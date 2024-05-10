@@ -12,9 +12,9 @@ KORE
     "header": "purple",
     "Battle": "red",
     "startup": "yellow",
-    "footer": "green"
+    "footer": "orange"
   },
-  "zoom": 1
+  "zoom": 0.6
 }
 
 
@@ -30,11 +30,9 @@ A few photos of a group of friends. A young redheaded man can be seen alone in a
 [[Pictures]] 
 
 
-:: Bank {"position":"875,550","size":"100,100"}
+:: Bank {"position":"1000,500","size":"100,100"}
 Current Balance:
-
 $playerMoney
-
 [[Browser]] 
 
 
@@ -43,15 +41,21 @@ $playerMoney
 :: Battle {"position":"350,175","size":"100,100"}
 (collapse:)[
 (set: $log to "you")
+(set:$botnetCount to 0)
+(for: each _bot, ...$botnet)[(set:$botnetCount to it + 1)]
+(set:$maxBotnetHealth to 100*$botnetCount)
 (set:$enemyMaxHealth to $enemy's Health)
-(set:$enemyMaxICE to $enemy's "Max ICE")](hook:"Battle")[(collapse:)
-[(set:$enemyICE to $enemy's "ICE")
-(set:$enemyHealth to $enemy's Health)]<div>(box:"X")+(b4r:"solid","double","double","solid")+(b4r-colour:cyan)+(b4r-size: 20,20,30,30)[
+(set:$enemyMaxICE to $enemy's "Max ICE")]
+(hook:"Battle")[(collapse:)[
+(set:$enemyICE to $enemy's "ICE")
+(set:$enemyHealth to $enemy's Health)
+(if:$enemyHealth <1)[$winResult]]
+<div>(box:"X")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[
 <div>
 =|=
-<div>(box:"X=")+(b4r:"solid","double","double","solid")+(b4r-color:cyan)+(b4r-size:5,5,10,10)
-[PC: 
-$playerHealth/$maxPlayerHealth
+<div>(box:"X=")+(b4r:"solid","double","double","solid")+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(b4r-size:5,5,10,10)
+[Kore HP: 
+$playerHealth/$playerMaxHealth
 ICE:
 $playerICE/$playerMaxICE
 Botnet:
@@ -59,24 +63,23 @@ $botnetHealth/$maxBotnetHealth]
 </div>
 =|=
 (box:"=X")+(b4r:"solid","double","double","solid")+(b4r-color:red)+(b4r-size:5,5,10,10)
-[$enemyName
-HP $enemyHealth/$enemyMaxHealth
-ICE $enemyICE/$enemyMaxICE]</div>
+[$enemyName HP: $enemyHealth/$enemyMaxHealth
+ICE: $enemyICE/$enemyMaxICE]</div>
 <div id="log">
 (display:"Log")
-(if:$enemyHealth <1)[$winResult]
 </div>
 </div>
 
 ]
 </div>
-]
+] 
 
 
-:: Bed {"position":"900,250","size":"100,100"}
-Save your game?
+:: Bed {"position":"900,325","size":"100,100"}
+(if:$day)
+You aren't tired, but you can save your game.
 
-(link:"Save game?")[
+(button:)[(link:"Save game?")[
   (if:(save-game:"Slot A"))[
   (if: (saved-games:) contains "Slot A")[
 Saved to Slot A!
@@ -86,150 +89,161 @@ Saved to Slot A!
   ](else: )[
     Sorry, I couldn't save your game.
   ]
-]
+]]
 
 
-:: Botnet {"position":"1275,825","size":"100,100"}
+:: Botnet {"position":"475,50","size":"100,100"}
+<div>
+(box: "X")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[(button:)+(box:"====X")+(color:red)[[[X->Computer]]]
+(collapse:)[(set:$botnetCount to 0)
+(for: each _machine, ...$botnet)[(set:$botnetCount to it+1)]]
 Botnet:
-
 You have $botnetCount machines under your control
 
 Machines:
-
 (for: each _machine, ...$botnet)[_machine]
 
-(button:)
-[[Desktop->Computer]] 
+]
 
 
-
-
-:: Browser {"position":"600,700","size":"100,100"}
-<div>
-(box:"X")+(b4r:"solid","double","double","solid")+(b4r-colour:cyan)+(b4r-size: 20,20,30,30)[
-<div>(align:"==>")+(box:"=====X")[(button:"X")+(color:red)+(size:.75)(link-goto:"X", "Computer")</div>]
-<div>
+:: Browser {"position":"700,550","size":"100,100"}
+(box:"X",18)+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(css:"margin-top:0px,margin-bottom:0px")[(align:"==>")+(box:"=====X")+(css:"margin-top: 0px;offset-position: top 100px;")[(button:"X")+(color:red)+(size:.75)(link-goto:"X", "Computer")</div>]
 =|=
-(button:)+(color:cyan)
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))
 [[Bank]] 
-(button:)+(color:cyan)
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))
 [[Darknet Shop]] 
 =|=
-(button:)+(color:cyan)
-[[Mama Mias Pizzeria]](button:)+(color:cyan)
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))
+[[Mama Mias Pizzeria]](button:)+(color:(mix: 0.5, white, 0.5, #00f))
 [[Level 5]] 
 =|=
-(button:)+(color:cyan)
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))
 [[Level 2]] 
-(button:)+(color:cyan)
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))
 [[Level 6]] 
 =|=
-(button:)+(color:cyan)
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))
 [[Level 3]] 
-(button:)+(color:cyan)
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))
 [[Level 7]]
 =|=
-(button:)+(color:cyan)
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))
 [[Level 4]] 
-(button:)+(color:cyan)
-[[Level 8]] 
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))
+[[Hack a Stranger]] 
 </div>
 ]
-</div>
 
 
 :: Computer {"position":"1100,50","size":"200,200"}
-<div>
-(box: "X")+(b4r:"solid","double","double","solid")+(b4r-colour:cyan)+(b4r-size: 20,20,30,30)
-[(collapse:)[(display:"Email Passage")]
+(box: "X",18)+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)
+[
+<br>
+<br>
+<br>
 =|=
-(button:)+(color:cyan)+(hover-style:(background:cyan)+(text-color:black))
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(text-color:black))
 [[Documents]]
 
 
 
-(button:)+(color:cyan)+(hover-style:(background:cyan)+(text-color:black))
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(text-color:black))
 [[Pictures]]
 
 =|=
-(button:)+(color:cyan)+(hover-style:(background:cyan)+(text-color:black))
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(text-color:black))
 [[Downloads]]
 
 (if:$emailNotif >0)[
 (button:)+(color:#FF69B4)+(hover-style:(background:#FF69B4)+(text-color:black))
 [[Mail ($emailNotif) ->Email]]
 ](else:)[
-(button:)+(color:cyan)+(hover-style:(background:cyan)+(text-color:black))
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(text-color:black))
 [[Mail ->Email]]
 ]
 =|=
-(button:)+(color:cyan)+(hover-style:(background:cyan)+(text-color:black))
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(text-color:black))
 [[Music]]
 
 
 
-(button:)+(color:cyan)+(hover-style:(background:cyan)+(text-color:black))
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(text-color:black))
 [[Browser]]
 
 =|=
-(button:)+(color:cyan)+(hover-style:(background:cyan)+(text-color:black))
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(text-color:black))
 [[Botnet]]
 
 
 
-(button:)+(color:cyan)+(hover-style:(background:cyan)+(text-color:black))
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(text-color:black))
 [[IDE]]
 
 =|=
-(button:)+(color:cyan)+(hover-style:(background:cyan)+(text-color:black))
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(text-color:black))
 [[Trash]]
 
 
 
-(button:)+(color:cyan)+(hover-style:(background:cyan)+(text-color:black))
-[[Home]]
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(text-color:black))
+[[Turn off Computer -->Home]]
 |==|
 ]
 
-</div>
+
+:: Darknet Shop {"position":"225,500","size":"100,100"}
+<div>
+(box: "X", 18)+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)
+[(box:"X",1)+(b4r:"solid","double","double","solid")+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(css:"padding:0px")[(box:"====X")+(css:"padding:0px")+(color:red)+(size:.5)+(button:)[[[X->Computer]]]]
+(for: each _program, ...$allPrograms)[
+
+(if:_program's "Purchasable" is true)[
+(print:_program's "Name")
+==||=
+(print: _program's "Price")^^CR^^
+(print:_program's "Description")
+(button:)[(link:"Buy it Now")[
+(if:$playerMoney > _program's "Price")[
+(set:$playerMoney to it - _program's "Price")
+(set:$downloads to it + _program)]
+(else:)[Insufficient Funds]
+]]]]]
 
 
-:: Darknet Shop {"position":"1000,550","size":"100,100"}
-(if:$downloads does not contain "ICEPick.exe")[
-
-[[ICEPick]]
-100CR
-]
-(if: $level1Complete is true and $downloads does not contain "EnhancedICEPick.exe")[
-[[Enhanced ICEPick]]
-2500CR
-]
-(if: $downloads does not contain $haveAutovirus)[
-[[autovirus.exe]]
-8000CR
-]
 
 
-[[desktop->Computer]] 
 
+:: Debug {"position":"775,75","size":"100,100"}
+(button:"Give All Programs")[]
+(button:"Infinite Money")[(set:$playerMoney to 99999999))]
 
 
 :: Documents {"position":"1125,375","size":"100,100"}
-[[Employment]]
+<div>
+(box: "X")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[(button:)+(box:"====X")+(color:red)[[[X->Computer]]]
+(button:)[
+[[Employment]]]
 
-[[Computer]] 
+]
 
 
-:: Downloads {"position":"1250,350","size":"100,100"}
+:: Downloads {"position":"925,50","size":"100,100"}
+<div>
+(collapse:)[
+(set:$programNames to (a:))]
+(box: "X")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)
+[(button:)+(box:"====X")+(color:red)[[[X->Computer]]]
 <!-- Purchased soft should be available to browse here-->
+<h3>Downloads:</h3>
+(for:each _download, ...$downloads)[(print:_download's "Name")
+]
 
-$downloads
-
-[[Computer]] 
+]
 
 
-:: Email {"position":"1600,100","size":"100,100"}
-<div>(box: "X")+(b4r:"solid","double","double","solid")+(b4r-colour:cyan)+(b4r-size: 20,20,30,30)[(button:)+(box:"====X")+(color:red)[[[X->Computer]] ]
+:: Email {"position":"1725,375","size":"100,100"}
+<div>(box: "X")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[(button:)+(box:"====X")+(color:red)[[[X->Computer]] ]
 <!-- New emails to appear during course of game from other SCOUTS members-->
 (if:$level2Complete is true)[
 <div>
@@ -401,7 +415,7 @@ There are photos from Kore's graduation.
 [[Pictures]] 
 
 
-:: Hack Newspaper {"position":"700,1300","size":"100,100"}
+:: Hack Newspaper {"position":"500,875","size":"100,100"}
 <!-- Set the text to show -->
 (set: $typewriterText to "initializing...
 
@@ -439,7 +453,17 @@ What would you like to do?
 [[Hack the Newspaper]]]
 
 
-:: Hack the Newspaper {"position":"700,1425","size":"100,100"}
+:: Hack a Stranger {"position":"1375,750","size":"100,100"}
+(collapse:)[
+(display:"Random Encounter")
+(set:$enemy to $randomEncounter)
+(set:$winResult to (go-to:"Stranger Hacked"))
+]
+(display:"Battle")
+
+
+
+:: Hack the Newspaper {"position":"550,1000","size":"100,100"}
 (set: $nespaperHacked to 0)
 <!-- Set the text to show -->
 (set: $clearText to 0)
@@ -486,71 +510,69 @@ Connection forced with Unknown Netrunner.
 
 
 :: Hacking Options {"position":"100,175","size":"100,100"}
-(collapse:)[(if: $downloads contains "ICEPick.exe")[
-(button:)[(link:"ICEPick.exe")[
-(if:$enemyICE >0)[
-(set:$damage to $ICEPick's "Damage" * (random: 10, 20))
-(set:$enemy's "Health" to it - $damage)
-(set:$ICEDamage to $ICEPick's "ICE Damage")
-(set:$enemy's "ICE" to it - $ICEDamage)
-(set:$ICEDamageChecker to true)]
-(else:)[
-(set:$damage to $ICEPick's "Damage" * 30)
-(set:$enemy's "Health" to it - $damage)
-(set:$ICEDamageChecker to false)]
-$enemyName was dealt $damage damage!
-(if:$ICEDamageChecker is true)[$enemyName took $ICEDamage ICE Damage!]
-(set:$log to "enemy")
-(link:"Next")[
-(rerun:?Battle)]]]]
+(collapse:)[
+<!-- Poison Damage -->
+	(if:$playerStat's "Poisoned" is true)[
+	(set:$playerHealth to it - (random:1,10))]
+<!-- Programs -->
+	(for: each _download, ...$downloads)[(button:)[
+		(link:"Name" of _download)[
+			(set:$damage to _download's "Damage"*(random: 10,20))
+			(set:$ICEDamage to _download's "ICE Damage")
+            
+            <!-- Heal -->
+            (if:_download's "Heal" is >0)[
+            (set:$healing to _download's "Heal")
+            (set:$playerHealth to it + $healing)
+            (set:$healCheck to true)
+            ]
+            
+            <!-- ICE Healing -->
+            (if:_download's "ICE Heal" is >0)[
+            (set:$ICEHealing to _download's "ICE Heal")
+            (set:$playerICE to it + $ICEHealing)
+            (set:$ICEHealCheck to true)
+            ]
+            
+            <!-- ICE Damage-->
+            (if:$ICEDamage >0)[(set:$ICEDamageChecker to true)]
+            (if:"Poison" of _download is true)[(set:$enemy's "Poisoned" to true)]
+			(set:$enemy's "Health" to it - $damage)
+			(if:$enemyICE >0)[
+				(set:$enemy's "ICE" to it - $ICEDamage)]
+            (if:$healCheck is true)[
+            	(print:"Name" of _download+"heals you for " + $healing + "points.")]
+                (if:$ICEHealCheck is true)[
+            	(print:"Name" of _download+"repairs your ICE by " + $ICEHealing + "points.")]
+            (if:$damage >0)[(print:"Name" of _download) deals $damage damage to $enemyName's machine.]
+			(if:$ICEDamageChecker is true)[$enemyName's ICE lost $ICEDamage integrity.]
+			(button:)+(link:"Next")[
+			(if:$enemyHealth <1)[$winResult]
+        	        	(set:$log to "enemy")
+                		(rerun:?Battle)]
+]]]] 
 
 
-(if:$downloads contains "EnhancedICEPick.exe")[
-(button:)[(link:"EnhancedICEPick.exe")[
-(set:$damage to $EnhancedICEPick's "Damage" * (random: 10, 20))
-(set:$ICEDamage to $EnhancedICEPick's "ICE Damage")
-(set:$enemy's "Health" to it - $damage)
-(set:$enemy's "ICE" to it - $ICEDamage)
-$enemyName was dealt $damage damage!
-$enemyName took $ICEDamage ICE Damage!
-(set:$log to "enemy")
-(link:"Next")[
-(rerun:?Battle)]]]]]
+:: Header [header] {"position":"600,50","size":"100,100"}
 
 
 
-:: Home {"position":"950,125","size":"100,100"}
-Log on to [[Computer]]
+:: Home {"position":"900,200","size":"100,100"}
+(button:)[[Boot PC ->Computer]]
 
-Go to [[Bed]]
-
-
-:: ICEPick {"position":"850,850","size":"100,100"}
-ICEPick
-Details:
-Basic script for dealing with low-level security. Automatically adds hacked servers and computers to botnet.
-(if:$playerMoney is >999)[
-Purchase the ICEPick?
-[[Purchase the ICEPick]]
-[[Darknet Shop]]
-
-[[Browser]]]
-(else:)[
-[[Darknet Shop]]
-
-[[Browser]]]
+(button:)[[Go to bed ->Bed]]
 
 
 :: IDE {"position":"1850,375","size":"100,100"}
-<div>(box: "X")+(b4r:"solid","double","double","solid")+(b4r-colour:cyan)+(b4r-size: 20,20,30,30)[(button:)+(box:"=====X")+(color:red)[
+<div>(box: "X")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[(button:)+(box:"=====X")+(color:red)[
 [[X->Computer]] ]
 There's some broken code here.
 ]
 </div>
 
 
-:: Legends of Trii'el Kore {"position":"550,325","size":"100,100"}
-(set: $typewriterText to "Legends of Trii'el
+:: Legends of Trii'el Kore {"position":"475,300","size":"100,100"}
+<h1>(set: $typewriterText to "Legends of Trii'el:
 Kore")
 {
   <!-- Create a variable to track the position within the $typewriterText string -->
@@ -574,27 +596,27 @@ Kore")
     ]
   ]
 }
-
+</h1>
 (live: 2s)[
 
 
 
 
-(t8n-depart:"dissolve")+(t8n-arrive:"dissolve")[[Press Start->Main Menu]]]
+(t8n-depart:"dissolve")+(t8n-arrive:"dissolve")+(button:)[[Press Start->Main Menu]]]
 
 
-:: Level 1 {"position":"550,1300","size":"100,100"}
+:: Level 1 {"position":"375,750","size":"100,100"}
 (collapse:)[
 (display:"Mama Mia")
 (set:$enemyName to "Mama Mia")
 (set:$enemy to $MamaMia)
-(set:$winResult to
-(go-to:"Mama Mias Hacked")
-)](display:"Battle")
+(set:$winResult to (go-to:"Mama Mias Hacked"))
+]
+(display:"Battle")
 
 
 
-:: Level 2 {"position":"700,1175","size":"100,100"}
+:: Level 2 {"position":"500,750","size":"100,100"}
 Un'taeko Daily News
 
 Bombing at Dani's Show
@@ -620,49 +642,37 @@ Hack the Newspaper?
  
 
 
-:: Level 3 {"position":"825,1175","size":"100,100"}
+:: Level 3 {"position":"625,750","size":"100,100"}
 Coming Soon
 
 [[Browser]] 
 
 
-:: Level 4 {"position":"950,1175","size":"100,100"}
+:: Level 4 {"position":"750,750","size":"100,100"}
 Coming Soon
 
 [[Browser]] 
 
 
-:: Level 5 {"position":"1075,1175","size":"100,100"}
+:: Level 5 {"position":"875,750","size":"100,100"}
 Coming Soon
 
 [[Browser]] 
 
 
-:: Level 6 {"position":"1200,1175","size":"100,100"}
+:: Level 6 {"position":"1000,750","size":"100,100"}
 Coming Soon
 
 [[Browser]] 
 
 
-:: Level 7 {"position":"1325,1175","size":"100,100"}
+:: Level 7 {"position":"1125,750","size":"100,100"}
 Coming Soon
 
 [[Browser]] 
 
 
-:: Level 8 {"position":"1450,1175","size":"100,100"}
-Coming Soon
-
-[[Browser]] 
-
-
-:: Level 9 {"position":"1575,1175","size":"100,100"}
-Coming Soon
-
-[[Browser]] 
-
-
-:: Load Game {"position":"775,325","size":"100,100"}
+:: Load Game {"position":"750,325","size":"100,100"}
 {(if: (saved-games: ) contains "Slot A")[
   (link: "Load game")[(load-game:"Slot A")]
 ]}
@@ -670,7 +680,7 @@ Coming Soon
 
 :: Log {"position":"225,175","size":"100,100"}
 (hook:"Log")[(collapse:)[
-(box:"X")+(b4r:"solid","double","double","solid")+(b4r-color:cyan)+(b4r-size:10,10,15,15)[
+(box:"X")+(b4r:"solid","double","double","solid")+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(b4r-size:10,10,15,15)[
 (if:$log is "you")[It's your turn.
 (button:)+(box:"X==")[
 (link:"Hack")[
@@ -683,29 +693,24 @@ Coming Soon
 ]
 
 
-:: Main Menu {"position":"550,500","size":"100,100"}
-[[New Game]]
+:: Main Menu {"position":"600,300","size":"100,100"}
+(link:"New Game",(button:))[(go-to:"New Game")]
 
-[[Load Game]]
-
-[[Options]]
-
-[[Exit]]
+(link:"Load Game", (button:))[(go-to:"Load Game")]
 
 
 
 
-:: Mama Mia {"position":"250,475","size":"100,100"}
+:: Mama Mia {"position":"100,500","size":"100,100"}
 (hook:"Mama Mia")[(set: $MamaMiasAttacks to (ds: $ICEPick))
-(set: $MamaMia to (dm:"Max Health",100, "Health", 100, "Max ICE", 100, "ICE", 100, "Bandwidth", 4, "Attack",10, "Attacks", $MamaMiasAttacks,))]
+(set: $MamaMia to (dm:"Max Health",100, "Health", 100, "Max ICE", 100, "ICE", 100, "Bandwidth", 4, "Attack",10, "Attacks", $MamaMiasAttacks,"Poisoned", false))]
 
 
 
-:: Mama Mias Hacked {"position":"500,1425","size":"100,100"}
+:: Mama Mias Hacked {"position":"375,875","size":"100,100"}
 (set: $pizzaPlaceHacked to true)
 <div>
-(box: "X")+(b4r:"solid","double","double","solid")+(b4r-colour:cyan)+(b4r-size: 20,20,30,30)
-[
+(box: "X")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[
 Welcome to MAMA MIA'S!
 Your rewards level is 9999999999999999999999999999999999999999999999999999
 You have 999999999999999999999999999999999 free pizzas!
@@ -718,26 +723,26 @@ Would you like to redeem a free pizza?
 
 
 
-:: Mama Mias Pizzeria {"position":"550,1175","size":"100,100"}
+:: Mama Mias Pizzeria {"position":"375,550","size":"100,100"}
 <div>
-(box:"X")+(b4r:"solid","double","double","solid")+(b4r-colour:cyan)+(b4r-size: 20,20,30,30)[
+(box:"X")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[(box:"====X")+(color:red)+(button:)[[[X->Computer]]]
 MAMA MIA'S PIZZERIA
 <div>
 Menu	
 =|=
 Small	
-1299CR
+1299^^CR^^
 =|=
 Medium
-1599CR
+1599^^CR^^
 =|=
 Large
-1899CR
+1899^^CR^^
 </div>
 <div>
-Basic Toppings (200CR Each):
-Spicy Meat
-Ground Meat
+Basic Toppings (200^^CR^^ Each):
+Spicy Meat^^TM^^
+Ground Meat^^TM^^
 ...
 
 Copyright 2035 Mama Mia's Pizzeria, a Corporation 2 Company
@@ -764,7 +769,7 @@ There are some various music files here. They're mostly alternative rock and edm
 
 
 
-:: New Game {"position":"775,200","size":"100,100"}
+:: New Game {"position":"750,200","size":"100,100"}
 (set: $typewriterText to "Your name is Kore. You're a Corporation 2 employee, and you've just come home early from a stressful day of designing casino games. In your spare time, you enjoy hacking, and today you've got all day to spend diving the net for interesting data.")
 {
   <!-- Create a variable to track the position within the $typewriterText string -->
@@ -789,27 +794,30 @@ There are some various music files here. They're mostly alternative rock and edm
   ]
 }
 (live:4s)[
-[[Home]]
+(color:purple)+(button:)[[Home]]
 ]
 
 
-:: Newspaper Battle {"position":"700,1550","size":"100,100"}
+:: Newspaper Battle {"position":"550,1125","size":"100,100"}
+(collapse:)[
+(display:"Newspaper Runner")
+(set:$enemyName to "C2News Runner")
+(set:$enemy to $newspaperRunner)
+(set:$winResult to (go-to:"Newspaper Battle Won"))
+]
+(display:"Battle")
 
 
-(set:$newspaperBattle to 1)
-(if:$newspaperBattle is > 0)[
-
-(link:"You win!")[[Newspaper Battle Won]]]
 
 
-:: Newspaper Battle Won {"position":"700,1675","size":"100,100"}
+:: Newspaper Battle Won {"position":"550,1250","size":"100,100"}
 
 
 
-:: Options {"position":"775,450","size":"100,100"}
-there are no options
+:: Newspaper Runner {"position":"100,750","size":"100,100"}
+(hook:"newspaperRunner")[(set: $newsRunnerAttacks to (ds: $ICEPick,$poison))
+(set: $MamaMia to (dm:"Max Health",100, "Health", 100, "Max ICE", 100, "ICE", 100, "Bandwidth", 4, "Attack",10, "Attacks", $MamaMiasAttacks,"Poisoned", false))]
 
-[[Legends of Trii'el Kore]] 
 
 
 :: Pictures {"position":"1475,475","size":"100,100"}
@@ -821,46 +829,66 @@ there are no options
 [[Computer]] 
 
 
+:: Player {"position":"600,175","size":"100,100"}
+(hook:"Player")[(collapse:)[(set:$playerStat to (dm: "Health",100, "Max Health", 100, "Botnet Health", $botnetHealth, "ICE", 100, "Max ICE", 100, "XP", 0, "Level", 1,"Money", 2000,"Poisoned", false))
+(set:$playerMaxHealth to $playerStat's "Max Health")
+(set:$playerMaxICE to $playerStat's "Max ICE")
+(set:$playerHealth to $playerStat's "Health")
+(set:$playerICE to $playerStat's "ICE")
+(set:$playerMoney to $playerStat's "Money")
+]]
+
+
 :: Programs {"position":"100,50","size":"100,100"}
-(collapse:)[(set:$allPrograms to (a:))
-
+(collapse:)[
 <!-- ICEPick -->
-(set: $ICEPick to (dm: "Name","ICEPick.exe","Price", 1000, "Damage",1, "ICE Damage", 25, "Poison",False, "Heal", 0, "ICE Heal", 0))
-(set: $allPrograms to $ICEPick's "Name")
-
+(set: $ICEPick to (dm: "Name","ICEPick.exe","ID", 01, "Price", 1000, "Damage",1, "ICE Damage", 25, "Poison",False, "Heal", 0, "ICE Heal", 0, "Description","A Hacker's primary tool to break through ICE (Intrusion Countermeasures Electronics)", "Purchasable", false, "Glitchery",false))
+(set: $allPrograms to (a:$ICEPick))
+ 
 <!-- Enhanced ICEPick -->
-(set: $EnhancedICEPick to (dm: "Name","EnhancedICEPick.exe","Price", 1000, "Damage",5, "ICE Damage", 50, "Poison",False, "Heal", 0, "ICE Heal", 0))
-(set: $allPrograms to it + $EnhancedICEPick's "Name")
+(set: $EnhancedICEPick to (dm: "Name","EnhancedICEPick.exe", "ID", 02, "Price", 1000, "Damage",5, "ICE Damage", 50, "Poison",False, "Heal", 0, "ICE Heal", 0, "Description", "An Enhanced version of the ICEPick. Deals extra damage to ICE", "Purchasable", false, "Glitchery",false))
+(set: $allPrograms to it + (a:$EnhancedICEPick))
 
 <!-- Poison -->
-(set: $poison to (dm:"Name","Poison.exe", "Price", 1500, "Damage", 0, "ICE Damage", 0, "Poison",True, "Heal", 0, "ICE Heal", 0))
-(set: $allPrograms to it+$poison's "Name")
+(set: $poison to (dm:"Name","Poison.exe", "ID", 03, "Price", 1500, "Damage", 0, "ICE Damage", 0, "Poison",True, "Heal", 0, "ICE Heal", 0, "Description","It does what's on the tin!", "Purchasable",true, "Glitchery",false))
+(set: $allPrograms to it+ (a:$poison))
 
 <!-- ICE Repair -->
-(set: $repairICE to (dm:"Name", "ICE Repair", "Price", 2500, "ICE Damage", 0, "Damage", 0, "Poison", False, "Heal", 0, "ICE Heal", 10)) 
-(set:$allPrograms to it + $repairICE's "Name")
+(set: $repairICE to (dm:"Name", "ICERepairHero.exe", "ID", 04, "Price", 2500, "ICE Damage", 0, "Damage", 0, "Poison", False, "Heal", 0, "ICE Heal", 10, "Description", "Quick repair for your personal ICE","Purchasable", true, "Glitchery",false)) 
+(set:$allPrograms to it + (a:$repairICE))
 
+<!-- Glitchery -->
+
+(set: $glitchery to (dm:"Name", "glitchery.exe", "ID", 05, "Price", 4000, "ICE Damage", 0, "Damage", 0, "Poison",false, "Heal", 0, "ICE Heal", 10, "Description", "Causes the computer infected to occasionally glitch out.","Purchasable", true, "Glitchery",true)) 
+(set:$allPrograms to it + (a:$glitchery))
+
+
+
+(set:$programsCount to 0)
+
+(for:each _program, $allPrograms)[(set:$programsCount to it + 1)]
+]
+
+
+:: Random Encounter {"position":"100,625","size":"100,100"}
+(hook:"RandomEncounter")[(collapse:)[
+(set:$enemyAttacks to (a:$ICEPick))
+(for: each _program, ...$allPrograms)[
+	(set:$flipResult to (random:0,1))
+	(if:$flipResult is >0 and _program is not $ICEPick)[
+		(set:$enemyAttacks to it + (a:_program))]
+	(set:$enemyName to $seed + (random:1,$seed))
+]
+(set: $randomEncounter to (dm:"Max Health",100, "Health", 100, "Max ICE", 100, "ICE", 100, "Bandwidth", 4, "Attack",10, "Attacks", $enemyAttacks,"Poisoned", false))
+]
 ]
 
 
 
-:: Purchase the Enchanced ICEPick {"position":"975,975","size":"100,100"}
-You've acquired the Enhanced ICEPick
-(set:$playerMoney to $playerMoney-2500)
-(set:$haveEnhancedICEPick to true)
-(set: $programs to it +$enhancedICEPick)
-[[Browser]]
 
-
-:: Purchase the ICEPick {"position":"850,975","size":"100,100"}
-You've acquired the ICEPick
-(set:$playerMoney to $playerMoney-1000)
-(set:$downloads to it + $ICEPick's "ID")
-
-[[Browser]]
-
-
-:: Resume {"position":"1200,650","size":"100,100"}
+:: Resume {"position":"1250,500","size":"100,100"}
+<div>
+(box: "X")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[(button:)+(box:"====X")+(color:red)[[[X->Computer]]]
 Pikore Rae'en
 He/Him
 +7127772789
@@ -878,19 +906,22 @@ Tonii Piroa | Coworker
 Tonii.Piroa@Corp2.corp
 
 ugh why am i even making this there's no one else to hire me anymore
-[[Documents]] 
+]
+
+
+:: Stranger Hacked {"position":"1375,875","size":"100,100"}
+(box: "X")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[
+You've hacked a complete stranger! That was nice of you.
+Their machine is part of your botnet now.
+(set:$playerMoney to $playerMoney+5000)
+(set:$botnet to it + (a:(text:$enemyName)))
+(button:)[(link:"Browser")[(go-to:"Browser")]]]
 
 
 :: Trash {"position":"1525,350","size":"100,100"}
 It's empty...
 <!-- Maybe put something in here during gameplay-->
 [[Computer]] 
-
-
-
-:: autovirus.exe {"position":"1100,850","size":"100,100"}
-autovirus.exe
-Description: Automatically infects any computers on a network with this virus, and adds them to your botnet. 
 
 
 
@@ -914,46 +945,19 @@ Description: Automatically infects any computers on a network with this virus, a
 (set: $level13Complete to false)
 
 <!-- starting player money-->
-(set:$playerMoney to 1000)
+
 
 <!-- WIP Arrays for downloads-->
 (display:"Programs")
-(set: $downloads to (a:"ICEPick.exe"))
+(set: $downloads to (a:))
+(set: $downloads to it + (a:$ICEPick))
 
 <!-- emails reset -->
 (set: $emailNotif to 1)
 
 <!-- botnet -->
 (set:$botnet to (a: 'Corporation 2 Casino Server'))
-(set:$botnetDamage to 0)
 (set:$playerICE to 100)
-(set:$playerMaxICE to 100)
-(set:$playerHealth to 100)
-(set: $maxPlayerHealth to 100)
-(set:$playerStat to (dm: "Health",$playerHealth, "Max Health", 100, "Botnet Health", $botnetHealth, "ICE", 100, "Max ICE", 100, "XP", 0, "Level", 1))
-(set:$playerMaxHealth to $playerStat's "Max Health")
-(set:$playerMaxICE to $playerStat's "Max ICE")
-(set:$playerHealth to $playerStat's "Health")
-(set:$playerICE to $playerStat's "ICE")]
 
-
-:: StoryStylesheet [stylesheet]
-/* unvisited link */
-a:link {
-  color: red;
-}
-
-/* visited link */
-a:visited {
-  color: green;
-}
-
-/* mouse over link */
-a:hover {
-  color: hotpink;
-}
-
-/* selected link */
-a:active {
-  color: cyan;
-}
+(display:"Player")
+]
