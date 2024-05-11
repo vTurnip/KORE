@@ -9,9 +9,12 @@
 </head>
 <body>
 <tw-story><noscript><tw-noscript>JavaScript needs to be enabled to play KORE.</tw-noscript></noscript></tw-story>
-<tw-storydata name="KORE" startnode="29" creator="Twine" creator-version="2.8.1" format="Harlowe" format-version="3.3.8" ifid="F2E45620-03C3-48AB-B787-4F1FACFCE5F3" options="" tags="" zoom="0.6" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-tag name="header" color="purple"></tw-tag><tw-tag name="Battle" color="red"></tw-tag><tw-tag name="startup" color="yellow"></tw-tag><tw-tag name="footer" color="orange"></tw-tag><tw-passagedata pid="1" name="2036 Summer" tags="" position="1475,600" size="100,100">Some old photos of a group of friends celebrating. A young redheaded man can be seen kissing a blond girl in one of the photos
+<tw-storydata name="KORE" startnode="29" creator="Twine" creator-version="2.8.1" format="Harlowe" format-version="3.3.8" ifid="F2E45620-03C3-48AB-B787-4F1FACFCE5F3" options="" tags="" zoom="0.6" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">.button{
+ padding:0.1px;
+ margin:0.1px;
+}</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-tag name="header" color="purple"></tw-tag><tw-tag name="Battle" color="red"></tw-tag><tw-tag name="startup" color="yellow"></tw-tag><tw-tag name="footer" color="orange"></tw-tag><tw-passagedata pid="1" name="2036 Summer" tags="" position="1900,775" size="100,100">Some old photos of a group of friends celebrating. A young redheaded man can be seen kissing a blond girl in one of the photos
 
-[[Pictures]]</tw-passagedata><tw-passagedata pid="2" name="2037 Spring" tags="" position="1575,600" size="100,100">A few photos of a group of friends. A young redheaded man can be seen alone in a few of the photos.
+[[Pictures]]</tw-passagedata><tw-passagedata pid="2" name="2037 Spring" tags="" position="2000,775" size="100,100">A few photos of a group of friends. A young redheaded man can be seen alone in a few of the photos.
 
 [[Pictures]]</tw-passagedata><tw-passagedata pid="3" name="Bank" tags="" position="1000,500" size="100,100">Current Balance:
 $playerMoney
@@ -48,9 +51,16 @@ ICE: $enemyICE/$enemyMaxICE]&lt;/div&gt;
 
 ]
 &lt;/div&gt;
-]</tw-passagedata><tw-passagedata pid="5" name="Bed" tags="" position="900,325" size="100,100">(if:$day)
-You aren&#39;t tired, but you can save your game.
-
+]</tw-passagedata><tw-passagedata pid="5" name="Bed" tags="" position="900,325" size="100,100">(if: $level1Complete is true)[
+	(button:)[(link:&quot;Go to Bed?&quot;)[
+		(set: $day to it +1)
+	    (go-to:&quot;Home&quot;)
+        (set: $playerHealth to $playerStat&#39;s &quot;Max Health&quot;)
+		]
+    ]
+]
+(else:)[
+You aren&#39;t tired yet, but you can save your game.
 (button:)[(link:&quot;Save game?&quot;)[
   (if:(save-game:&quot;Slot A&quot;))[
   (if: (saved-games:) contains &quot;Slot A&quot;)[
@@ -71,7 +81,12 @@ You have $botnetCount machines under your control
 Machines:
 (for: each _machine, ...$botnet)[_machine]
 
-]</tw-passagedata><tw-passagedata pid="7" name="Browser" tags="" position="700,500" size="100,100">(box:&quot;X&quot;,18)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(css:&quot;margin-top:0px,margin-bottom:0px&quot;)[(align:&quot;==&gt;&quot;)+(box:&quot;=====X&quot;)+(css:&quot;margin-top: 0px;offset-position: top 100px;&quot;)[(button:&quot;X&quot;)+(color:red)+(size:.75)(link-goto:&quot;X&quot;, &quot;Computer&quot;)&lt;/div&gt;]
+]</tw-passagedata><tw-passagedata pid="7" name="Browser" tags="" position="700,500" size="100,100">(float-box:&quot;X&quot;,&quot;Y&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(css:&quot;margin-top:0px,margin-bottom:0px&quot;)[
+	(align:&quot;==&gt;&quot;)+(box:&quot;=====X&quot;)+(css:&quot;margin-top: 0px;offset-position: top 100px;&quot;)[
+    	(collapse:)[(float-box: &quot;========X&quot;, &quot;Y===========&quot;)+(css: &quot;overflow:hidden&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
+        	(button:&quot;X&quot;)+(css: &quot;border:1px&quot;)+(color:black)+(hover-style: (color:white))(link-goto:&quot;X&quot;, &quot;Computer&quot;)
+        ]
+        ]]
 =|=
 (button:)+(color:(mix: 0.5, white, 0.5, #00f))
 [[Bank]] 
@@ -79,11 +94,12 @@ Machines:
 [[Darknet Shop]] 
 =|=
 (button:)+(color:(mix: 0.5, white, 0.5, #00f))
-[[Mama Mias Pizzeria]](button:)+(color:(mix: 0.5, white, 0.5, #00f))
+[[Mama Mia&#39;s]]
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))
 [[Level 5]] 
 =|=
 (button:)+(color:(mix: 0.5, white, 0.5, #00f))
-[[Level 2]] 
+[[Un&#39;taeko Daily News]] 
 (button:)+(color:(mix: 0.5, white, 0.5, #00f))
 [[Level 6]] 
 =|=
@@ -97,7 +113,15 @@ Machines:
 (button:)+(color:(mix: 0.5, white, 0.5, #00f))
 [[Hack a Stranger]] 
 &lt;/div&gt;
-]</tw-passagedata><tw-passagedata pid="8" name="Computer" tags="" position="1100,50" size="200,200">(box: &quot;X&quot;,18)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)
+]</tw-passagedata><tw-passagedata pid="8" name="Computer" tags="" position="1100,50" size="200,200">{
+(set: $emailNotif to 0)
+(for: each _emails, ...$koreEmails)[
+	(if: _emails&#39;s &quot;Read&quot; is false)[
+		(set: $emailNotif to it +1)
+       ]
+]
+
+}(float-box: &quot;X&quot;,&quot;Y&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)
 [
 &lt;br&gt;
 &lt;br&gt;
@@ -192,7 +216,7 @@ Machines:
 
 
 </tw-passagedata><tw-passagedata pid="10" name="Debug" tags="" position="775,75" size="100,100">(button:&quot;Give All Programs&quot;)[]
-(button:&quot;Infinite Money&quot;)[(set:$playerMoney to 99999999))]</tw-passagedata><tw-passagedata pid="11" name="Documents" tags="" position="1125,375" size="100,100">&lt;div&gt;
+(button:&quot;Infinite Money&quot;)[(set:$playerMoney to 99999999))]</tw-passagedata><tw-passagedata pid="11" name="Documents" tags="" position="1550,550" size="100,100">&lt;div&gt;
 (box: &quot;X&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[(button:)+(box:&quot;====X&quot;)+(color:red)[[[X-&gt;Computer]]]
 (button:)[
 [[Employment]]]
@@ -207,68 +231,32 @@ Machines:
 (for:each _download, ...$downloads)[(print:_download&#39;s &quot;Name&quot;)
 ]
 
-]</tw-passagedata><tw-passagedata pid="13" name="Email" tags="" position="1725,375" size="100,100">&lt;div&gt;(box: &quot;X&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[(button:)+(box:&quot;====X&quot;)+(color:red)[[[X-&gt;Computer]] ]
+]</tw-passagedata><tw-passagedata pid="13" name="Email" tags="" position="1100,300" size="100,100">{(css: &quot;z-index: 1&quot;)+(float-box: &quot;X&quot;,&quot;Y&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[(button:)+(box:&quot;====X&quot;)+(color:red)[[[X-&gt;Computer]] ]
 &lt;!-- New emails to appear during course of game from other SCOUTS members--&gt;
-(if:$level2Complete is true)[
-&lt;div&gt;
-To: NUKE@SCOUTS.group
-From: Unknown
-Subject:  (none)
-
-You will pay.
-&lt;/div&gt;
-&lt;div&gt;
-
-To: Pikore.Raeen@corp2.corp
-From: Bron.Frulk@corp2.corp
-Subject: PTO
-
-If you need any more time off, let me know. You do have 2 days PTO, and it doesn&#39;t roll over so I understand if you want to use it. We appreciate all your hard work these past 2 years, and we would hate to see such talent wasted at Corporation 3 or 1.  
-By the way, I heard IT is giving you a hard time about getting these emails at home. We have discussed working from home before, but that&#39;s not available yet to unsalaried employees. It&#39;s a security issue. So turn it off.
-
-Have a nice rest of your day,
-
-Bron Frulk
-Supervisor
-
-&lt;/div&gt;]
-(if:$level1Complete is true)[
-&lt;div&gt;
-To: NUKE@SCOUTS.group
-From: GUNS@SCOUTS.group
-Subject: ICEBREAKER
-
-NUKE
-GOT A NEW ICEBREAKER IN THE SHOP
-CHECK IT OUT &gt;:)
-GUNS
-
-&lt;/div&gt;
-
-
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+(box:&quot;X=&quot;)+(b4r: &quot;solid&quot;, &quot;double&quot;, &quot;double&quot;, &quot;solid&quot;) + (b4r-color:(mix: 0.5, white, 0.5, #00f))+(css: &quot;padding:0px; margin:0px; height:75px; overflow:hidden&quot;)[
+=|=
+(box:&quot;X=&quot;)+(css: &quot;height:50px; padding:0.1px; margin:0px;&quot;)[From]
+=|=
+(box:&quot;=X&quot;)+(css: &quot;padding:0.1px; overflow:hidden&quot;)[Subject]
 ]
-&lt;div&gt;
-To: pikore.raeen@corp2.corp
-From: Demaunt@corp2.corp
-Subject: Home Email Access
-
-Pikore,
-
-As I&#39;m sure you know, its against Corporate protocol to access company email from your home pc. I know you&#39;re &quot;safe&quot; but this isn&#39;t in my hands.
+(for:each _email, ...$koreEmails)[(box:&quot;X=&quot;)+(b4r: &quot;solid&quot;, &quot;double&quot;, &quot;double&quot;, &quot;solid&quot;) + (b4r-color:(mix: 0.5, white, 0.5, #00f))+(css: &quot;padding:0.1px; margin:0px; height:75px; overflow:hidden&quot;)[(box:&quot;=XXXXX=&quot;)[(print: &quot;(link-rerun: &#39;&quot; + (text: _email&#39;s Sender) + &quot; | &quot;+ (text: _email&#39;s Subject) + &quot;&#39;)[(set: $selected to &quot; +&quot;&#39;&quot; + (text: _email&#39;s Subject) + &quot;&#39;&quot; + &quot;)&quot; +&quot;(display: &quot;+ &#39;&quot;selectedEmail&quot;)(show: ?emailWindow)]&#39;)]
+        ]
+    
+]
 
 
-Demaunt
-IT
-&lt;/div&gt;
 (set: $emailNotif to 0)
  ]
-
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="14" name="Email Passage" tags="" position="1700,100" size="100,100">(hidden:)|emailHook&gt;[
-	(collapse:)[        
+}
+</tw-passagedata><tw-passagedata pid="14" name="Email Passage" tags="startup" position="1225,300" size="100,100">	(collapse:)[        
         &lt;!-- Day 1 --&gt;
-        (set: $blankEmail to (dm:&quot;From&quot;,&quot;&quot;, &quot;To&quot;,&quot;&quot;,&quot;Subject&quot;,&quot;&quot;,&quot;Body&quot;,&quot;&quot;,&quot;Sent&quot;,false))
+        (set: $blankEmail to (dm:&quot;Sender&quot;,&quot;&quot;, &quot;Receiver&quot;,&quot;&quot;,&quot;Subject&quot;,&quot;&quot;,&quot;Body&quot;,&quot;&quot;,&quot;Sent&quot;,false, &quot;Read&quot;, false))
         
-        (set: $ITEmail to (dm:&quot;From&quot;,&quot;Demaunt@corp2.corp&quot;, &quot;To&quot;,&quot;pikore.raeen@corp2.corp&quot;,&quot;Subject&quot;,&quot;Home Email Access&quot;,&quot;Body&quot;,&quot;Pikore,
+        (set: $ITEmail to (dm:&quot;Sender&quot;,&quot;Demaunt@corp2.corp&quot;, &quot;Receiver&quot;,&quot;pikore.raeen@corp2.corp&quot;,&quot;Subject&quot;,&quot;Home Email Access&quot;,&quot;Body&quot;,&quot;Pikore,
 
 Our server records indicate you&#39;re having your emails forwarded to a server off site. As I&#39;m sure you know, its against Corporate policy to access company email from personal computers for security reasons. Please remove any email forwarding as soon as possible, or I&#39;ll be forced to notify your supervisor.
 
@@ -277,18 +265,37 @@ Thank you
 Demaunt
 IT&quot;,&quot;Sent&quot;,true, &quot;Read&quot;,false))
 
-		
+(set: $mysteriousEmail to (dm: &quot;Sender&quot;, &quot;Unknown&quot;, &quot;Receiver&quot;, &quot;NUKE@SCOUTS.group&quot;, &quot;Subject&quot;, &quot;(None)&quot;, &quot;Body&quot;, &quot;You will pay.&quot;, &quot;Sent&quot;, false, &quot;Read&quot;, false))
+
+        (set: $PTOEmail to (dm:&quot;Sender&quot;,&quot;Bron.Frulk@corp2.corp&quot;, &quot;Receiver&quot;,&quot;Pikore.Raeen@corp2.corp&quot;,&quot;Subject&quot;,&quot;PTO&quot;,&quot;Body&quot;,&quot;If you need any more time off, let me know. You do have 2 days PTO, and it doesn&#39;t roll over so I understand if you want to use it. We appreciate all your hard work these past 2 years, and we would hate to see such talent wasted at Corporation 3 or 1.  
+By the way, I heard IT is giving you a hard time about getting these emails at home. We have discussed working from home before, but that&#39;s not available yet to unsalaried employees. It&#39;s a security issue. So turn it off.
+
+Have a nice rest of your day,
+
+Bron Frulk
+Supervisor&quot;,&quot;Sent&quot;,false, &quot;Read&quot;, false))
+
+
+(set: $enhancedICEPickEmail to (dm: &quot;Sender&quot;, &quot;GUNS@SCOUTS.group&quot;, &quot;Receiver&quot;, &quot;NUKE@SCOUTS.group&quot;, &quot;Subject&quot;, &quot;ICEBREAKER&quot;, &quot;Body&quot;, &quot;NUKE
+GOT A NEW ICEBREAKER IN THE SHOP
+CHECK IT OUT &gt;:)
+GUNS&quot;, &quot;Sent&quot;, false, &quot;Read&quot;, false))
+
        
-       (set:$emailNotif to 0)
-       (for:_emails, $koreEmails)[
-       (if:_emails&#39;s &quot;sent&quot; is true)[
-		(set:$emailNotif to it +1)
-       ]
-       ]
-	]
-]</tw-passagedata><tw-passagedata pid="15" name="Employment" tags="" position="1125,525" size="100,100">[[Resume]]
+		(set:$koreEmails to (a:$ITEmail))
+        (set: $unsentEmails to (a: $enhancedICEPickEmail, $PTOEmail, $mysteriousEmail))
+
+]</tw-passagedata><tw-passagedata pid="15" name="Employment" tags="" position="1550,700" size="100,100">[[Resume]]
 
 [[Documents]]</tw-passagedata><tw-passagedata pid="16" name="Enemy Turn" tags="" position="100,300" size="100,100">(hook:&quot;enemyTurn&quot;)[(collapse:)[
+&lt;!-- Poison Check --&gt;
+	(if: $enemy&#39;s &quot;Poisoned&quot; is true)[
+    	(display: &quot;Enemy Status Effects&quot;)
+        (if: $enemyHealth is &lt; 1)[
+        	$winResult
+        ]
+    ]
+
 &lt;!-- Enemy Attacks --&gt;
 (set: $enemyAttacks to $enemy&#39;s &quot;Attacks&quot;)
 (set:$enemyAttack to (either: ...$enemyAttacks))
@@ -328,9 +335,11 @@ Purchase the ICEPick?
 (box: &quot;X&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:cyan)+(b4r-size: 20,20,30,30)[
 You&#39;ve ordered a free pizza! Expect your prize in 30 minutes or less.
 
+
+
 (set: $level1Complete to true)
 (set:$playerMoney to $playerMoney+5000)
-(set: $emailNotif = $emailNotif+1)
+(set: $unsentEmails&#39;s 1st&#39;s &quot;Sent&quot; to true)
 (set: $EnhancedICEPick&#39;s &quot;Purchasable&quot; to true)
 (set:$botnet to it + (a:&quot;Pizza Planet&quot;))
 (button:)[
@@ -340,7 +349,7 @@ You&#39;ve ordered a free pizza! Expect your prize in 30 minutes or less.
 Stay at your location. Corporation 2 Security Forces are on their way.]
 
 (live:2s)[
-(link-goto:&quot;Main Menu&quot;,&quot;Legends of Trii&#39;el Kore&quot;)]</tw-passagedata><tw-passagedata pid="21" name="Graduation Photos" tags="" position="1375,600" size="100,100">There are photos from Kore&#39;s graduation.
+(link-goto:&quot;Main Menu&quot;,&quot;Legends of Trii&#39;el Kore&quot;)]</tw-passagedata><tw-passagedata pid="21" name="Graduation Photos" tags="" position="1800,775" size="100,100">There are photos from Kore&#39;s graduation.
 
 [[Pictures]]</tw-passagedata><tw-passagedata pid="22" name="Hack Newspaper" tags="" position="500,875" size="100,100">&lt;!-- Set the text to show --&gt;
 (set: $typewriterText to &quot;initializing...
@@ -424,9 +433,6 @@ Connection forced with Unknown Netrunner.
     ]
   ]
 }</tw-passagedata><tw-passagedata pid="25" name="Hacking Options" tags="" position="100,175" size="100,100">(collapse:)[
-&lt;!-- Poison Damage --&gt;
-	(if:$playerStat&#39;s &quot;Poisoned&quot; is true)[
-	(set:$playerHealth to it - (random:1,10))]
 &lt;!-- Programs --&gt;
 	(for: each _download, ...$downloads)[(button:)[
 		(link:&quot;Name&quot; of _download)[
@@ -449,7 +455,8 @@ Connection forced with Unknown Netrunner.
             
             &lt;!-- ICE Damage--&gt;
             (if:$ICEDamage &gt;0)[(set:$ICEDamageChecker to true)]
-            (if:&quot;Poison&quot; of _download is true)[(set:$enemy&#39;s &quot;Poisoned&quot; to true)]
+            (if:&quot;Poison&quot; of _download is true)[(set:$enemy&#39;s &quot;Poisoned&quot; to true)
+            You&#39;ve successfully installed poison.exe on $enemyName&#39;s computer]
 			(set:$enemy&#39;s &quot;Health&quot; to it - $damage)
 			(if:$enemyICE &gt;0)[
 				(set:$enemy&#39;s &quot;ICE&quot; to it - $ICEDamage)]
@@ -459,10 +466,10 @@ Connection forced with Unknown Netrunner.
             	(print:&quot;Name&quot; of _download+&quot;repairs your ICE by &quot; + $ICEHealing + &quot;points.&quot;)]
             (if:$damage &gt;0)[(print:&quot;Name&quot; of _download) deals $damage damage to $enemyName&#39;s machine.]
 			(if:$ICEDamageChecker is true)[$enemyName&#39;s ICE lost $ICEDamage integrity.]
-			(button:)+(link:&quot;Next&quot;)[
+			(button:)[(link:&quot;-&gt;&quot;)[
 			(if:$enemyHealth &lt;1)[$winResult]
         	        	(set:$log to &quot;enemy&quot;)
-                		(rerun:?Battle)]
+                		(rerun:?Battle)]]
 ]]]]</tw-passagedata><tw-passagedata pid="26" name="Header" tags="header" position="600,50" size="100,100">(collapse:)[
 (display: &quot;Programs&quot;)
 (set: $allPrograms to (a:$ICEPick))
@@ -472,7 +479,7 @@ Connection forced with Unknown Netrunner.
 (set:$allPrograms to it + (a:$glitchery))
 ]</tw-passagedata><tw-passagedata pid="27" name="Home" tags="" position="900,200" size="100,100">(button:)[[Boot PC -&gt;Computer]]
 
-(button:)[[Go to bed -&gt;Bed]]</tw-passagedata><tw-passagedata pid="28" name="IDE" tags="" position="1850,375" size="100,100">&lt;div&gt;(box: &quot;X&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[(button:)+(box:&quot;=====X&quot;)+(color:red)[
+(button:)[[Go to bed -&gt;Bed]]</tw-passagedata><tw-passagedata pid="28" name="IDE" tags="" position="2275,550" size="100,100">&lt;div&gt;(box: &quot;X&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[(button:)+(box:&quot;=====X&quot;)+(color:red)[
 [[X-&gt;Computer]] ]
 There&#39;s some broken code here.
 ]
@@ -512,28 +519,70 @@ Kore&quot;)
 (set:$enemy to $MamaMia)
 (set:$winResult to (go-to:&quot;Mama Mias Hacked&quot;))
 ]
-(display:&quot;Battle&quot;)</tw-passagedata><tw-passagedata pid="31" name="Level 2" tags="" position="500,750" size="100,100">Un&#39;taeko Daily News
+(display:&quot;Battle&quot;)</tw-passagedata><tw-passagedata pid="31" name="Un&#39;taeko Daily News" tags="" position="500,750" size="100,100">(float-box:&quot;X&quot;,&quot;Y&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(css:&quot;margin-top:0px,margin-bottom:0px&quot;)[
+	(align:&quot;==&gt;&quot;)+(box:&quot;=====X&quot;)+(css:&quot;margin-top: 0px;offset-position: top 100px;&quot;)[
+    	(collapse:)[(float-box: &quot;========X&quot;, &quot;Y===========&quot;)+(css: &quot;overflow:hidden&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
+        	(button:&quot;X&quot;)+(css: &quot;border:1px&quot;)+(color:black)+(hover-style: (color:white))(link-goto:&quot;X&quot;, &quot;Computer&quot;)
+        ]
+        ]]
+&lt;h2&gt;Un&#39;taeko Daily News&lt;/h2&gt;
+&lt;br&gt;
 
-Bombing at Dani&#39;s Show
+(if: $day is &gt;= 3)[
+=|=
+&lt;h4&gt;Alarming rise in Flitflower use among teenagers&lt;/h4&gt;
+=|=
+&lt;h4&gt;Remembering the lost at Dani Riiho&#39;s show&lt;/h4&gt;
+=|=
+&lt;h4&gt;A RealBerry^^TM^^ Cake Recipe&lt;/h4&gt;
+
+]
+&lt;br&gt;
+(if: $day is &gt;= 2)[
+
+
+=|=
+&lt;h4&gt;Bombing at Dani Riiho&#39;s Show&lt;/h4&gt;
 by Fili Arny
-A bombing has occured at the pop star&#39;s show. Eyewitnesses report magic users known as &quot;Aelma&quot; had been seen throwing fireballs at the show after the main explosion. This is strange, as Aelma have been considered extinct for 20 years. This is a developing story.
-
-Hackers in Un&#39;taeko
+A bombing has occured at the pop star&#39;s show. Eyewitnesses report magic users known as &quot;Aelma&quot; had been seen throwing fireballs at the show after the main explosion caused major damage to the building, resulting in the roof collapsing.
+Aelma had previously been believed to be extinct for 14 years, after the Second Assault on Arsinvar. 
+(if: $newspaperVandalized)[We have reason to suspect that Corporation 1 may have been utilizing what&#39;s known as a &quot;false flag operation&quot; to lay blame on the Aelma for unknown reasons.]
+This is a developing story and may be updated when new information arises.
+=|=
+&lt;h4&gt;Hackers in Un&#39;taeko&lt;/h4&gt;
 by Tili Arny
-Today in Un&#39;taeko, a local Pizza Place was hacked by a mysterious group known only as &quot;SCOUTS&quot;
+Today in Un&#39;taeko, a local Pizza Place known as Mama Mia&#39;s was hacked by a mysterious group known only as &quot;SCOUTS&quot;, who vandalized the webpage belonging to Mama Mia&#39;s.
+(if: $newspaperVandalized)[The hackers also rewarded all loyal Corporation 2 customers with an infinite number of rewards points. Hurry and get a free pizza while it lasts!]
 This hacker group hasn&#39;t previously been heard from before, and the government reports that they&#39;re &quot;nothing to be afraid of&quot; and that they&#39;re &quot;working on it&quot;.
-
-Deviled Egg Recipe
+=|=
+&lt;h4&gt;Deviled Egg Recipe&lt;/h4&gt;
 by Dres Mila
 My mother once told me the secret to a great deviled egg recipe starts with great eggs. I told her she was delirious and needed to go back to bed. There haven&#39;t been real eggs in Un&#39;taeko since the great war! How am I supposed to get fresh eggs? So here&#39;s how I, the great chef Bela will show you how to make MY Deviled Eggs, using SynthEggIcTM Eggs!
+]
+=|=
+&lt;h4&gt;Cabrons celebrate 100 year victory against the Aelma&lt;/h4&gt;
+by Ammet Sarille
+Today marks the 300 year anniversary of the Cabrons assault on the Aelmic Capitol of Arsinvar. This massive battle brought the former empire to its knees, and paved the way for the freedom of humanity from their former masters. Celebrations have begun in all three of the capital cities, as are the Cabrons who are holding a tournament tonight viewable on C2TV
+The Cabron Company, known colloquially as the Witch Hunters, are the only independent corporation to currently exist legally in all of Trii&#39;el. While its speculated that this distinct privilege is due to payments made to the CEOs of the other Corporations, there is no evidence to support these claims. It&#39;s more likely due to tensions between Corporation 2&#39;s CEO (who own the majority of law enforcement and security services)  and the Cabron&#39;s Commander in Chief Riiho.
+=|=
+&lt;h4&gt;Dangerous Weather Conditions on Un&#39;rael Island&lt;/h4&gt;
+by Scarla Edelte
+It&#39;s hurricane season in Un&#39;taeko, and Hurricane Abot has arrived to remind us of that fact. Flood watches are in effect across all western islands. Un&#39;rael Island is expected to get the worst of it, with power outages expected and flash floods imminent. Make sure to have water stocked up, flashlights ready, and any open files saved.
+=|=
+&lt;h4&gt;Chocolate^^TM^^ Chip Cookie recipe&lt;/h4&gt;
+by Teri Blecok
+My grandmother taught me the most important ingredient when you&#39;re baking chocolate chip cookies isn&#39;t actually the chocolate chips! It&#39;s actually the quality of the eggs you&#39;re using. And no one has better eggs than EGGCO^^TM^^! So today, I&#39;ll show you a recipe for the best damn Chocolate^^TM^^ Chip Cookie you&#39;ve ever eaten, using my favorite EGGCO^^TM^^ eggs!
+
+
 
 (if:$haveEnhancedICEPick is true)[
 Hack the Newspaper?
 
-[[Hack Newspaper]]
+(button:)[[Hack Newspaper]]
+]
 ]
 
-[[Browser]]</tw-passagedata><tw-passagedata pid="32" name="Level 3" tags="" position="625,750" size="100,100">Coming Soon
+}</tw-passagedata><tw-passagedata pid="32" name="Level 3" tags="" position="625,750" size="100,100">Coming Soon
 
 [[Browser]]</tw-passagedata><tw-passagedata pid="33" name="Level 4" tags="" position="750,750" size="100,100">Coming Soon
 
@@ -547,16 +596,19 @@ Hack the Newspaper?
   (link: &quot;Load game&quot;)[(load-game:&quot;Slot A&quot;)]
 ]}</tw-passagedata><tw-passagedata pid="38" name="Log" tags="" position="225,175" size="100,100">(hook:&quot;Log&quot;)[(collapse:)[
 (box:&quot;X&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(b4r-size:10,10,15,15)[
-(if:$log is &quot;you&quot;)[It&#39;s your turn.
+(if:$log is &quot;you&quot;)[
+	(if:$playerStat&#39;s &quot;Poisoned&quot; is true)[
+    (display:&quot;Player Status Effects&quot;)]
+    
+(else:)[
 (button:)+(box:&quot;X==&quot;)[
 (link:&quot;Hack&quot;)[
 (set:$log to &quot;hacking&quot;)
-(rerun:?Battle)]]]
+(rerun:?Battle)]]]]
 (else-if:$log is &quot;enemy&quot;)[(display:&quot;Enemy Turn&quot;)]
 (else-if:$log is &quot;hacking&quot;)[(display:&quot;Hacking Options&quot;)]
 ]
-]
-]</tw-passagedata><tw-passagedata pid="39" name="Main Menu" tags="" position="600,300" size="100,100">(link:&quot;New Game&quot;,(button:))[(go-to:&quot;New Game&quot;)]
+]]</tw-passagedata><tw-passagedata pid="39" name="Main Menu" tags="" position="600,300" size="100,100">(link:&quot;New Game&quot;,(button:))[(go-to:&quot;New Game&quot;)]
 
 (link:&quot;Load Game&quot;, (button:))[(go-to:&quot;Load Game&quot;)]</tw-passagedata><tw-passagedata pid="40" name="Mama Mia" tags="" position="100,500" size="100,100">(hook:&quot;Mama Mia&quot;)[(set: $MamaMiasAttacks to (ds: $ICEPick))
 (set: $MamaMia to (dm:&quot;Max Health&quot;,100, &quot;Health&quot;, 100, &quot;Max ICE&quot;, 100, &quot;ICE&quot;, 100, &quot;Bandwidth&quot;, 4, &quot;Attack&quot;,10, &quot;Attacks&quot;, $MamaMiasAttacks,&quot;Poisoned&quot;, false))]</tw-passagedata><tw-passagedata pid="41" name="Mama Mias Hacked" tags="" position="375,875" size="100,100">(set: $pizzaPlaceHacked to true)
@@ -569,8 +621,19 @@ You have 999999999999999999999999999999999 free pizzas!
 Would you like to redeem a free pizza?
 (button:)[
 [[Redeem -&gt;Free Pizza for Life]]]]
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="42" name="Mama Mias Pizzeria" tags="" position="475,575" size="100,100">&lt;div&gt;
-(box:&quot;X&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[(box:&quot;====X&quot;)+(color:red)+(button:)[[[X-&gt;Computer]]]
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="42" name="Mama Mia&#39;s" tags="" position="475,575" size="100,100">&lt;div&gt;
+(float-box:&quot;X&quot;,&quot;Y&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[(box:&quot;====X&quot;)+(color:red)+(button:)[[[X-&gt;Computer]]]
+&lt;div&gt;
+=|=
+(button:)
+[[Hack -&gt;Level 1]]
+=|=
+(button:)
+[[Desktop-&gt;Computer]] 
+=|=
+(button:)
+[[Browser]] 
+&lt;/div&gt;
 MAMA MIA&#39;S PIZZERIA
 &lt;div&gt;
 Menu	
@@ -592,19 +655,9 @@ Ground Meat^^TM^^
 
 Copyright 2035 Mama Mia&#39;s Pizzeria, a Corporation 2 Company
 ]
-&lt;/div&gt;&lt;div&gt;
-=|=
-(button:)
-[[Hack -&gt;Level 1]]
-=|=
-(button:)
-[[Desktop-&gt;Computer]] 
-=|=
-(button:)
-[[Browser]] 
 &lt;/div&gt;
 
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="43" name="Music" tags="" position="1375,100" size="100,100">There are some various music files here. They&#39;re mostly alternative rock and edm.
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="43" name="Music" tags="" position="2125,550" size="100,100">There are some various music files here. They&#39;re mostly alternative rock and edm.
 &lt;!-- Would like to make it possible to unlock various tracks through gameplay to be played in a media player in game--&gt;
 [[Computer]]</tw-passagedata><tw-passagedata pid="44" name="New Game" tags="" position="750,200" size="100,100">(set: $typewriterText to &quot;Your name is Kore. You&#39;re a Corporation 2 employee, and you&#39;ve just come home early from a stressful day of designing casino games. In your spare time, you enjoy hacking, and today you&#39;ve got all day to spend diving the net for interesting data.&quot;)
 {
@@ -638,12 +691,12 @@ Copyright 2035 Mama Mia&#39;s Pizzeria, a Corporation 2 Company
 (set:$winResult to (go-to:&quot;Newspaper Battle Won&quot;))
 ]
 (display:&quot;Battle&quot;)</tw-passagedata><tw-passagedata pid="46" name="Newspaper Battle Won" tags="" position="550,1250" size="100,100"></tw-passagedata><tw-passagedata pid="47" name="Newspaper Runner" tags="" position="100,750" size="100,100">(hook:&quot;newspaperRunner&quot;)[(set: $newsRunnerAttacks to (ds: $ICEPick,$poison))
-(set: $MamaMia to (dm:&quot;Max Health&quot;,100, &quot;Health&quot;, 100, &quot;Max ICE&quot;, 100, &quot;ICE&quot;, 100, &quot;Bandwidth&quot;, 4, &quot;Attack&quot;,10, &quot;Attacks&quot;, $MamaMiasAttacks,&quot;Poisoned&quot;, false))]</tw-passagedata><tw-passagedata pid="48" name="Pictures" tags="" position="1475,475" size="100,100">&lt;!-- Need to commission/draw art for these--&gt;
+(set: $MamaMia to (dm:&quot;Max Health&quot;,100, &quot;Health&quot;, 100, &quot;Max ICE&quot;, 100, &quot;ICE&quot;, 100, &quot;Bandwidth&quot;, 4, &quot;Attack&quot;,10, &quot;Attacks&quot;, $MamaMiasAttacks,&quot;Poisoned&quot;, false))]</tw-passagedata><tw-passagedata pid="48" name="Pictures" tags="" position="1900,650" size="100,100">&lt;!-- Need to commission/draw art for these--&gt;
 [[Graduation Photos]]
 [[2036 Summer]]
 [[2037 Spring]]
 
-[[Computer]]</tw-passagedata><tw-passagedata pid="49" name="Player" tags="" position="600,175" size="100,100">(hook:&quot;Player&quot;)[(collapse:)[(set:$playerStat to (dm: &quot;Health&quot;,100, &quot;Max Health&quot;, 100, &quot;Botnet Health&quot;, $botnetHealth, &quot;ICE&quot;, 100, &quot;Max ICE&quot;, 100, &quot;XP&quot;, 0, &quot;Level&quot;, 1,&quot;Money&quot;, 2000,&quot;Poisoned&quot;, false))
+[[Computer]]</tw-passagedata><tw-passagedata pid="49" name="Player" tags="" position="225,50" size="100,100">(hook:&quot;Player&quot;)[(collapse:)[(set:$playerStat to (dm: &quot;Health&quot;,100, &quot;Max Health&quot;, 100, &quot;Botnet Health&quot;, $botnetHealth, &quot;ICE&quot;, 100, &quot;Max ICE&quot;, 100, &quot;XP&quot;, 0, &quot;Level&quot;, 1,&quot;Money&quot;, 2000,&quot;Poisoned&quot;, false))
 (set:$playerMaxHealth to $playerStat&#39;s &quot;Max Health&quot;)
 (set:$playerMaxICE to $playerStat&#39;s &quot;Max ICE&quot;)
 (set:$playerHealth to $playerStat&#39;s &quot;Health&quot;)
@@ -681,7 +734,7 @@ Copyright 2035 Mama Mia&#39;s Pizzeria, a Corporation 2 Company
 ]
 (set: $randomEncounter to (dm:&quot;Max Health&quot;,100, &quot;Health&quot;, 100, &quot;Max ICE&quot;, 100, &quot;ICE&quot;, 100, &quot;Bandwidth&quot;, 4, &quot;Attack&quot;,10, &quot;Attacks&quot;, $enemyAttacks,&quot;Poisoned&quot;, false))
 ]
-]</tw-passagedata><tw-passagedata pid="52" name="Resume" tags="" position="1250,500" size="100,100">&lt;div&gt;
+]</tw-passagedata><tw-passagedata pid="52" name="Resume" tags="" position="1675,675" size="100,100">&lt;div&gt;
 (box: &quot;X&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[(button:)+(box:&quot;====X&quot;)+(color:red)[[[X-&gt;Computer]]]
 Pikore Rae&#39;en
 He/Him
@@ -705,13 +758,14 @@ You&#39;ve hacked a complete stranger! That was nice of you.
 Their machine is part of your botnet now.
 (set:$playerMoney to $playerMoney+5000)
 (set:$botnet to it + (a:(text:$enemyName)))
-(button:)[(link:&quot;Browser&quot;)[(go-to:&quot;Browser&quot;)]]]</tw-passagedata><tw-passagedata pid="54" name="Trash" tags="" position="1525,350" size="100,100">It&#39;s empty...
+(button:)[(link:&quot;Browser&quot;)[(go-to:&quot;Browser&quot;)]]]</tw-passagedata><tw-passagedata pid="54" name="Trash" tags="" position="1950,525" size="100,100">It&#39;s empty...
 &lt;!-- Maybe put something in here during gameplay--&gt;
-[[Computer]]</tw-passagedata><tw-passagedata pid="55" name="startup" tags="startup" position="475,175" size="100,100">(collapse:)[(set: $botnetCount to 0)
-
+[[Computer]]</tw-passagedata><tw-passagedata pid="55" name="A) Startup" tags="startup" position="475,175" size="100,100">(collapse:)[(set: $botnetCount to 0)
+(set: $day to 1)
 &lt;!-- levels--&gt;
 (set: $seed to (random:1000000,4999999))
 (set: $level1Complete to false)
+(set: $newspaperVandalized to false)
 (set: $level2Complete to false)
 (set: $level3Complete to false)
 (set: $level4Complete to false)
@@ -734,13 +788,12 @@ Their machine is part of your botnet now.
 (set: $downloads to it + (a:$ICEPick))
 
 &lt;!-- emails reset --&gt;
-(set: $emailNotif to 1)
+(set: $emailNotif to 0)
 
 &lt;!-- botnet --&gt;
 (set:$botnet to (a: &#39;Corporation 2 Casino Server&#39;))
 (set:$playerICE to 100)
 
-(set:$koreEmails to (a:$ITEmail))
 
 (display:&quot;Player&quot;)
 ]</tw-passagedata><tw-passagedata pid="56" name="Purchase Confirmation" tags="" position="375,450" size="100,100">(collapse:)[(hidden:)|purchaseConfirmation&gt;[You&#39;ve purchased (print: $selected)!
@@ -751,7 +804,28 @@ Their machine is part of your botnet now.
     (set: $playerStat&#39;s Money to it - _program&#39;s Price)
 ]]]]
 
-</tw-passagedata></tw-storydata>
+</tw-passagedata><tw-passagedata pid="57" name="Player Status Effects" tags="" position="0,175" size="100,100">(if: $playerStat&#39;s &quot;Poisoned&quot; is true)[
+(set:$poisonDamage to (random:5,20))
+(set:$playerHealth to it - $poisonDamage)
+You take $poisonDamage from $enemyName&#39;s poison.exe!
+(box:&quot;===X&quot;)[(button:&quot;Ouch&quot;)[(set:$log to &quot;hacking&quot;)
+(rerun:?Battle)]]]</tw-passagedata><tw-passagedata pid="58" name="Enemy Status Effects" tags="" position="0,300" size="100,100">(if: $enemy&#39;s &quot;Poisoned&quot; is true)[
+(set:$poisonDamage to (random:5,20))
+(set:$enemyHealth to it - $poisonDamage)
+$enemyName takes $poisonDamage from your poison.exe!
+(box:&quot;===X&quot;)[(button:&quot;Nice&quot;)[(set:$log to &quot;enemy&quot;)
+(rerun:?Battle)]]]</tw-passagedata><tw-passagedata pid="59" name="selectedEmail" tags="" position="1100,400" size="100,100">(hook: &quot;emailWindow&quot;)[(css: &quot;z-index: 2&quot;)+(b4r: &quot;solid&quot;, &quot;double&quot;, &quot;double&quot;, &quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(float-box:&quot;==XXXXXXXX=&quot;,&quot;=YYYYYYYYYYY=&quot;)+(bg: black)[
+(float-box: &quot;========X=&quot;, &quot;=Y===========&quot;)+(css: &quot;overflow:hidden&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[(button:&quot;X&quot;)+(css: &quot;border:1px&quot;)+(color:black)+(hover-style: (color:white))[(link:&quot;X&quot;)[(hide:?emailWindow)]]]
+            (for:each _email, ...$koreEmails)[
+(if: $selected is _email&#39;s Subject)[
+(set: $selected to _email)
+From: (print:$selected&#39;s Sender)
+To: (print:$selected&#39;s Receiver)
+Subject: (print:$selected&#39;s Subject)
+
+(print:$selected&#39;s Body)
+(set: $selected&#39;s &quot;Read&quot; to true)
+]]]]</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
  * https://github.com/paulmillr/es6-shim
