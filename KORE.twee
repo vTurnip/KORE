@@ -71,9 +71,30 @@ A few photos of a group of friends. A young redheaded man can be seen alone in a
 
 
 :: Bank {"position":"975,450","size":"100,100"}
+(collapse:)[(float-box:"X","Y")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(css:"margin-top:0px,margin-bottom:0px")[
+	(align:"==>")+(box:"=====X")+(css:"margin-top: 0px;offset-position: top 100px;")[
+    	(collapse:)[(float-box: "========X", "Y===========")+(css: "overflow:hidden")+(b4r:"solid","double","double","solid")+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
+        	(hook: "exitButton")[(button:"X")+(css: "border:1px")+(color:white)+(hover-style: (color:black))(link-goto:"X", "Computer")
+        ]]
+        ]]		(box:"X=====")[
+        (float-box: "X========", "Y===========")+(css: "overflow:hidden;")+(b4r:"solid","double","double","solid")+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
+        	(button:"X")+(css: "border:1px")+(color:black)+(hover-style: (color:white))(link-goto:"<-", "Browser")
+        ]]]
+        =|=
+<br>
+<br>
+<h4>Welcome to</h4>
+<br>
+<h3>1st Bank of Un'taeko</h3>
+<br>
+<br>
+<br>
+<br>
+Checking Account ending in 31173:
+<br>
 Current Balance:
-$playerMoney
-[[Browser]]
+$playerMoney^^CR^^
+]
 
 
 :: Battle {"position":"350,175","size":"100,100"}
@@ -151,40 +172,46 @@ Machines:
 ]]
 
 
-:: Browser {"position":"700,500","size":"100,100"}
-(float-box:"X","Y")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(css:"margin-top:0px,margin-bottom:0px")[
+:: Browser {"position":"775,550","size":"100,100"}
+(collapse:)[(float-box:"X","Y")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(css:"margin-top:0px,margin-bottom:0px")[
 	(align:"==>")+(box:"=====X")+(css:"margin-top: 0px;offset-position: top 100px;")[
     	(collapse:)[(float-box: "========X", "Y===========")+(css: "overflow:hidden")+(b4r:"solid","double","double","solid")+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
-        	(button:"X")+(css: "border:1px")+(color:black)+(hover-style: (color:white))(link-goto:"X", "Computer")
-        ]
+        	(hook: "exitButton")[(button:"X")+(css: "border:1px")+(color:white)+(hover-style: (color:black))(link-goto:"X", "Computer")
         ]]
+        ]]]	
+]
 =|=
 (button:)+(color:(mix: 0.5, white, 0.5, #00f))
 [[Bank]] 
+<br>
 (button:)+(color:(mix: 0.5, white, 0.5, #00f))
 [[Darknet Shop]] 
 =|=
 (button:)+(color:(mix: 0.5, white, 0.5, #00f))
 [[Mama Mia's]]
+<br>
 (button:)+(color:(mix: 0.5, white, 0.5, #00f))
 [[Level 5]] 
 =|=
 (button:)+(color:(mix: 0.5, white, 0.5, #00f))
 [[Un'taeko Daily News]] 
-(button:)+(color:(mix: 0.5, white, 0.5, #00f))
-[[Level 6]] 
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))[
+[[Level 6]] ]
 =|=
 (button:)+(color:(mix: 0.5, white, 0.5, #00f))
 [[Level 3]] 
+<br>
 (button:)+(color:(mix: 0.5, white, 0.5, #00f))
 [[Level 7]]
 =|=
 (button:)+(color:(mix: 0.5, white, 0.5, #00f))
 [[Level 4]] 
+<br>
 (button:)+(color:(mix: 0.5, white, 0.5, #00f))
 [[Hack a Stranger]] 
+
 </div>
-]
+
 
 
 :: Computer {"position":"1100,50","size":"200,200"}
@@ -306,20 +333,25 @@ Machines:
 
 
 :: Documents {"position":"1550,550","size":"100,100"}
-<div>
-(box: "X")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[(button:)+(box:"====X")+(color:red)[[[X->Computer]]]
+(float-box:"X","Y")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(css:"margin-top:0px,margin-bottom:0px")[
+	(align:"==>")+(box:"=====X")+(css:"margin-top: 0px;offset-position: top 100px;")[
+    	(collapse:)[(float-box: "========X", "Y===========")+(css: "overflow:hidden")+(b4r:"solid","double","double","solid")+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
+        	(button:"X")+(css: "border:1px")+(color:black)+(hover-style: (color:white))(link-goto:"X", "Computer")
+        ]
+        ]]
 (button:)[
 [[Employment]]]
 
-]
+]]
 
 
 :: Downloads {"position":"925,0","size":"100,100"}
-<div>
-(collapse:)[
-(set:$programNames to (a:))]
-(box: "X")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)
-[(button:)+(box:"====X")+(color:red)[[[X->Computer]]]
+(float-box:"X","Y")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(css:"margin-top:0px,margin-bottom:0px")[
+	(align:"==>")+(box:"=====X")+(css:"margin-top: 0px;offset-position: top 100px;")[
+    	(collapse:)[(float-box: "========X", "Y===========")+(css: "overflow:hidden")+(b4r:"solid","double","double","solid")+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
+        	(button:"X")+(css: "border:1px")+(color:black)+(hover-style: (color:white))(link-goto:"X", "Computer")
+        ]
+        ]]
 <!-- Purchased soft should be available to browse here-->
 <h3>Downloads:</h3>
 (for:each _download, ...$downloads)[(print:_download's "Name")
@@ -396,9 +428,17 @@ GUNS", "Sent", false, "Read", false))
 
 
 :: Employment {"position":"1550,700","size":"100,100"}
+(float-box:"X","Y")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(css:"margin-top:0px,margin-bottom:0px")[
+	(align:"==>")+(box:"=====X")+(css:"margin-top: 0px;offset-position: top 100px;")[
+    	(collapse:)[(float-box: "========X", "Y===========")+(css: "overflow:hidden")+(b4r:"solid","double","double","solid")+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
+        	(button:"X")+(css: "border:1px")+(color:black)+(hover-style: (color:white))(link-goto:"X", "Computer")
+        ]
+        ]]
+
 [[Resume]]
 
 [[Documents]]
+]
 
 
 :: Enemy Status Effects {"position":"0,300","size":"100,100"}
@@ -556,7 +596,7 @@ What would you like to do?
 [[Hack the Newspaper]]]
 
 
-:: Hack a Stranger {"position":"1375,750","size":"100,100"}
+:: Hack a Stranger {"position":"1250,750","size":"100,100"}
 (collapse:)[
 (display:"Random Encounter")
 (set:$enemy to $randomEncounter)
@@ -676,7 +716,8 @@ Connection forced with Unknown Netrunner.
 (set:$allPrograms to it + (a:$DDOS))
 
 (set:$botnetCount to 0)
-(for: each _machine, ...$botnet)[(set:$botnetCount to it+1)]]
+(for: each _machine, ...$botnet)[(set:$botnetCount to it+1)]
+]
 
 
 :: Home {"position":"900,200","size":"100,100"}
@@ -686,11 +727,14 @@ Connection forced with Unknown Netrunner.
 
 
 :: IDE {"position":"1500,50","size":"100,100"}
-<div>(box: "X")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[(button:)+(box:"=====X")+(color:red)[
-[[X->Computer]] ]
+(float-box:"X","Y")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(css:"margin-top:0px,margin-bottom:0px")[
+	(align:"==>")+(box:"=====X")+(css:"margin-top: 0px;offset-position: top 100px;")[
+    	(collapse:)[(float-box: "========X", "Y===========")+(css: "overflow:hidden")+(b4r:"solid","double","double","solid")+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
+        	(button:"X")+(css: "border:1px")+(color:black)+(hover-style: (color:white))(link-goto:"X", "Computer")
+        ]
+        ]]
 There's some broken code here.
 ]
-</div>
 
 
 :: Legends of Trii'el Kore {"position":"475,300","size":"100,100"}
@@ -814,43 +858,71 @@ Coming Soon
 
 
 :: Mama Mia's {"position":"475,575","size":"100,100"}
-<div>
-(float-box:"X","Y")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[(box:"====X")+(color:red)+(button:)[[[X->Computer]]]
-<div>
-=|=
-(button:)
+(css: "z-index:0;")+(background:black)+(box:"X")[
+(css: "z-index:0; background-color: rgba(0, 0, 0, 0.1); margin-top:0px; margin-bottom:0px")+(float-box:"X","Y")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[]
+	(align:"==>")+(box:"=====X")+(css:"margin-top: 0px;offset-position: top 100px;")[
+    	(collapse:)[(float-box: "========X", "Y===========")+(css: "overflow:hidden")+(b4r:"solid","double","double","solid")+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
+        	(button:"X")+(css: "border:1px")+(color:black)+(hover-style: (color:white))(link-goto:"X", "Computer")
+        ]
+        ]](collapse:)[
+	(box:"X=====")[
+        (float-box: "X========", "Y===========")+(css: "overflow:hidden;")+(b4r:"solid","double","double","solid")+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
+        	(button:"X")+(css: "border:1px")+(color:black)+(hover-style: (color:white))(link-goto:"<-", "Browser")
+        ]]]](collapse:)[
+(css: "z-index: 3; padding:0.1px;")+(float-box:"=XXX=","=Y===================")[
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))
 [[Hack ->Level 1]]
-=|=
-(button:)
-[[Desktop->Computer]] 
-=|=
-(button:)
-[[Browser]] 
-</div>
+]]
+(css: "z-index:0;")+(box:"X")[
+|==|
+=><=
+<h2>
 MAMA MIA'S PIZZERIA
+---
+|==|
+</h2>
+(collapse:)[
 <div>
+<h3>
 Menu	
-=|=
+</h3>
+<br>
+|==|
+(box:"X")[
+<==>
+|==
 Small	
 1299^^CR^^
 =|=
 Medium
 1599^^CR^^
-=|=
+==|
 Large
 1899^^CR^^
-</div>
-<div>
-Basic Toppings (200^^CR^^ Each):
+]
+|==|
+<br>
+<==>
+---
+<h4>
+Basic Toppings 
+<h5>(200^^CR^^ Each):</h5>
+
+</h4>
+<br>
 Spicy Meat^^TM^^
+<br>
 Ground Meat^^TM^^
+<br>
 ...
+<br>
+<br>
+<br>
+<br>
+
 
 Copyright 2035 Mama Mia's Pizzeria, a Corporation 2 Company
-]
-</div>
-
-</div>
+]]
 
 
 :: Mama Mias Hacked {"position":"375,875","size":"100,100"}
@@ -868,9 +940,17 @@ Would you like to redeem a free pizza?
 
 
 :: Music {"position":"1500,175","size":"100,100"}
+(float-box:"X","Y")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(css:"margin-top:0px,margin-bottom:0px")[
+	(align:"==>")+(box:"=====X")+(css:"margin-top: 0px;offset-position: top 100px;")[
+    	(collapse:)[(float-box: "========X", "Y===========")+(css: "overflow:hidden")+(b4r:"solid","double","double","solid")+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
+        	(button:"X")+(css: "border:1px")+(color:black)+(hover-style: (color:white))(link-goto:"X", "Computer")
+        ]
+        ]]
+
 There are some various music files here. They're mostly alternative rock and edm.
 <!-- Would like to make it possible to unlock various tracks through gameplay to be played in a media player in game-->
-[[Computer]]
+
+]
 
 
 :: New Game {"position":"750,200","size":"100,100"}
@@ -1025,8 +1105,12 @@ There are some various music files here. They're mostly alternative rock and edm
 
 
 :: Resume {"position":"1675,675","size":"100,100"}
-<div>
-(box: "X")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[(button:)+(box:"====X")+(color:red)[[[X->Computer]]]
+(float-box:"X","Y")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(css:"margin-top:0px,margin-bottom:0px")[
+	(align:"==>")+(box:"=====X")+(css:"margin-top: 0px;offset-position: top 100px;")[
+    	(collapse:)[(float-box: "========X", "Y===========")+(css: "overflow:hidden")+(b4r:"solid","double","double","solid")+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
+        	(button:"X")+(css: "border:1px")+(color:black)+(hover-style: (color:white))(link-goto:"X", "Computer")
+        ]
+        ]]
 Pikore Rae'en
 He/Him
 +7127772789
@@ -1047,7 +1131,7 @@ ugh why am i even making this there's no one else to hire me anymore
 ]
 
 
-:: Stranger Hacked {"position":"1375,875","size":"100,100"}
+:: Stranger Hacked {"position":"1250,875","size":"100,100"}
 (box: "X")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[
 You've hacked a complete stranger! That was nice of you.
 Their machine is part of your botnet now.
@@ -1067,8 +1151,15 @@ It's empty...
 	(align:"==>")+(box:"=====X")+(css:"margin-top: 0px;offset-position: top 100px;")[
     	(collapse:)[(float-box: "========X", "Y===========")+(css: "overflow:hidden")+(b4r:"solid","double","double","solid")+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
         	(button:"X")+(css: "border:1px")+(color:black)+(hover-style: (color:white))(link-goto:"X", "Computer")
+	        ]
         ]
-        ]]
+	](collapse:)[
+	(box:"X=====")[
+        (float-box: "X========", "Y===========")+(css: "overflow:hidden;")+(b4r:"solid","double","double","solid")+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
+        	(button:"X")+(css: "border:1px")+(color:black)+(hover-style: (color:white))(link-goto:"<-", "Browser")
+        ]
+    ]
+]
 <h2>Un'taeko Daily News</h2>
 <br>
 
@@ -1126,7 +1217,7 @@ Hack the Newspaper?
 ]
 ]
 
-}
+
 
 
 :: selectedEmail {"position":"1100,400","size":"100,100"}
@@ -1148,7 +1239,10 @@ Subject: (print:$selected's Subject)
 
 
 :: StoryStylesheet [stylesheet]
-.button{
- padding:0.1px;
- margin:0.1px;
+.enchantment-button {
+  color: #af8aff;
+}
+
+.enchantment-button {
+color: rgb(175, 138, 255);
 }
