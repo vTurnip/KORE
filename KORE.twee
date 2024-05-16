@@ -52,7 +52,9 @@ A few photos of a group of friends. A young redheaded man can be seen alone in a
 
 <!-- starting player money-->
 
-
+<!-- Computer Parts -->
+(display: "Computer Parts")
+(set: $koresPCParts to (a: ))
 <!-- WIP Arrays for downloads-->
 (display:"Programs")
 (set: $downloads to (a:))
@@ -65,6 +67,7 @@ A few photos of a group of friends. A young redheaded man can be seen alone in a
 (set:$botnet to (a: 'Corporation 2 Casino Server'))
 (set:$playerICE to 100)
 
+(set: $shopInventory to (a:))
 
 (display:"Player")
 ]
@@ -102,11 +105,11 @@ $playerMoney^^CR^^
 (set: $log to "you")
 (set:$maxBotnetHealth to 100*$botnetCount)
 (set:$botnetHealth to $maxBotnetHealth)
+(set: $enemyHealth to $enemy's Health)
 (set:$enemyMaxHealth to $enemy's Health)
 (set:$enemyMaxICE to $enemy's "Max ICE")]
 (hook:"Battle")[(collapse:)[
 (set:$enemyICE to $enemy's "ICE")
-(set:$enemyHealth to $enemy's Health)
 (if:$enemyHealth <1)[$winResult]]
 <div>(float-box:"X","Y")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[
 <div>
@@ -136,11 +139,17 @@ ICE: $enemyICE/$enemyMaxICE]</div>
 
 :: Bed {"position":"900,325","size":"100,100"}
 (if: $level1Complete is true)[
-	(button:)[(link:"Go to Bed?")[
-		(set: $day to it +1)
-	    (go-to:"Home")
-        (set: $playerHealth to $playerStat's "Max Health")
+	(button:)[
+    	(link:"Go to Bed?")[
+			(set: $day to it +1)
+	    	(go-to:"Home")
+        	(set: $playerHealth to $playerStat's "Max Health")
 		]
+    ]
+    (button:)[
+    	(link:"Nevermind")[
+    		(go-to:"Home")
+    	]
     ]
 ]
 (else:)[
@@ -156,7 +165,517 @@ Saved to Slot A!
   ](else: )[
     Sorry, I couldn't save your game.
   ]
-]]
+]
+]
+(button:)[
+	(link:"Nevermind")[
+		(go-to:"Home")
+	]
+]
+
+
+:: Bench {"position":"900,75","size":"100,100"}
+(float-box:"X", "Y")+(b4r: "outset")+(b4r-color:purple)+(b4r-size: 25)[
+	(float-box:"=======X=", "Y============")+(css: "margin-top:25px; margin-right:25px; overflow:hidden;")[
+    	(button:)+(color:red)[
+        	(link-goto: "Home","Home")
+        ]
+    ]
+	(hook: "ComputerSelect")[
+    {
+		(hook: "ComputerSelectDialogue")[
+			Here you can work on your PC, or build a new one.
+		]
+		(button:)[
+        	(link-reveal: "Work on main PC")[
+        		(hook: "bench")[
+					(hide:?ComputerSelectDialogue)
+					<h2>Installed</h2>
+					|===
+					<h3>Processing Cores</h3>
+					Slot 1:
+					(print: $computerStats's "Core1"'s "Name")<br>
+					Slot 2:
+					(print: $computerStats's "Core2"'s "Name")<br>
+					(if: $computerStats's "Core3" is not "None" and it is not "Empty")[
+						Slot 3:
+						(print: $computerStats's "Core3"'s "Name")<br>
+                    ]
+                	(if: $computerStats's "Core3" is "Empty")[
+        				Slot 3:
+        				(print: "Empty")<br>
+        			]
+        				(if: $computerStats's "Core4" is not "None" and it is not "Empty")[
+                			Slot 4:
+							(print: $computerStats's "Core4"'s "Name")<br>
+                        ]
+        				(if: $computerStats's "Core4" is "Empty")[
+        					Slot 4:
+        					(print: "Empty")<br>
+        				]
+        				(if: $computerStats's "Core5" is not "None" and it is not "Empty")[
+        					Slot 5:
+							(print: $computerStats's "Core5"'s "Name")<br>
+                        ]
+        				(if: $computerStats's "Core5" is "Empty")[
+        					Slot 5:
+        					(print: "Empty")<br>
+        				]
+        				(if: $computerStats's "Core6" is not "None" and it is not "Empty")[
+        					Slot 6:
+							(print: $computerStats's "Core6"'s "Name")<br>
+                        ]
+       					(if: $computerStats's "Core6" is "Empty")[
+        					Slot 6:
+        					(print: "Empty")<br>
+        				]
+   						=|==
+   						<h3>RAM</h3>
+   						(print: $computerStats's "RAM Slot 1"'s "Name")<br>
+						(print: $computerStats's "RAM Slot 2"'s "Name")<br>
+        				(if: $computerStats's "RAM Slot 3" is not "None")[
+							(print: $computerStats's "RAM Slot 3"'s "Name")<br>
+                        ]
+        				(if: $computerStats's "RAM Slot 4" is not "None")[
+							(print: $computerStats's "RAM Slot 4"'s "Name")<br>
+                        ]
+        				(if: $computerStats's "RAM Slot 5" is not "None")[
+							(print: $computerStats's "RAM Slot 5"'s "Name")<br>
+                        ]
+        				(if: $computerStats's "RAM Slot 6" is not "None")[
+							(print: $computerStats's "RAM Slot 6"'s "Name")<br>
+                        ]        
+        				(if: $computerStats's "RAM Slot 7" is not "None")[
+							(print: $computerStats's "RAM Slot 7"'s "Name")<br>
+                        ]
+        				(if: $computerStats's "RAM Slot 8" is not "None")[
+							(print: $computerStats's "RAM Slot 8"'s "Name")<br>
+                         ]
+        				==|=
+    					<h3>Motherboard</h3>
+    					(print:$computerStats's "Motherboard"'s "Name")
+    					===|
+    					<h3>Cooling System</h3>
+    					(print: $computerStats's "Cooling System"'s "Name")
+   
+   						|==|
+   						<h2>Spare Parts</h2>
+						(set: _arrayNumber to 0)<br>
+						|===
+    					Cores:
+						(for: each _item, ...$koresSpareParts)[
+    						(set: _arrayNumber to it +1)
+    						(if: _item's "Slot" is "Core")[
+        					(set: $core1ID to _arrayNumber)
+    						(button:)[
+                            	(link: _item's "Name")[
+        							Swap (print: _item's "Name") into:
+                    				(button:)[
+                                    	(link:  $computerStats's Core1's Name)[
+                                        	(print: "
+                        					(set: $koresSpareParts to it + (a:$computerStats's Core1))
+                            				(set:  $computerStats's Core1 to $koresSpareParts's $core1ID)
+                            				(set: _partArray to (find: _part where _part's Name is $koresSpareParts's $core1ID's Name, ...$koresSpareParts))
+                            				(set: $koresSpareParts to it - _partArray)
+                            				(if: _partArray's length is >1)[
+                            					(set: _partArray to (subarray: _partArray, 1, _partArray's length -1))
+                            					(set: $koresSpareParts to it + _partArray)
+                                            ]
+                              				(text: $computerStats's Core1's Name)  slotted in successfully
+                           					(rerun: ?bench)")
+                        				]
+                    				]
+                    				(button:)[
+                                    	(link:  $computerStats's Core2's Name)[
+                                        	(print: "
+                        						(set: $koresSpareParts to it + (a:$computerStats's Core2))
+                            					(set:  $computerStats's Core2 to $koresSpareParts's $core1ID)
+                            					(set: _partArray to (find: _part where _part's Name is $koresSpareParts's $core1ID's Name, ...$koresSpareParts))
+                            					(set: $koresSpareParts to it - _partArray)
+                            					(if: _partArray's length is >1)[
+                            						(set: _partArray to (subarray: _partArray, 1, _partArray's length -1))
+                            						(set: $koresSpareParts to it + _partArray)
+												]
+												(text: $computerStats's Core2's Name)  slotted in successfully
+                           						(rerun: ?bench)"
+                                            )
+                       				]
+                    			]
+                                
+                            	(if: $computerStats's "Core3" is not "None"and it is not "Empty")[
+                    				(button:)[
+                                    	(link: $computerStats's Core3's Name)[
+                                        	(print: "
+                        					(set: $koresSpareParts to it + " + "(a:$computerStats's Core3))
+                            				(set:  $computerStats's Core3" + " to $koresSpareParts's $core1ID)
+                            				(set: _partArray to (find: _part where _part's Name is $koresSpareParts's $core1ID's Name, ...$koresSpareParts))
+                            				(set: $koresSpareParts to it - _partArray)
+                            				(if: _partArray's length is >1)[
+                            					(set: _partArray to (subarray: _partArray, 1, _partArray's length -1))
+                            					(set: $koresSpareParts to it + _partArray)
+                                            ]
+                            				(text: $computerStats's Core3's Name)  slotted in successfully
+                           					(rerun: ?bench)")
+                        					]
+                    					]
+                                    ]
+                            			(if: $computerStats's "Core3" is not "None"and it is "Empty")[
+                    						(button:)[
+                                            	(link:  "Empty Slot")[
+                                            		(print: "
+                            							(set:  $computerStats's Core3 to $koresSpareParts's $core1ID)
+                            							(set: _partArray to (find: _part where _part's Name is $koresSpareParts's $core1ID's Name, ...$koresSpareParts))
+                            							(set: $koresSpareParts to it - _partArray)
+                            							(if: _partArray's length is >1)[
+                            								(set: _partArray to (subarray: _partArray, 1, _partArray's length -1))
+                            								(set: $koresSpareParts to it + _partArray)
+                                                    	]
+                            						(text: $computerStats's Core3's Name)  slotted in successfully
+                           							(rerun: ?bench)"
+                                                    )
+                        						]
+                    						]
+                                        ]
+                            				(if: $computerStats's "Core4" is not "None"and it is not "Empty")[
+                                                (button:)[
+                                                    (link: $computerStats's Core4's Name)[
+                                                        (print: "
+                                                        (set: $koresSpareParts to it + (a:$computerStats's Core4))
+                                                        (set:  $computerStats's Core4 to $koresSpareParts's $core1ID)
+                                                        (set: _partArray to (find: _part where _part's Name is $koresSpareParts's $core1ID's Name, ...$koresSpareParts))
+                                                        (set: $koresSpareParts to it - _partArray)
+                                                        (if: _partArray's length is >1)[
+                                                            (set: _partArray to (subarray: _partArray, 1, _partArray's length -1))
+                                                            (set: $koresSpareParts to it + _partArray)
+                                                        ]
+                                                        (text: $computerStats's Core4's Name)  slotted in successfully
+                                                        (rerun: ?bench)")
+                                                        ]
+                                                    ]
+                                            ]
+                            
+                            				(if: $computerStats's "Core4" is not "None"and it is "Empty")[
+                    						(button:)[
+                                            	(link:  "Empty Slot")[
+                                            		(print: "
+                            							(set:  $computerStats's Core4 to $koresSpareParts's $core1ID)
+                            							(set: _partArray to (find: _part where _part's Name is $koresSpareParts's $core1ID's Name, ...$koresSpareParts))
+                            							(set: $koresSpareParts to it - _partArray)
+                            							(if: _partArray's length is >1)[
+                            								(set: _partArray to (subarray: _partArray, 1, _partArray's length -1))
+                            								(set: $koresSpareParts to it + _partArray)
+                                                    	]
+                            						(text: $computerStats's Core4's Name)  slotted in successfully
+                           							(rerun: ?bench)"
+                                                    )
+                        						]
+                    						]
+                                        ]
+                            
+                            				(if: $computerStats's "Core5" is not "None"and it is not "Empty")[
+                                                (button:)[
+                                                    (link: $computerStats's Core5's Name)[
+                                                        (print: "
+                                                        (set: $koresSpareParts to it + (a:$computerStats's Core5))
+                                                        (set:  $computerStats's Core5 to $koresSpareParts's $core1ID)
+                                                        (set: _partArray to (find: _part where _part's Name is $koresSpareParts's $core1ID's Name, ...$koresSpareParts))
+                                                        (set: $koresSpareParts to it - _partArray)
+                                                        (if: _partArray's length is >1)[
+                                                            (set: _partArray to (subarray: _partArray, 1, _partArray's length -1))
+                                                            (set: $koresSpareParts to it + _partArray)
+                                                        ]
+                                                        (text: $computerStats's Core5's Name)  slotted in successfully
+                                                        (rerun: ?bench)")
+                                                        ]
+                                                    ]
+                                            ]
+                            
+                            		(if: $computerStats's "Core5" is not "None"and it is "Empty")[
+                    						(button:)[
+                                            	(link:  "Empty Slot")[
+                                            		(print: "
+                            							(set:  $computerStats's Core5 to $koresSpareParts's $core1ID)
+                            							(set: _partArray to (find: _part where _part's Name is $koresSpareParts's $core1ID's Name, ...$koresSpareParts))
+                            							(set: $koresSpareParts to it - _partArray)
+                            							(if: _partArray's length is >1)[
+                            								(set: _partArray to (subarray: _partArray, 1, _partArray's length -1))
+                            								(set: $koresSpareParts to it + _partArray)
+                                                    	]
+                            						(text: $computerStats's Core5's Name)  slotted in successfully
+                           							(rerun: ?bench)"
+                                                    )
+                        						]
+                    						]
+                                        ]
+                            
+                            			(if: $computerStats's "Core6" is not "None"and it is not "Empty")[
+                                                (button:)[
+                                                    (link: $computerStats's Core6's Name)[
+                                                        (print: "
+                                                        (set: $koresSpareParts to it + (a:$computerStats's Core6))
+                                                        (set:  $computerStats's Core6 to $koresSpareParts's $core1ID)
+                                                        (set: _partArray to (find: _part where _part's Name is $koresSpareParts's $core1ID's Name, ...$koresSpareParts))
+                                                        (set: $koresSpareParts to it - _partArray)
+                                                        (if: _partArray's length is >1)[
+                                                            (set: _partArray to (subarray: _partArray, 1, _partArray's length -1))
+                                                            (set: $koresSpareParts to it + _partArray)
+                                                        ]
+                                                        (text: $computerStats's Core6's Name)  slotted in successfully
+                                                        (rerun: ?bench)")
+                                                        ]
+                                                    ]
+                                            ]
+                            
+                            			(if: $computerStats's "Core6" is not "None"and it is "Empty")[
+                    						(button:)[
+                                            	(link:  "Empty Slot")[
+                                            		(print: "
+                            							(set:  $computerStats's Core6 to $koresSpareParts's $core1ID)
+                            							(set: _partArray to (find: _part where _part's Name is $koresSpareParts's $core1ID's Name, ...$koresSpareParts))
+                            							(set: $koresSpareParts to it - _partArray)
+                            							(if: _partArray's length is >1)[
+                            								(set: _partArray to (subarray: _partArray, 1, _partArray's length -1))
+                            								(set: $koresSpareParts to it + _partArray)
+                                                    	]
+                            						(text: $computerStats's Core6's Name)  slotted in successfully
+                           							(rerun: ?bench)"
+                                                    )
+                        						]
+                    						]
+                                        ]
+                        			]
+                    			]
+                			]
+        				]
+                    
+                        <br>
+						(set: _arrayNumber to 0)
+						=|==
+						RAM:
+						(for: each _item, ...$koresSpareParts)[
+    						(set: _arrayNumber to it +1)
+    						(if: _item's "Slot" is "RAM")[
+        						(set: $RAM1ID to _arrayNumber)
+    							(button:)[(link: _item's "Name")[
+        							Swap into:
+                					(if: $computerStats's "RAM Slot 1" is not "Empty")[
+                    					(button:)[
+                                        	(link:  $computerStats's "RAM Slot 1"'s "Name" )[
+                        						(set: $koresSpareParts to it + (a:$computerStats's "RAM Slot 1"))
+                            					(set: $computerStats's "RAM Slot 1" to $koresSpareParts's $RAM1ID)
+                            					(set: _partArray to (find: _part where _part's Name is _item's Name, ...$koresSpareParts))
+                            					(set: $koresSpareParts to it - _partArray)
+                                                 (if: _partArray's length is >1)[
+                            						(set: _partArray to (subarray: _partArray, 1, _partArray's length -1))
+                            						(set: $koresSpareParts to it + _partArray)
+                                                 ]
+                                                 (print: (text:$computerStats's "RAM Slot 1"'s "Name") + " slotted in successfully.")
+                            					(rerun:?bench)
+                        					]
+                                     	]
+                        				(button:)[
+                                        	(link: $computerStats's "RAM Slot 2"'s "Name")[
+                        						(set: $koresSpareParts to it + (a:$computerStats's "RAM Slot 2"))
+                           						(set: $computerStats's "RAM Slot 2" to $koresSpareParts's $RAM1ID)
+                            					(set: _partArray to (find: _part where _part's Name is _item's Name, ...$koresSpareParts))
+                            					(set: $koresSpareParts to it - _partArray)
+                                                        (if: _partArray's length is >1)[
+                            								(set: _partArray to (subarray: _partArray, 1, _partArray's length -1))
+                            								(set: $koresSpareParts to it + _partArray)
+                                                        ]
+                                                        (print: (text:$computerStats's "RAM Slot 2"'s "Name") + " slotted in successfully.")
+                            							(rerun:?bench)
+                                                    ]
+                                                ]
+                            					(if: $computerStats's "RAM Slot 3" is not "None")[
+                         							(button:)[
+                                                    	(link: $computerStats's "RAM Slot 3"'s "Name")[
+                        									(set: $koresSpareParts to it + (a:$computerStats's "RAM Slot 3"))
+                            								(set: $computerStats's "RAM Slot 3" to $koresSpareParts's $RAM1ID)
+                            								(set: _partArray to (find: _part where _part's Name is _item's Name, ...$koresSpareParts))
+                           									(set: $koresSpareParts to it - _partArray)
+                            								(if: _partArray's length is >1)[
+                            									(set: _partArray to (subarray: _partArray, 1, _partArray's length -1))
+                            									(set: $koresSpareParts to it + _partArray)]
+                                                        	(print: (text:$computerStats's "RAM Slot 3"'s "Name") + " slotted in successfully.")
+                            								(rerun:?bench)
+                                                        ]
+                                                    ]
+                                                ]
+                            					(if: $computerStats's "RAM Slot 4" is not "None")[
+                        							(button:)[
+                                                    	(link: $computerStats's "RAM Slot 4"'s "Name")[
+                        								(set: $koresSpareParts to it + (a:$computerStats's "RAM Slot 4"))
+                            							(set: $computerStats's "RAM Slot 4" to $koresSpareParts's $RAM1ID)
+                            							(set: _partArray to (find: _part where _part's Name is _item's Name, ...$koresSpareParts))
+                            							(set: $koresSpareParts to it - _partArray)
+                            							(if: _partArray's length is >1)[
+                            								(set: _partArray to (subarray: _partArray, 1, _partArray's length -1))
+                            								(set: $koresSpareParts to it + _partArray)
+                                                        ]
+                                                        (print: (text:$computerStats's "RAM Slot 4"'s "Name") + " slotted in successfully.")
+                            							(rerun:?bench)
+                                                    ]
+                                                ]
+                                           ]
+                            				(if: $computerStats's "RAM Slot 5" is not "None")[
+                        					(button:)[
+                                            	(link: $computerStats's "RAM Slot 5"'s "Name")[
+                        							(set: $koresSpareParts to it + (a:$computerStats's "RAM Slot 5"))
+                            						(set: $computerStats's "RAM Slot 5" to $koresSpareParts's $RAM1ID)
+                            						(set: _partArray to (find: _part where _part's Name is _item's Name, ...$koresSpareParts))
+                            						(set: $koresSpareParts to it - _partArray)
+                                                        (if: _partArray's length is >1)[
+                            								(set: _partArray to (subarray: _partArray, 1, _partArray's length -1))
+                            								(set: $koresSpareParts to it + _partArray)
+                                                        ]
+                                                        (print: (text:$computerStats's "RAM Slot 5"'s "Name") + " slotted in successfully.")
+                            							(rerun:?bench)
+                                                    ]
+                                                ]
+                                            ]
+                            				(if: $computerStats's "RAM Slot 6" is not "None")[
+                        						(button:)[
+                                                	(link: $computerStats's "RAM Slot 6"'s "Name")[
+                        								(set: $koresSpareParts to it + (a:$computerStats's "RAM Slot 6"))
+                            							(set: $computerStats's "RAM Slot 6" to $koresSpareParts's $RAM1ID)
+                            							(set: _partArray to (find: _part where _part's Name is _item's Name, ...$koresSpareParts))
+                            							(set: $koresSpareParts to it - _partArray)
+                                                         (if: _partArray's length is >1)[
+                            								(set: _partArray to (subarray: _partArray, 1, _partArray's length -1))
+                            								(set: $koresSpareParts to it + _partArray)
+                                                          ]
+                                                        (print: (text:$computerStats's "RAM Slot 6"'s "Name") + " slotted in successfully.")
+                            							(rerun:?bench)
+                                                    ]
+                                                 ]
+                                             ]
+                            				(if: $computerStats's "RAM Slot 7" is not "None")[
+                        						(button:)[
+                                                	(link: $computerStats's "RAM Slot 7"'s "Name")[
+                        								(set: $koresSpareParts to it + (a:$computerStats's "RAM Slot 7"))
+                            							(set: $computerStats's "RAM Slot 7" to $koresSpareParts's $RAM1ID)
+                            							(set: _partArray to (find: _part where _part's Name is _item's Name, ...$koresSpareParts))
+                            							(set: $koresSpareParts to it - _partArray)
+                                                         (if: _partArray's length is >1)[
+                            								(set: _partArray to (subarray: _partArray, 1, _partArray's length -1))
+                            								(set: $koresSpareParts to it + _partArray)
+                                                        ]
+                                                        (print: (text:$computerStats's "RAM Slot 7"'s "Name") + " slotted in successfully.")
+                            							(rerun:?bench)
+                                                        ]
+                                                    ]
+                                                ]
+                            					(if: $computerStats's "RAM Slot 8" is not "None")[
+                        							(button:)[
+                                                    	(link: $computerStats's "RAM Slot 8"'s "Name")[
+                        									(set: $koresSpareParts to it + (a:$computerStats's "RAM Slot 8"))
+                                                              (set: $computerStats's "RAM Slot 8" to $koresSpareParts's $RAM1ID)
+                                                              (set: _partArray to (find: _part where _part's Name is _item's Name, ...$koresSpareParts))
+                                                              (set: $koresSpareParts to it - _partArray)
+                                                        	  (if: _partArray's length is >1)[
+                                                                    (set: _partArray to (subarray: _partArray, 1, _partArray's length -1))
+                                                                    (set: $koresSpareParts to it + _partArray)
+                                                              ]
+                                                        	  (print: (text:$computerStats's "RAM Slot 8"'s "Name") + " slotted in successfully.")
+                            								(rerun:?bench)
+                                                        ]
+                                                    ]
+                                              ]
+										]
+                    				]
+                				]
+        					]
+                        ]
+        				==|=
+        
+						(set: _arrayNumber to 0)
+        				Motherboards:
+        				(for: each _item, ...$koresSpareParts)[
+    						(set: _arrayNumber to it + 1)
+    						(if: _item's "Slot" is "Motherboard")[
+        						(set: $mobo1ID to _arrayNumber)
+    							(button:)[
+                                	(link: _item's "Name")[
+        								Swap into:
+                						(if: $computerStats's "Motherboard" is not "Empty")[
+                    						(button:)[
+                                        		(link:  $computerStats's "Motherboard"'s "Name" )[
+                        							(set: $koresSpareParts to it + (a:$computerStats's "Motherboard"))
+                            						(set: $computerStats's "Motherboard" to $koresSpareParts's $mobo1ID)
+                            						(set: _partArray to (find: _part where _part's Name is _item's Name, ...$koresSpareParts))
+                            						(set: $koresSpareParts to it - _partArray)
+                                             			 (if: _partArray's length is >1)[
+                            						(set: _partArray to (subarray: _partArray, 1, _partArray's length -1))
+                            						(set: $koresSpareParts to it + _partArray)
+                                       	         ]
+                                                (print: (text:$computerStats's "Motherboard"'s "Name") + " slotted in successfully.")
+                                                (if: $computerStats's "Core3" is "None" and $computerStats's "Motherboard"'s "Core Slots"is >2)[
+													(set: $computerStats's "Core3" to "Empty", $computerStats's "Core4" to "Empty")
+												]
+                                                (if: $computerStats's "RAM Slot 3" is "None" and $computerStats's "Motherboard"'s "RAM Slots" is > 2)[
+													(set: $computerStats's "RAM Slot 3" to "Empty", $computerStats's "RAM Slot 4" to "Empty")
+                                                ]
+												(if: $computerStats's "Core5" is "None" and $computerStats's "Motherboard"'s "Core Slots"is >4)[
+													(set: $computerStats's "Core5" to "Empty", $computerStats's "Core6" to "Empty")
+												]
+                                                (if: $computerStats's "Core3" is not "None" and $computerStats's "Motherboard"'s "Core Slots"is <3)[
+													(set: $koresSpareParts to it + (a: $computerStats's "Core3", $computerStats's "Core4"))
+													(set: $computerStats's "Core3" to "None", $computerStats's "Core4" to "None")
+												] 
+												(if: $computerStats's "Core5" is not "None" and $computerStats's "Motherboard"'s "Core Slots"is <5)[
+													(set: $koresSpareParts to it + (a: $computerStats's "Core5", $computerStats's "Core6"))
+													(set: $computerStats's "Core5" to "None", $computerStats's "Core6" to "None")
+												] 
+												(if: $koresSpareParts contains "Empty")[
+                                                	(set: $koresSpareParts to it - (a:"Empty"))
+                                                ]
+                            					(rerun:?bench)
+                        					]
+                                        ]
+        							]
+                                ]
+        					]
+        				]
+        			]
+        			===|
+        			(set: _arrayNumber to 0)
+        			Cooling Systems:
+        			(for: each _item, ...$koresSpareParts)[
+    					(set: _arrayNumber to it + 1)
+    					(if: _item's "Slot" is "Cooler")[
+        					(set: $cooler1ID to _arrayNumber)
+    						(button:)[
+                            	(link: _item's "Name")[
+        							Swap into:
+                					(if: $computerStats's "Cooling System" is not "Empty")[
+                    					(button:)[
+                                        	(link:  $computerStats's "Cooling System"'s "Name" )[
+                                                (set: $koresSpareParts to it + (a:$computerStats's "Cooling System"))
+                                                (set: $computerStats's "Cooling System" to $koresSpareParts's $cooler1ID)
+                                                (set: _partArray to (find: _part where _part's Name is _item's Name, ...$koresSpareParts))
+                                                (set: $koresSpareParts to it - _partArray)
+                                                (if: _partArray's length is >1)[
+                                                    (set: _partArray to (subarray: _partArray, 1, _partArray's length -1))
+                                                    (set: $koresSpareParts to it + _partArray)
+                                                  ]
+                                                  		(print: (text:$computerStats's "Cooling System"'s "Name") + " slotted in successfully.")
+                                                  	(rerun:?bench)
+                        					]
+                                        ]
+        							]
+                        		]
+        					]
+        				]
+        			]
+        			(set: _arrayNumber to 0)
+        		]
+			]
+        ]
+
+		}
+	]
+]
 
 
 :: Botnet {"position":"475,50","size":"100,100"}
@@ -175,39 +694,39 @@ Machines:
 :: Browser {"position":"775,550","size":"100,100"}
 (collapse:)[(float-box:"X","Y")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(css:"margin-top:0px,margin-bottom:0px")[
 	(align:"==>")+(box:"=====X")+(css:"margin-top: 0px;offset-position: top 100px;")[
-    	(collapse:)[(float-box: "========X", "Y===========")+(css: "overflow:hidden")+(b4r:"solid","double","double","solid")+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
-        	(hook: "exitButton")[(button:"X")+(css: "border:1px")+(color:white)+(hover-style: (color:black))(link-goto:"X", "Computer")
+    	(collapse:)[(float-box: "======================XXX=", "=YY=================")+(css: "overflow:hidden; padding-top: 0.1px;")+(b4r:"solid","double","double","solid")+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
+        	(hook: "exitButton")[(button:"X")+(css: ".enchantment-button:not(.link) tw-link {padding-top:0.1px; border:1px}")+(color:black)+(hover-style:(color:(mix: 0.5, white, 0.5, #00f))+(background:black))(link-goto:"X", "Computer")
         ]]
         ]]]	
 ]
 =|=
-(button:)+(color:(mix: 0.5, white, 0.5, #00f))
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))
 [[Bank]] 
 <br>
-(button:)+(color:(mix: 0.5, white, 0.5, #00f))
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))
 [[Darknet Shop]] 
 =|=
-(button:)+(color:(mix: 0.5, white, 0.5, #00f))
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))
 [[Mama Mia's]]
 <br>
-(button:)+(color:(mix: 0.5, white, 0.5, #00f))
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))
 [[Level 5]] 
 =|=
-(button:)+(color:(mix: 0.5, white, 0.5, #00f))
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))
 [[Un'taeko Daily News]] 
-(button:)+(color:(mix: 0.5, white, 0.5, #00f))[
-[[Level 6]] ]
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))
+[[Level 6]]
 =|=
-(button:)+(color:(mix: 0.5, white, 0.5, #00f))
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))
 [[Level 3]] 
 <br>
-(button:)+(color:(mix: 0.5, white, 0.5, #00f))
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))
 [[Level 7]]
 =|=
-(button:)+(color:(mix: 0.5, white, 0.5, #00f))
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))
 [[Level 4]] 
 <br>
-(button:)+(color:(mix: 0.5, white, 0.5, #00f))
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))
 [[Hack a Stranger]] 
 
 </div>
@@ -286,6 +805,155 @@ Machines:
 ]
 
 
+:: Computer Parts {"position":"1650,75","size":"100,100"}
+(collapse:)[
+(set: $rubyCore to (dm: "Name", "Ruby Core", "Element","Fire", "Purchasable", true, "Price", 10000, "Description", "A red gem inscribed with draconic runes. Contains the element of fire.", "Slot", "Core"))
+(set: $sapphireCore to (dm: "Name", "Sapphire Core", "Element","Water", "Purchasable", true, "Price", 10000, "Description", "A blue gem inscribed with draconic runes. Contains the element of water.", "Slot", "Core"))
+(set: $emeraldCore to (dm: "Name", "Emerald Core", "Element","Air", "Purchasable", true, "Price", 10000, "Description", "A green gem inscribed with draconic runes. Contains the element of air.", "Slot", "Core"))
+(set: $obsidianCore to (dm: "Name", "Obsidian Core", "Element","Aether", "Purchasable", false, "Price", 25000, "Description", "A red gem inscribed with draconic runes. Contains the element of aether.", "Slot", "Core"))
+(set: $diamondCore to (dm: "Name",  "Diamond Core", "Element","Light", "Purchasable", false, "Price", 25000, "Description", "A red gem inscribed with draconic runes. Contains the element of light.", "Slot", "Core"))
+(set:$allCores to (a: $rubyCore,$sapphireCore,$emeraldCore,$obsidianCore,$diamondCore))
+
+(set: $8GBRAM to  (dm: "Name", "8GB RAM Stick", "Price", 8000, "RAM", 8, "Description", "An 8GB RAM Stick", "Purchasable", true, "Slot", "RAM"))
+(set: $16GBRAM to (dm: "Name", "16GB RAM Stick", "Price", 16000, "RAM", 16, "Description", "A 16GB RAM Stick", "Purchasable", true, "Slot", "RAM"))
+(set: $32GBRAM to (dm: "Name", "32GB RAM Stick","Price", 32000, "RAM", 32, "Description", "A 32GB RAM Stick", "Purchasable", false, "Slot", "RAM"))
+(set: $allRAM to (a:$8GBRAM, $16GBRAM,$32GBRAM))
+
+(set: $basicCooler to (dm: "Name","Basic Cooling System", "Price", 10000, "Cooling", 10, "Description", "A basic cooling system for your machine's cores.", "Purchasable", true, "Slot", "Cooler"))
+(set: $advancedCooler to (dm: "Name","Advanced Cooling System", "Price", 50000, "Cooling", 50, "Description", "An advanced cooling system for your machine's cores.", "Purchasable", true, "Slot", "Cooler"))
+(set: $specialCooler to (dm: "Name", "Custom Cooling System", "Price", 75000, "Cooling", 75, "Description", "A custom cooling solution for your personal machine's cores.", "Purchasable", false, "Slot", "Cooler"))
+(set: $allCoolers to (a: $basicCooler, $advancedCooler, $specialCooler))
+
+(set: $basicMotherboard to (dm: "Name", "Basic Motherboard", "Core Slots", 2, "RAM Slots", 2, "Price", 8000, "Description", "A basic motherboard for a starter build. Can slot 2 cores and 2 RAM sticks.", "Purchasable", true, "Slot", "Motherboard")) 
+(set: $advancedMotherboard to (dm: "Name", "Advanced Motherboard", "Core Slots", 4, "RAM Slots", 4, "Price", 8000, "Description", "An advanced motherboard for a more powerful build. Can slot 4 cores and 4 RAM sticks.", "Purchasable", true, "Slot", "Motherboard"))
+(set: $specialMotherboard to (dm: "Name", "Special Motherboard", "Core Slots", 6, "RAM Slots", 8, "Price", 8000, "Description", "A special motherboard for a top of the line build. Can slot 6 cores and 8 RAM sticks.", "Purchasable", false, "Slot", "Motherboard"))
+(set: $allMotherboards to (a:$basicMotherboard, $advancedMotherboard, $specialMotherboard))
+(set: $allParts to (a:...$allCores, ...$allRAM, ...$allMotherboards, ...$allCoolers))
+]
+
+
+:: Computer Shop {"position":"1800,75","size":"100,100"}
+(collapse:)[
+    (hook: "computerShop")[
+(float-box:"=======X=", "=Y=========")+(css: "overflow:hidden;")[(button:)[[Home->Home]]]    (hidden: )|pcShopConfirmation>[(float-box: "=X=","==Y==")[
+    (set: _count to 0)
+	(for: each _item, ...$allParts)[
+    	(set: _count to it +1)
+    	(if:$selected  is _item's Name)[
+        	(set: $koresSpareParts to it + (a:$allParts's _count))
+            $selected added to your spare parts.
+            (rerun: ?computerShop)
+            ]
+    ]
+]]
+<style>
+	.shopHeaders {
+        margin-top:100px;
+    }
+    .shopItem {
+    border-style: solid;
+    border-color: purple;
+    }
+</style>
+<div class="shopItem">
+	<div class="shopHeaders">
+		<h3>Processor Cores</h3>
+	</div>
+(for: each _core, ...$allCores)[
+
+(if:_core's "Purchasable" is true)[
+(print:_core's "Name")
+==||=
+(size:.75)+(color:red)[Buy it Now for: ](print: _core's "Price")^^CR^^
+(print:_core's "Description")
+
+
+(collapse:)[
+(button:)[(link-replace:"Buy it Now")[
+
+	(if:$playerMoney > _core's "Price")[
+    
+	(print: "(link: 'Purchase " + (text: _core's Name) + "" + '?' + "')[(set: $selected to " +"'" + (text: _core's Name) + "'" + ")
+(display: " + "'Purchase Confirmation'" + ")(show: ?pcShopConfirmation)]")
+]
+
+(else:)[Insufficient Funds]
+]]]
+]]
+</div>
+<div class="shopHeaders">
+<h3>Core Cooling</h3>
+</div>
+(for: each _core, ...$allCoolers)[
+
+(if:_core's "Purchasable" is true)[
+(print:_core's "Name")
+==||=
+(size:.75)+(color:red)[Buy it Now for: ](print: _core's "Price")^^CR^^
+Description: (print:_core's "Description")
+
+
+(collapse:)[
+(button:)[(link-replace:"Buy it Now")[
+
+	(if:$playerMoney > _core's "Price")[
+    
+	(print: "(link: 'Purchase " + (text: _core's Name) + "" + '?' + "')[(set: $selected to " +"'" + (text: _core's Name) + "'" + ")
+(display: " + "'Purchase Confirmation'" + ")(show: ?pcShopConfirmation)]")
+]
+
+(else:)[Insufficient Funds]
+]]]]
+]]
+
+RAM
+(for: each _core, ...$allRAM)[
+
+(if:_core's "Purchasable" is true)[
+(print:_core's "Name")
+==||=
+(size:.75)+(color:red)[Buy it Now for: ](print: _core's "Price")^^CR^^
+Description: (print:_core's "Description")
+
+
+(collapse:)[
+(button:)[(link-replace:"Buy it Now")[
+
+	(if:$playerMoney > _core's "Price")[
+    
+	(print: "(link: 'Purchase " + (text: _core's Name) + "" + '?' + "')[(set: $selected to " +"'" + (text: _core's Name) + "'" + ")
+(display: " + "'Purchase Confirmation'" + ")(show: ?pcShopConfirmation)]")
+]
+
+(else:)[Insufficient Funds]
+]]]
+]] 
+
+Motherboards
+(for: each _core, ...$allMotherboards)[
+
+(if:_core's "Purchasable" is true)[
+(print:_core's "Name")
+==||=
+(size:.75)+(color:red)[Buy it Now for: ](print: _core's "Price")^^CR^^
+Description: (print:_core's "Description")
+
+
+(collapse:)[
+(button:)[(link-replace:"Buy it Now")[
+
+	(if:$playerMoney > _core's "Price")[
+    
+	(print: "(link: 'Purchase " + (text: _core's Name) + "" + '?' + "')[(set: $selected to " +"'" + (text: _core's Name) + "'" + ")
+(display: " + "'Purchase Confirmation'" + ")(show: ?pcShopConfirmation)]")
+]
+
+(else:)[Insufficient Funds]
+]]]
+]]]
+
+
+
 :: Darknet Shop {"position":"275,450","size":"100,100"}
 <div>
 (float-box:"X","Y")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(css:"margin-top:0px,margin-bottom:0px")[
@@ -327,9 +995,11 @@ Machines:
 
 
 
-:: Debug {"position":"775,75","size":"100,100"}
-(button:"Give All Programs")[]
-(button:"Infinite Money")[(set:$playerMoney to 99999999))]
+:: Debug {"position":"750,75","size":"100,100"}
+(button:"X==")[(link:"All Programs")[(set:_downloads to $allPrograms)]]
+(button:"X==")[(link:"Infinite Money")[(set:$playerMoney to 99999999)]]
+
+(button:)[["Home"->Home]]
 
 
 :: Documents {"position":"1550,550","size":"100,100"}
@@ -345,7 +1015,7 @@ Machines:
 ]]
 
 
-:: Downloads {"position":"925,0","size":"100,100"}
+:: Downloads {"position":"225,50","size":"100,100"}
 (float-box:"X","Y")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(css:"margin-top:0px,margin-bottom:0px")[
 	(align:"==>")+(box:"=====X")+(css:"margin-top: 0px;offset-position: top 100px;")[
     	(collapse:)[(float-box: "========X", "Y===========")+(css: "overflow:hidden")+(b4r:"solid","double","double","solid")+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
@@ -362,8 +1032,8 @@ Machines:
 
 :: Email {"position":"1100,300","size":"100,100"}
 {(hook:"emailHook")[
-	(css: "z-index: 1")+(float-box: "X","Y")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[
-(float-box: "========X", "Y===========")+(css: "overflow:hidden")+(b4r:"solid","double","double","solid")+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[(button:"X")+(css: "border:1px")+(color:black)+(hover-style: (color:white))[[[[X->Computer]]]]]
+	(css: "z-index: 1")+(float-box: "X","Y")+(css:"padding:100px; margin-top:0.1px;")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[
+(float-box: "========X", "Y===========")+(css: "overflow:hidden; padding:0.1px;")+(b4r:"solid","double","double","solid")+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[(button:"X")+(css: "border:1px")+(color:black)+(hover-style: (color:white))[[[[X->Computer]]]]]
 <!-- New emails to appear during course of game from other SCOUTS members-->
 <br>
 <br>
@@ -371,13 +1041,20 @@ Machines:
 <br>
 		(box:"X=")+(b4r: "solid", "double", "double", "solid") + (b4r-color:(mix: 0.5, white, 0.5, #00f))+(css: "padding:0px; margin:0px; height:75px; overflow:hidden")[
 =|=
-			(box:"X=")+(css: "height:50px; padding:0.1px; margin:0px;")[From]
+			(box:"X=")+(css: "padding:0.1px; margin:0px;")[From]
 =|=
 			(box:"=X")+(css: "padding:0.1px; overflow:hidden")[Subject]
 		]
 	(for:each _email, ...$koreEmails)[
-    	(box:"X=")+(b4r: "solid", "double", "double", "solid") + (b4r-color:(mix: 0.5, white, 0.5, #00f))+(css: "padding:0.1px; margin:0px; height:75px; overflow:hidden")[
-	    	(box:"=XXXXX=")[(print: "(link-rerun: '" + (text: _email's Sender) + " | "+ (text: _email's Subject) + "')[(set: $selected to " +"'" + (text: _email's Subject) + "'" + ")" +"(display: "+ '"selectedEmail")(show: ?emailWindow)]')
+    	(box:"X=")+(b4r: "solid", "double", "double", "solid") + (b4r-color:(mix: 0.5, white, 0.5, #00f))[
+	    	(box:"=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX=")+(css: "padding:0.1px; margin:0.1px; height:175px;width:250%; overflow:hidden")[(print: "(button:)[(css: " + '"height: 50px; padding:20px; margin: 0.1px") + ' + "(link-rerun: '" +
+            "
+            ||==
+            " +(text: _email's Sender)+ "
+            =||=
+            " + '(align: "=><=")[|]' +" 
+            ==||||
+            "+(text: _email's Subject)+ "')[(set: $selected to " +"'" + (text: _email's Subject) + "'" + ")" +"(display: "+ '"selectedEmail")(show: ?emailWindow)]]')
         ]
 	]
 ]
@@ -388,6 +1065,10 @@ Machines:
 
 ]
 }
+
+
+
+
 
 
 :: Email Passage [startup] {"position":"1225,300","size":"100,100"}
@@ -442,13 +1123,16 @@ GUNS", "Sent", false, "Read", false))
 
 
 :: Enemy Status Effects {"position":"0,300","size":"100,100"}
-(if: $enemy's "Poisoned" is true)[
-(set:$poisonDamage to (random:5,20))
+(collapse:)[(if: $enemy's "Poisoned" is true)[
+	(set:$poisonDamage to (random:5,20))
+	(if: $allKoresCores contains $emeraldCore)[
+		(set: $poisonDamage to it*1.5)
+    ]
 (set:$enemyHealth to it - $poisonDamage)
 $enemyName's machine is infected with your poison.exe!
 $enemyName takes $poisonDamage from your poison.exe!
-(box:"===X")[(button:)[(link: "Nice!")[(set:$log to "enemy")
-(rerun:?Battle)]]]]
+]
+]
 
 
 :: Enemy Turn {"position":"100,300","size":"100,100"}
@@ -653,55 +1337,80 @@ Connection forced with Unknown Netrunner.
 
 :: Hacking Options {"position":"100,175","size":"100,100"}
 (collapse:)[
-<!-- Programs -->
-	(for: each _download, ...$downloads)[(button:)[
-		(link:"Name" of _download)[
-			(set:$damage to _download's "Damage"*(random: 10,20))
-			(set:$ICEDamage to _download's "ICE Damage")
-            
-            <!-- Poison -->
-            (if: _download's "Poison" is true)[
-            	(set: $enemy's "Poisoned" to true)
-                (set: $log to "enemy")
-                (rerun: ?Battle)
+	(hook: "Hack")[
+		<!-- Programs -->
+		(for: each _download, ...$downloads)[
+    		(button:)[
+			(link:"Name" of _download)[
+				(set:$damage to _download's "Damage"*(random: 10,20))
+            	(if: $allKoresCores contains $rubyCore)[
+                	(set: _allRubyCores to (find: $_rubies where _rubies is $rubyCore ...$allKoresCores)'s length)
+            		(set: $damage to it*1.25*_allRubyCores*1+it)]
+                (set: _criticalCheck to (random: 1,20))
+                (if: _criticalCheck is 20)[
+                	(set: $damage to it*2)
+                ]
+				(set:$ICEDamage to _download's "ICE Damage")
+            	(if: $allKoresCores contains $diamondCore)[
+            		(set: $ICEDamage to it*1.25)
+                    ]
+                    
+                <!-- Poison -->
+                (if: _download's "Poison" is true)[
+                    (set: _poisonCheck to (random: 1,4))
+                    (if: _poisonCheck is 4)[
+                        (set: $enemy's "Poisoned" to true)
+                    ]
+                    (if: _poisonCheck is 3 and $allKoresCores contains $obsidianCore)[
+                    	(set: $enemy's "Poisoned" to true)
+                    ]
+                    (set: $log to "enemy")
+                    (rerun: ?Battle)
+                ]
+                <!-- Heal -->
+                (if:_download's "Heal" is > 0)[
+                    (set:$healing to _download's "Heal")
+                    (if: $allKoresCores contains $sapphireCore)[
+                        (set: $healing to it*2)
+                    ]
+                	(set:$playerHealth to it + $healing)
+                	(set:$healCheck to true)
+                ] 
+
+                <!-- ICE Healing -->
+                (if:_download's "ICE Heal" is >0)[
+                (set:$ICEHealing to _download's "ICE Heal")
+                    (if: $allKoresCores contains $sapphireCore)[
+                        (set: $ICEHealing to it*2)
+                    ]
+                (set:$playerICE to it + $ICEHealing)
+                (set:$ICEHealCheck to true)
+                ]
+
+                <!-- ICE Damage-->
+                (if:$ICEDamage is > 0)[(set:$ICEDamageChecker to true)]
+                (if:"Poison" of _download is true)[(set:$enemy's "Poisoned" to true)
+                You've successfully installed poison.exe on $enemyName's computer]
+                (set:$enemyHealth to it - $damage)
+                (if:$enemyICE >0)[
+                    (set:$enemy's "ICE" to it - $ICEDamage)]
+                (if:$healCheck is true)[
+                    (print:"Name" of _download+"heals you for " + $healing + "points.")]
+                    (if:$ICEHealCheck is true)[
+                        (print:"Name" of _download +" repairs your ICE by " + $ICEHealing + "points.")]
+                (if:$damage >0)[(print:"Name" of _download) deals $damage damage to $enemyName's machine.]
+                (if:$ICEDamageChecker is true)[$enemyName's ICE lost $ICEDamage integrity.]
+
+                        (if:$enemyHealth <1)[$winResult]
+                        (else:)[
+                            (set:$log to "enemy")
+                            (rerun:?Battle)
+                        ]
+                    ]
+                ]
             ]
-            <!-- Heal -->
-            (if:_download's "Heal" is >0)[
-            (set:$healing to _download's "Heal")
-            (set:$playerHealth to it + $healing)
-            (set:$healCheck to true)
-            ]
-            
-            <!-- ICE Healing -->
-            (if:_download's "ICE Heal" is >0)[
-            (set:$ICEHealing to _download's "ICE Heal")
-            (set:$playerICE to it + $ICEHealing)
-            (set:$ICEHealCheck to true)
-            ]
-            
-            <!-- ICE Damage-->
-            (if:$ICEDamage is > 0)[(set:$ICEDamageChecker to true)]
-            (if:"Poison" of _download is true)[(set:$enemy's "Poisoned" to true)
-            You've successfully installed poison.exe on $enemyName's computer]
-			(set:$enemy's "Health" to it - $damage)
-			(if:$enemyICE >0)[
-				(set:$enemy's "ICE" to it - $ICEDamage)]
-            (if:$healCheck is true)[
-            	(print:"Name" of _download+"heals you for " + $healing + "points.")]
-                (if:$ICEHealCheck is true)[
-            		(print:"Name" of _download +" repairs your ICE by " + $ICEHealing + "points.")]
-            (if:$damage >0)[(print:"Name" of _download) deals $damage damage to $enemyName's machine.]
-			(if:$ICEDamageChecker is true)[$enemyName's ICE lost $ICEDamage integrity.]
-				(button:)[(link:"->")[
-					(if:$enemyHealth <1)[$winResult]
-                	(else:)[
-        				(set:$log to "enemy")
-                		(rerun:?Battle)]
-                	]
-            	]
-			]
-    	]
-	]
+        ]
+    ]
 ]
 
 
@@ -717,6 +1426,9 @@ Connection forced with Unknown Netrunner.
 
 (set:$botnetCount to 0)
 (for: each _machine, ...$botnet)[(set:$botnetCount to it+1)]
+
+(set: $allKoresCores to (a:$computerStats's "Core1", $computerStats's "Core2", $computerStats's "Core3", $computerStats's "Core4", $computerStats's "Core5", $computerStats's "Core6", ))
+
 ]
 
 
@@ -725,12 +1437,17 @@ Connection forced with Unknown Netrunner.
 
 (button:)[[Go to bed ->Bed]]
 
+(button:)[[Go to Computer Shop ->Computer Shop]] 
+
+(button:)[[Workbench ->Bench]] 
+
 
 :: IDE {"position":"1500,50","size":"100,100"}
 (float-box:"X","Y")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(css:"margin-top:0px,margin-bottom:0px")[
 	(align:"==>")+(box:"=====X")+(css:"margin-top: 0px;offset-position: top 100px;")[
-    	(collapse:)[(float-box: "========X", "Y===========")+(css: "overflow:hidden")+(b4r:"solid","double","double","solid")+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
-        	(button:"X")+(css: "border:1px")+(color:black)+(hover-style: (color:white))(link-goto:"X", "Computer")
+    	(collapse:)[(float-box: "======================XXX=", "=YY=================")+(css: "overflow:hidden; padding:0.1px")+(b4r:"solid","double","double","solid")+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
+        	(hook: "exitButton")[(button:"X")+(css: ".enchantment-button:not(.link) tw-link {padding-top:0.1px; border:1px}")+(color:black)+(hover-style: (color:white))(link-goto:"X", "Computer")
+        ]
         ]
         ]]
 There's some broken code here.
@@ -858,22 +1575,22 @@ Coming Soon
 
 
 :: Mama Mia's {"position":"475,575","size":"100,100"}
-(css: "z-index:0;")+(background:black)+(box:"X")[
-(css: "z-index:0; background-color: rgba(0, 0, 0, 0.1); margin-top:0px; margin-bottom:0px")+(float-box:"X","Y")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[]
+(collapse:)[(css: "z-index:0;")+(background:black)+(box:"X")[
+(css: "z-index:0; background-color: margin-top:0px; margin-bottom:0px")+(float-box:"X","Y")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[]
 	(align:"==>")+(box:"=====X")+(css:"margin-top: 0px;offset-position: top 100px;")[
-    	(collapse:)[(float-box: "========X", "Y===========")+(css: "overflow:hidden")+(b4r:"solid","double","double","solid")+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
+    	(float-box: "========X", "YY===========")+(css: "overflow:hidden")+(b4r:"solid","double","double","solid")+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
         	(button:"X")+(css: "border:1px")+(color:black)+(hover-style: (color:white))(link-goto:"X", "Computer")
         ]
-        ]](collapse:)[
+        ]
 	(box:"X=====")[
-        (float-box: "X========", "Y===========")+(css: "overflow:hidden;")+(b4r:"solid","double","double","solid")+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
+        (float-box: "X========", "YY===========")+(css: "overflow:hidden;")+(b4r:"solid","double","double","solid")+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
         	(button:"X")+(css: "border:1px")+(color:black)+(hover-style: (color:white))(link-goto:"<-", "Browser")
-        ]]]](collapse:)[
-(css: "z-index: 3; padding:0.1px;")+(float-box:"=XXX=","=Y===================")[
+        ]]
+(css: "z-index: 3; padding:0.1px;margin-top:0.1px;margin-bottom:0.1px;")+(float-box:"=XXX=","=YYY===================")[
 (button:)+(color:(mix: 0.5, white, 0.5, #00f))
 [[Hack ->Level 1]]
 ]]
-(css: "z-index:0;")+(box:"X")[
+(css: "z-index:0;margin-top:1px;padding:0.1px;")+(box:"X")[
 |==|
 =><=
 <h2>
@@ -881,7 +1598,6 @@ MAMA MIA'S PIZZERIA
 ---
 |==|
 </h2>
-(collapse:)[
 <div>
 <h3>
 Menu	
@@ -1010,14 +1726,25 @@ There are some various music files here. They're mostly alternative rock and edm
 [[Computer]]
 
 
-:: Player {"position":"225,50","size":"100,100"}
-(hook:"Player")[(collapse:)[(set:$playerStat to (dm: "Health",100, "Max Health", 100, "Botnet Health", $botnetHealth, "ICE", 100, "Max ICE", 100, "XP", 0, "Level", 1,"Money", 2000,"Poisoned", false, "Glitched", false))
-(set:$playerMaxHealth to $playerStat's "Max Health")
-(set:$playerMaxICE to $playerStat's "Max ICE")
-(set:$playerHealth to $playerStat's "Health")
-(set:$playerICE to $playerStat's "ICE")
-(set:$playerMoney to $playerStat's "Money")
-]]
+:: Player {"position":"600,175","size":"100,100"}
+(collapse:)[
+	(hook:"Player")[
+    	(set:$playerStat to (dm: "Health",100, "Max Health", 100, "Botnet Health", $botnetHealth, "ICE", 100, "Max ICE", 100, "XP", 0, "Level", 1,"Money", 2000,"Poisoned", false, "Glitched", false, "Attack Speed", 0))
+		(set:$playerMaxHealth to $playerStat's "Max Health")
+		(set:$playerMaxICE to $playerStat's "Max ICE")
+		(set:$playerHealth to $playerStat's "Health")
+		(set:$playerICE to $playerStat's "ICE")
+		(set:$playerMoney to $playerStat's "Money")
+	]
+	(hook:"Kore's PC")[
+(set: $computerStats to (dm: "Motherboard", $basicMotherboard, "Core1", $emeraldCore, "Core2", $sapphireCore, "Core3", "None", "Core4", "None", "Core5", "None", "Core6", "None", "RAM Slots", 2,"RAM Slot 1", $8GBRAM,"RAM Slot 2", $8GBRAM, "RAM Slot 3", "None", "RAM Slot 4", "None", "RAM Slot 5", "None", "RAM Slot 6", "None", "RAM Slot 7", "None", "RAM Slot 8", "None", "Cooling System", $basicCooler))
+	]
+    (hook: "Kore's Spare Parts")[
+    (set: $koresSpareParts to (a: $rubyCore, $16GBRAM, $advancedMotherboard, $advancedCooler))
+]
+]
+
+
 
 
 :: Player Status Effects {"position":"0,175","size":"100,100"}
@@ -1136,7 +1863,7 @@ ugh why am i even making this there's no one else to hire me anymore
 You've hacked a complete stranger! That was nice of you.
 Their machine is part of your botnet now.
 (set:$playerMoney to $playerMoney+5000)
-(set:$botnet to it + (a:(text:$enemyName)))
+(print: "(set:$botnet to it + (a:+$enemyName" +")")
 (button:)[(link:"Browser")[(go-to:"Browser")]]]
 
 
@@ -1147,35 +1874,45 @@ It's empty...
 
 
 :: Un'taeko Daily News {"position":"500,750","size":"100,100"}
-(float-box:"X","Y")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(css:"margin-top:0px,margin-bottom:0px")[
-	(align:"==>")+(box:"=====X")+(css:"margin-top: 0px;offset-position: top 100px;")[
+(float-box:"X","Y")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(css:"margin-top:0.1px,margin-bottom:0.1px")[
+	(align:"==>")+(box:"=====X")+(css:"margin-top: 0.1px;offset-position: top 100px;padding:0.1px;")[
     	(collapse:)[(float-box: "========X", "Y===========")+(css: "overflow:hidden")+(b4r:"solid","double","double","solid")+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
         	(button:"X")+(css: "border:1px")+(color:black)+(hover-style: (color:white))(link-goto:"X", "Computer")
 	        ]
-        ]
-	](collapse:)[
-	(box:"X=====")[
+        ]{
+	(box:"X=====")+(css: "padding:0.1px; margin:0.1px")[
         (float-box: "X========", "Y===========")+(css: "overflow:hidden;")+(b4r:"solid","double","double","solid")+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
         	(button:"X")+(css: "border:1px")+(color:black)+(hover-style: (color:white))(link-goto:"<-", "Browser")
         ]
     ]
-]
+    <style>
+    .article {
+  border: 5px outset purple;
+  background-color: black;
+  text-align: center;
+  padding: 0.1px;
+  margin: 0.1px;
+  }
+  </style>
+}]
+(box:"=XXX=")[
+<div class="article">
 <h2>Un'taeko Daily News</h2>
-<br>
-
+</div>
+]
 (if: $day is >= 3)[
+<div>
 =|=
 <h4>Alarming rise in Flitflower use among teenagers</h4>
 =|=
 <h4>Remembering the lost at Dani Riiho's show</h4>
 =|=
 <h4>A RealBerry^^TM^^ Cake Recipe</h4>
-
+</div>
 ]
 <br>
 (if: $day is >= 2)[
-
-
+<div>
 =|=
 <h4>Bombing at Dani Riiho's Show</h4>
 by Fili Arny
@@ -1193,7 +1930,9 @@ This hacker group hasn't previously been heard from before, and the government r
 <h4>Deviled Egg Recipe</h4>
 by Dres Mila
 My mother once told me the secret to a great deviled egg recipe starts with great eggs. I told her she was delirious and needed to go back to bed. There haven't been real eggs in Un'taeko since the great war! How am I supposed to get fresh eggs? So here's how I, the great chef Bela will show you how to make MY Deviled Eggs, using SynthEggIcTM Eggs!
+</div>
 ]
+<div>
 =|=
 <h4>Cabrons celebrate 100 year victory against the Aelma</h4>
 by Ammet Sarille
@@ -1207,8 +1946,17 @@ It's hurricane season in Un'taeko, and Hurricane Abot has arrived to remind us o
 <h4>Chocolate^^TM^^ Chip Cookie recipe</h4>
 by Teri Blecok
 My grandmother taught me the most important ingredient when you're baking chocolate chip cookies isn't actually the chocolate chips! It's actually the quality of the eggs you're using. And no one has better eggs than EGGCO^^TM^^! So today, I'll show you a recipe for the best damn Chocolate^^TM^^ Chip Cookie you've ever eaten, using my favorite EGGCO^^TM^^ eggs!
+</div>
+<div>
 
+<br>
+<br>
+<br>
+|==|
 
+Un'taeko Daily News is a member of the Corporation 2 family
+
+</div>
 
 (if:$haveEnhancedICEPick is true)[
 Hack the Newspaper?
@@ -1221,8 +1969,8 @@ Hack the Newspaper?
 
 
 :: selectedEmail {"position":"1100,400","size":"100,100"}
-(hook: "emailWindow")[(css: "z-index: 2")+(b4r: "solid", "double", "double", "solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(float-box:"==XXXXXXXX=","=YYYYYYYYYYY=")+(bg: black)[
-(float-box: "========X=", "=Y===========")+(css: "overflow:hidden")+(b4r:"solid","double","double","solid")+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[(button:"X")+(css: "border:1px")+(color:black)+(hover-style: (color:white))[(link:"X")[(hide:?emailWindow)(rerun:?emailHook)]]]
+(hook: "emailWindow")[(t8n:"zoom")[(float-box:"==XXXXXXXX=","=YYYYYYYYYYY=")+(css: "z-index: 2; overflow: hidden")+(b4r: "solid", "double", "double", "solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(bg: black)[
+(float-box: "================X==", "==YY================")+(css: "overflow:hidden; margin-top: 0.1px; padding: 0.1px;")+(b4r:"solid","double","double","solid")+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[(button:"X")+(color:black)+(hover-style: (color:white))[(link:"X")[(hide:?emailWindow)(rerun:?emailHook)]]]
             (for:each _email, ...$koreEmails)[
 (if: $selected is _email's Subject)[
 (set: $selected to _email)
@@ -1235,7 +1983,7 @@ Subject: (print:$selected's Subject)
 
 (set: $selected's "Read" to true)
 (set: $koreEmails to it + (a:$selected))
-]]]]
+]]]]]
 
 
 :: StoryStylesheet [stylesheet]
@@ -1245,4 +1993,19 @@ Subject: (print:$selected's Subject)
 
 .enchantment-button {
 color: rgb(175, 138, 255);
+}
+
+.enchantment-button:not(.link) tw-link:active {
+  border-radius: 0.1px; 
+  border:1px; 
+  margin-top: 0.1px;
+  color: #af8aff;
+}
+
+.enchantment-button:not(.link) tw-link {
+  border-radius: 0.1px;
+  color: #af8aff;
+  padding-top: 25px;
+  padding-bottom:25px;
+  margin:0.1px;
 }
