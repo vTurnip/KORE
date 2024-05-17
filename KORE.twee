@@ -58,7 +58,7 @@ A few photos of a group of friends. A young redheaded man can be seen alone in a
 <!-- WIP Arrays for downloads-->
 (display:"Programs")
 (set: $downloads to (a:))
-(set: $downloads to it + (a:$ICEPick))
+(set: $downloads to it + (a:$bruteForce,$ICEPick))
 
 <!-- emails reset -->
 (set: $emailNotif to 0)
@@ -102,6 +102,14 @@ $playerMoney^^CR^^
 
 :: Battle {"position":"350,175","size":"100,100"}
 (collapse:)[
+(set: $playerHealth to $playerMaxHealth)
+        
+(if: $allKoresCores contains $sapphireCore)[
+	(for: each _Core where _Core is $sapphireCore or it is $diamondCore, ...$allKoresCores)[
+    	(set: $playerMaxHealth to it +50)
+    ]
+    (set: $playerHealth to $playerMaxHealth)
+]
 (set: $log to "you")
 (set:$maxBotnetHealth to 100*$botnetCount)
 (set:$botnetHealth to $maxBotnetHealth)
@@ -198,12 +206,11 @@ Saved to Slot A!
 					Slot 2:
 					(print: $computerStats's "Core2"'s "Name")<br>
 					(if: $computerStats's "Core3" is not "None" and it is not "Empty")[
-						Slot 3:
-						(print: $computerStats's "Core3"'s "Name")<br>
+						:
+						(print:"Slot 3: " +  $computerStats's "Core3"'s "Name")<br>
                     ]
                 	(if: $computerStats's "Core3" is "Empty")[
-        				Slot 3:
-        				(print: "Empty")<br>
+        				(print:"Slot 3: " + "Empty")<br>
         			]
         				(if: $computerStats's "Core4" is not "None" and it is not "Empty")[
                 			Slot 4:
@@ -231,32 +238,55 @@ Saved to Slot A!
         				]
    						=|==
    						<h3>RAM</h3>
+                        Slot 1:
    						(print: $computerStats's "RAM Slot 1"'s "Name")<br>
+                        Slot 2:
 						(print: $computerStats's "RAM Slot 2"'s "Name")<br>
-        				(if: $computerStats's "RAM Slot 3" is not "None")[
-							(print: $computerStats's "RAM Slot 3"'s "Name")<br>
+        				(if: $computerStats's "RAM Slot 3" is not "None" and it is not "Empty")[
+							(print:"Slot 3: " + $computerStats's "RAM Slot 3"'s "Name")<br>
                         ]
-        				(if: $computerStats's "RAM Slot 4" is not "None")[
-							(print: $computerStats's "RAM Slot 4"'s "Name")<br>
+                        (if: $computerStats's "RAM Slot 3" is "Empty")[
+							(print: "Slot 3: Empty")<br>
                         ]
-        				(if: $computerStats's "RAM Slot 5" is not "None")[
-							(print: $computerStats's "RAM Slot 5"'s "Name")<br>
+
+        				(if: $computerStats's "RAM Slot 4" is not "None" and it is not "Empty")[
+							(print:"Slot 4: " +  $computerStats's "RAM Slot 4"'s "Name")<br>
                         ]
-        				(if: $computerStats's "RAM Slot 6" is not "None")[
-							(print: $computerStats's "RAM Slot 6"'s "Name")<br>
+        				(if: $computerStats's "RAM Slot 5" is not "None" and it is not "Empty")[
+							(print:"Slot 5: " +  $computerStats's "RAM Slot 5"'s "Name")<br>
+                        ]
+        				(if: $computerStats's "RAM Slot 6" is not "None" and it is not "Empty")[
+							(print:"Slot 6: " +  $computerStats's "RAM Slot 6"'s "Name")<br>
                         ]        
-        				(if: $computerStats's "RAM Slot 7" is not "None")[
-							(print: $computerStats's "RAM Slot 7"'s "Name")<br>
+        				(if: $computerStats's "RAM Slot 7" is not "None" and it is not "Empty")[
+							(print:"Slot 7: " +  $computerStats's "RAM Slot 7"'s "Name")<br>
                         ]
-        				(if: $computerStats's "RAM Slot 8" is not "None")[
-							(print: $computerStats's "RAM Slot 8"'s "Name")<br>
+        				(if: $computerStats's "RAM Slot 8" is not "None" and it is not "Empty")[
+							(print:"Slot 8: " +  $computerStats's "RAM Slot 8"'s "Name")<br>
                          ]
+        				(if: $computerStats's "RAM Slot 4" is "Empty")[
+							(print:"Slot 4: " +  "Empty")<br>
+                        ]
+        				(if: $computerStats's "RAM Slot 5" is "Empty")[
+							(print: "Slot 5: Empty")<br>
+                        ]
+        				(if: $computerStats's "RAM Slot 6" is "Empty")[
+							(print: "Slot 6: Empty")<br>
+                        ]        
+        				(if: $computerStats's "RAM Slot 7" is "Empty")[
+							(print: "Slot 7: Empty")<br>
+                        ]
+        				(if: $computerStats's "RAM Slot 8" is "Empty")[
+							(print: "Slot 8: Empty")<br>
+                            ]
         				==|=
     					<h3>Motherboard</h3>
     					(print:$computerStats's "Motherboard"'s "Name")
     					===|
     					<h3>Cooling System</h3>
-    					(print: $computerStats's "Cooling System"'s "Name")
+                        (if: $computerStats's "Cooling System" is not "Empty")[
+    					(print: $computerStats's "Cooling System"'s "Name")]
+                        (else:)[(print: "Empty")]
    
    						|==|
    						<h2>Spare Parts</h2>
@@ -1338,18 +1368,19 @@ Connection forced with Unknown Netrunner.
 :: Hacking Options {"position":"100,175","size":"100,100"}
 (collapse:)[
 	(hook: "Hack")[
-		<!-- Programs -->
+		<!-- Programs --> 
 		(for: each _download, ...$downloads)[
     		(button:)[
 			(link:"Name" of _download)[
 				(set:$damage to _download's "Damage"*(random: 10,20))
             	(if: $allKoresCores contains $rubyCore)[
-                	(set: _allRubyCores to (find: $_rubies where _rubies is $rubyCore ...$allKoresCores)'s length)
-            		(set: $damage to it*1.25*_allRubyCores*1+it)]
+                	(set: $allRubyCores to (find: $_rubies where _rubies is $rubyCore ...$allKoresCores)'s length)
+            		(set: $damage to it*1.25*$allRubyCores*1+it)]
                 (set: _criticalCheck to (random: 1,20))
                 (if: _criticalCheck is 20)[
                 	(set: $damage to it*2)
                 ]
+                
 				(set:$ICEDamage to _download's "ICE Damage")
             	(if: $allKoresCores contains $diamondCore)[
             		(set: $ICEDamage to it*1.25)
@@ -1393,6 +1424,7 @@ Connection forced with Unknown Netrunner.
                 You've successfully installed poison.exe on $enemyName's computer]
                 (set:$enemyHealth to it - $damage)
                 (if:$enemyICE >0)[
+                	(set: $damage to it*.115*$allRubyCores+it)
                     (set:$enemy's "ICE" to it - $ICEDamage)]
                 (if:$healCheck is true)[
                     (print:"Name" of _download+"heals you for " + $healing + "points.")]
@@ -1411,7 +1443,7 @@ Connection forced with Unknown Netrunner.
             ]
         ]
     ]
-]
+
 
 
 :: Header [header] {"position":"600,50","size":"100,100"}
@@ -1429,6 +1461,15 @@ Connection forced with Unknown Netrunner.
 
 (set: $allKoresCores to (a:$computerStats's "Core1", $computerStats's "Core2", $computerStats's "Core3", $computerStats's "Core4", $computerStats's "Core5", $computerStats's "Core6", ))
 
+(set:$RAM to 0)
+
+(set: $allRAM to (a:$computerStats's "RAM Slot 1",  $computerStats's "RAM Slot 2", $computerStats's "RAM Slot 3", $computerStats's "RAM Slot 4", $computerStats's "RAM Slot 5", $computerStats's "RAM Slot 6", $computerStats's "RAM Slot 7", $computerStats's "RAM Slot 8"))
+
+	(for: each _RAMStick, ...$allRAM)[
+		(if: _RAMStick is not "None")[
+			(set: $RAM to it + _RAMStick's RAM)
+        ]
+    ]
 ]
 
 
@@ -1779,25 +1820,28 @@ There are some various music files here. They're mostly alternative rock and edm
 
 :: Programs {"position":"100,50","size":"100,100"}
 (collapse:)[
+<!-- BruteForceAttack -->
+(set: $bruteForce to (dm: "Name","BruteForceAttack.bat","ID", 01, "Price", 1000, "Damage",3, "ICE Damage", 0, "Poison",False, "Heal", 0, "ICE Heal", 0, "Description","An attack that deals a strong hit to your opponent, but only after their ICE is down.", "Purchasable", false, "Glitchery",false))
+
 <!-- ICEPick -->
 (set: $ICEPick to (dm: "Name","ICEPick.exe","ID", 01, "Price", 1000, "Damage",1, "ICE Damage", 25, "Poison",False, "Heal", 0, "ICE Heal", 0, "Description","A Hacker's primary tool to break through ICE (Intrusion Countermeasures Electronics)", "Purchasable", false, "Glitchery",false))
  
 <!-- Enhanced ICEPick -->
-(set: $EnhancedICEPick to (dm: "Name","EnhancedICEPick.exe", "ID", 02, "Price", 1000, "Damage", 35, "ICE Damage", 50, "Poison",False, "Heal", 0, "ICE Heal", 0, "Description", "An Enhanced version of the ICEPick. Deals extra damage to ICE", "Purchasable", false, "Glitchery",false))
+(set: $EnhancedICEPick to (dm: "Name","EnhancedICEPick.exe", "ID", 02, "Price", 1000, "Damage", 2, "ICE Damage", 50, "Poison",False, "Heal", 0, "ICE Heal", 0, "Description", "An Enhanced version of the ICEPick. Deals extra damage to ICE", "Purchasable", false, "Glitchery",false))
 
 <!-- Poison -->
-(set: $poison to (dm:"Name","Poison.exe", "ID", 03, "Price", 1500, "Damage", 0, "ICE Damage", 0, "Poison",True, "Heal", 0, "ICE Heal", 0, "Description","It does what's on the tin!", "Purchasable",true, "Glitchery",false))
+(set: $poison to (dm:"Name","Outbreak.dll", "ID", 03, "Price", 1500, "Damage", 0, "ICE Damage", 0, "Poison",True, "Heal", 0, "ICE Heal", 0, "Description","It does what's on the tin!", "Purchasable",true, "Glitchery",false))
 
 <!-- ICE Repair -->
 (set: $repairICE to (dm:"Name", "ICERepairHero.exe", "ID", 04, "Price", 2500, "ICE Damage", 0, "Damage", 0, "Poison", False, "Heal", 0, "ICE Heal", 10, "Description", "Quick repair for your personal ICE","Purchasable", true, "Glitchery",false)) 
 
 <!-- Glitchery -->
 
-(set: $glitchery to (dm:"Name", "glitchery.exe", "ID", 05, "Price", 4000, "ICE Damage", 0, "Damage", 0, "Poison",false, "Heal", 0, "ICE Heal", 10, "Description", "Sends your bots at the enemy, dealing damage to their system integrity per bot","Purchasable", true, "Glitchery",false))
+(set: $glitchery to (dm:"Name", "glitchery.scr", "ID", 05, "Price", 4000, "ICE Damage", 0, "Damage", 0, "Poison",false, "Heal", 0, "ICE Heal", 10, "Description", "Sends your bots at the enemy, dealing damage to their system integrity per bot","Purchasable", true, "Glitchery",false))
 
 <!-- DDOS -->
 
-(set: $DDOS to  (dm:"Name", "DDOS.exe", "ID", 06, "Price", 1000, "ICE Damage", 0, "Damage", 10*$botnetCount, "Poison",false, "Heal", 0, "ICE Heal", 0, "Description", "Overwhelms target's network, dealing damage to their system integrity based on the number of bots in your botnet.","Purchasable", true, "Glitchery",true))
+(set: $DDOS to  (dm:"Name", "DDOS.bat", "ID", 06, "Price", 1000, "ICE Damage", 0, "Damage", 10*$botnetCount, "Poison",false, "Heal", 0, "ICE Heal", 0, "Description", "Overwhelms target's network, dealing damage to their system integrity based on the number of bots in your botnet.","Purchasable", true, "Glitchery",true))
 
 (set:$programsCount to 0)
 
@@ -1822,11 +1866,17 @@ There are some various music files here. They're mostly alternative rock and edm
 (set:$enemyAttacks to (a:$ICEPick))
 (for: each _program, ...$allPrograms)[
 	(set:$flipResult to (random:0,1))
-	(if:$flipResult is >0 and _program is not $ICEPick and _program is not $DDOS)[
+	(if:$flipResult is >0 and _program is not $DDOS)[
 		(set:$enemyAttacks to it + (a:_program))]
 	(set:$enemyName to $seed + (random:1,$seed))
 ]
-(set: $randomEncounter to (dm:"Max Health",100, "Health", 100, "Max ICE", 100, "ICE", 100, "Bandwidth", 4, "Attack",10, "Attacks", $enemyAttacks,"Poisoned", false))
+(set: $randomEncounter to (dm:"Max Health", (random:50, 200), "Health", 50, "Max ICE", 100, "ICE", 100, "Bandwidth", 4, "Attack",10, "Attacks", $enemyAttacks,"Poisoned", false))
+(set: _dieroll to (random: 1, 20))
+(if: _dieroll is < 5)[
+	(set: $randomEncounter's "Max Health" to it*5)
+    (
+]
+(set: $randomEncounter's "Health" to $randomEncounter's "Max Health")
 ]
 ]
 

@@ -58,6 +58,14 @@ Checking Account ending in 31173:
 Current Balance:
 $playerMoney^^CR^^
 ]</tw-passagedata><tw-passagedata pid="4" name="Battle" tags="" position="350,175" size="100,100">(collapse:)[
+(set: $playerHealth to $playerMaxHealth)
+        
+(if: $allKoresCores contains $sapphireCore)[
+	(for: each _Core where _Core is $sapphireCore or it is $diamondCore, ...$allKoresCores)[
+    	(set: $playerMaxHealth to it +50)
+    ]
+    (set: $playerHealth to $playerMaxHealth)
+]
 (set: $log to &quot;you&quot;)
 (set:$maxBotnetHealth to 100*$botnetCount)
 (set:$botnetHealth to $maxBotnetHealth)
@@ -544,18 +552,19 @@ Connection forced with Unknown Netrunner.
   ]
 }</tw-passagedata><tw-passagedata pid="25" name="Hacking Options" tags="" position="100,175" size="100,100">(collapse:)[
 	(hook: &quot;Hack&quot;)[
-		&lt;!-- Programs --&gt;
+		&lt;!-- Programs --&gt; 
 		(for: each _download, ...$downloads)[
     		(button:)[
 			(link:&quot;Name&quot; of _download)[
 				(set:$damage to _download&#39;s &quot;Damage&quot;*(random: 10,20))
             	(if: $allKoresCores contains $rubyCore)[
-                	(set: _allRubyCores to (find: $_rubies where _rubies is $rubyCore ...$allKoresCores)&#39;s length)
-            		(set: $damage to it*1.25*_allRubyCores*1+it)]
+                	(set: $allRubyCores to (find: $_rubies where _rubies is $rubyCore ...$allKoresCores)&#39;s length)
+            		(set: $damage to it*1.25*$allRubyCores*1+it)]
                 (set: _criticalCheck to (random: 1,20))
                 (if: _criticalCheck is 20)[
                 	(set: $damage to it*2)
                 ]
+                
 				(set:$ICEDamage to _download&#39;s &quot;ICE Damage&quot;)
             	(if: $allKoresCores contains $diamondCore)[
             		(set: $ICEDamage to it*1.25)
@@ -599,6 +608,7 @@ Connection forced with Unknown Netrunner.
                 You&#39;ve successfully installed poison.exe on $enemyName&#39;s computer]
                 (set:$enemyHealth to it - $damage)
                 (if:$enemyICE &gt;0)[
+                	(set: $damage to it*.115*$allRubyCores+it)
                     (set:$enemy&#39;s &quot;ICE&quot; to it - $ICEDamage)]
                 (if:$healCheck is true)[
                     (print:&quot;Name&quot; of _download+&quot;heals you for &quot; + $healing + &quot;points.&quot;)]
@@ -617,7 +627,7 @@ Connection forced with Unknown Netrunner.
             ]
         ]
     ]
-]</tw-passagedata><tw-passagedata pid="26" name="Header" tags="header" position="600,50" size="100,100">(collapse:)[
+</tw-passagedata><tw-passagedata pid="26" name="Header" tags="header" position="600,50" size="100,100">(collapse:)[
 (display: &quot;Programs&quot;)
 (set: $allPrograms to (a:$ICEPick))
 (set: $allPrograms to it + (a:$EnhancedICEPick))
@@ -631,6 +641,15 @@ Connection forced with Unknown Netrunner.
 
 (set: $allKoresCores to (a:$computerStats&#39;s &quot;Core1&quot;, $computerStats&#39;s &quot;Core2&quot;, $computerStats&#39;s &quot;Core3&quot;, $computerStats&#39;s &quot;Core4&quot;, $computerStats&#39;s &quot;Core5&quot;, $computerStats&#39;s &quot;Core6&quot;, ))
 
+(set:$RAM to 0)
+
+(set: $allRAM to (a:$computerStats&#39;s &quot;RAM Slot 1&quot;,  $computerStats&#39;s &quot;RAM Slot 2&quot;, $computerStats&#39;s &quot;RAM Slot 3&quot;, $computerStats&#39;s &quot;RAM Slot 4&quot;, $computerStats&#39;s &quot;RAM Slot 5&quot;, $computerStats&#39;s &quot;RAM Slot 6&quot;, $computerStats&#39;s &quot;RAM Slot 7&quot;, $computerStats&#39;s &quot;RAM Slot 8&quot;))
+
+	(for: each _RAMStick, ...$allRAM)[
+		(if: _RAMStick is not &quot;None&quot;)[
+			(set: $RAM to it + _RAMStick&#39;s RAM)
+        ]
+    ]
 ]</tw-passagedata><tw-passagedata pid="27" name="Home" tags="" position="900,200" size="100,100">(button:)[[Boot PC -&gt;Computer]]
 
 (button:)[[Go to bed -&gt;Bed]]
@@ -945,30 +964,33 @@ There are some various music files here. They&#39;re mostly alternative rock and
 (set: $computerStats to (dm: &quot;Motherboard&quot;, $basicMotherboard, &quot;Core1&quot;, $emeraldCore, &quot;Core2&quot;, $sapphireCore, &quot;Core3&quot;, &quot;None&quot;, &quot;Core4&quot;, &quot;None&quot;, &quot;Core5&quot;, &quot;None&quot;, &quot;Core6&quot;, &quot;None&quot;, &quot;RAM Slots&quot;, 2,&quot;RAM Slot 1&quot;, $8GBRAM,&quot;RAM Slot 2&quot;, $8GBRAM, &quot;RAM Slot 3&quot;, &quot;None&quot;, &quot;RAM Slot 4&quot;, &quot;None&quot;, &quot;RAM Slot 5&quot;, &quot;None&quot;, &quot;RAM Slot 6&quot;, &quot;None&quot;, &quot;RAM Slot 7&quot;, &quot;None&quot;, &quot;RAM Slot 8&quot;, &quot;None&quot;, &quot;Cooling System&quot;, $basicCooler))
 	]
     (hook: &quot;Kore&#39;s Spare Parts&quot;)[
-    (set: $koresSpareParts to (a: $rubyCore, $16GBRAM, $advancedMotherboard, $advancedCooler))
+    (set: $koresSpareParts to (a: $rubyCore))
 ]
 ]
 
 </tw-passagedata><tw-passagedata pid="50" name="Programs" tags="" position="100,50" size="100,100">(collapse:)[
+&lt;!-- BruteForceAttack --&gt;
+(set: $bruteForce to (dm: &quot;Name&quot;,&quot;BruteForceAttack.bat&quot;,&quot;ID&quot;, 01, &quot;Price&quot;, 1000, &quot;Damage&quot;,3, &quot;ICE Damage&quot;, 0, &quot;Poison&quot;,False, &quot;Heal&quot;, 0, &quot;ICE Heal&quot;, 0, &quot;Description&quot;,&quot;An attack that deals a strong hit to your opponent, but only after their ICE is down.&quot;, &quot;Purchasable&quot;, false, &quot;Glitchery&quot;,false))
+
 &lt;!-- ICEPick --&gt;
 (set: $ICEPick to (dm: &quot;Name&quot;,&quot;ICEPick.exe&quot;,&quot;ID&quot;, 01, &quot;Price&quot;, 1000, &quot;Damage&quot;,1, &quot;ICE Damage&quot;, 25, &quot;Poison&quot;,False, &quot;Heal&quot;, 0, &quot;ICE Heal&quot;, 0, &quot;Description&quot;,&quot;A Hacker&#39;s primary tool to break through ICE (Intrusion Countermeasures Electronics)&quot;, &quot;Purchasable&quot;, false, &quot;Glitchery&quot;,false))
  
 &lt;!-- Enhanced ICEPick --&gt;
-(set: $EnhancedICEPick to (dm: &quot;Name&quot;,&quot;EnhancedICEPick.exe&quot;, &quot;ID&quot;, 02, &quot;Price&quot;, 1000, &quot;Damage&quot;, 35, &quot;ICE Damage&quot;, 50, &quot;Poison&quot;,False, &quot;Heal&quot;, 0, &quot;ICE Heal&quot;, 0, &quot;Description&quot;, &quot;An Enhanced version of the ICEPick. Deals extra damage to ICE&quot;, &quot;Purchasable&quot;, false, &quot;Glitchery&quot;,false))
+(set: $EnhancedICEPick to (dm: &quot;Name&quot;,&quot;EnhancedICEPick.exe&quot;, &quot;ID&quot;, 02, &quot;Price&quot;, 1000, &quot;Damage&quot;, 2, &quot;ICE Damage&quot;, 50, &quot;Poison&quot;,False, &quot;Heal&quot;, 0, &quot;ICE Heal&quot;, 0, &quot;Description&quot;, &quot;An Enhanced version of the ICEPick. Deals extra damage to ICE&quot;, &quot;Purchasable&quot;, false, &quot;Glitchery&quot;,false))
 
 &lt;!-- Poison --&gt;
-(set: $poison to (dm:&quot;Name&quot;,&quot;Poison.exe&quot;, &quot;ID&quot;, 03, &quot;Price&quot;, 1500, &quot;Damage&quot;, 0, &quot;ICE Damage&quot;, 0, &quot;Poison&quot;,True, &quot;Heal&quot;, 0, &quot;ICE Heal&quot;, 0, &quot;Description&quot;,&quot;It does what&#39;s on the tin!&quot;, &quot;Purchasable&quot;,true, &quot;Glitchery&quot;,false))
+(set: $poison to (dm:&quot;Name&quot;,&quot;Outbreak.dll&quot;, &quot;ID&quot;, 03, &quot;Price&quot;, 1500, &quot;Damage&quot;, 0, &quot;ICE Damage&quot;, 0, &quot;Poison&quot;,True, &quot;Heal&quot;, 0, &quot;ICE Heal&quot;, 0, &quot;Description&quot;,&quot;It does what&#39;s on the tin!&quot;, &quot;Purchasable&quot;,true, &quot;Glitchery&quot;,false))
 
 &lt;!-- ICE Repair --&gt;
 (set: $repairICE to (dm:&quot;Name&quot;, &quot;ICERepairHero.exe&quot;, &quot;ID&quot;, 04, &quot;Price&quot;, 2500, &quot;ICE Damage&quot;, 0, &quot;Damage&quot;, 0, &quot;Poison&quot;, False, &quot;Heal&quot;, 0, &quot;ICE Heal&quot;, 10, &quot;Description&quot;, &quot;Quick repair for your personal ICE&quot;,&quot;Purchasable&quot;, true, &quot;Glitchery&quot;,false)) 
 
 &lt;!-- Glitchery --&gt;
 
-(set: $glitchery to (dm:&quot;Name&quot;, &quot;glitchery.exe&quot;, &quot;ID&quot;, 05, &quot;Price&quot;, 4000, &quot;ICE Damage&quot;, 0, &quot;Damage&quot;, 0, &quot;Poison&quot;,false, &quot;Heal&quot;, 0, &quot;ICE Heal&quot;, 10, &quot;Description&quot;, &quot;Sends your bots at the enemy, dealing damage to their system integrity per bot&quot;,&quot;Purchasable&quot;, true, &quot;Glitchery&quot;,false))
+(set: $glitchery to (dm:&quot;Name&quot;, &quot;glitchery.scr&quot;, &quot;ID&quot;, 05, &quot;Price&quot;, 4000, &quot;ICE Damage&quot;, 0, &quot;Damage&quot;, 0, &quot;Poison&quot;,false, &quot;Heal&quot;, 0, &quot;ICE Heal&quot;, 10, &quot;Description&quot;, &quot;Sends your bots at the enemy, dealing damage to their system integrity per bot&quot;,&quot;Purchasable&quot;, true, &quot;Glitchery&quot;,false))
 
 &lt;!-- DDOS --&gt;
 
-(set: $DDOS to  (dm:&quot;Name&quot;, &quot;DDOS.exe&quot;, &quot;ID&quot;, 06, &quot;Price&quot;, 1000, &quot;ICE Damage&quot;, 0, &quot;Damage&quot;, 10*$botnetCount, &quot;Poison&quot;,false, &quot;Heal&quot;, 0, &quot;ICE Heal&quot;, 0, &quot;Description&quot;, &quot;Overwhelms target&#39;s network, dealing damage to their system integrity based on the number of bots in your botnet.&quot;,&quot;Purchasable&quot;, true, &quot;Glitchery&quot;,true))
+(set: $DDOS to  (dm:&quot;Name&quot;, &quot;DDOS.bat&quot;, &quot;ID&quot;, 06, &quot;Price&quot;, 1000, &quot;ICE Damage&quot;, 0, &quot;Damage&quot;, 10*$botnetCount, &quot;Poison&quot;,false, &quot;Heal&quot;, 0, &quot;ICE Heal&quot;, 0, &quot;Description&quot;, &quot;Overwhelms target&#39;s network, dealing damage to their system integrity based on the number of bots in your botnet.&quot;,&quot;Purchasable&quot;, true, &quot;Glitchery&quot;,true))
 
 (set:$programsCount to 0)
 
@@ -977,11 +999,17 @@ There are some various music files here. They&#39;re mostly alternative rock and
 (set:$enemyAttacks to (a:$ICEPick))
 (for: each _program, ...$allPrograms)[
 	(set:$flipResult to (random:0,1))
-	(if:$flipResult is &gt;0 and _program is not $ICEPick and _program is not $DDOS)[
+	(if:$flipResult is &gt;0 and _program is not $DDOS)[
 		(set:$enemyAttacks to it + (a:_program))]
 	(set:$enemyName to $seed + (random:1,$seed))
 ]
-(set: $randomEncounter to (dm:&quot;Max Health&quot;,100, &quot;Health&quot;, 100, &quot;Max ICE&quot;, 100, &quot;ICE&quot;, 100, &quot;Bandwidth&quot;, 4, &quot;Attack&quot;,10, &quot;Attacks&quot;, $enemyAttacks,&quot;Poisoned&quot;, false))
+(set: $randomEncounter to (dm:&quot;Max Health&quot;, (random:50, 200), &quot;Health&quot;, 50, &quot;Max ICE&quot;, 100, &quot;ICE&quot;, 100, &quot;Bandwidth&quot;, 4, &quot;Attack&quot;,10, &quot;Attacks&quot;, $enemyAttacks,&quot;Poisoned&quot;, false))
+(set: _dieroll to (random: 1, 20))
+(if: _dieroll is &lt; 5)[
+	(set: $randomEncounter&#39;s &quot;Max Health&quot; to it*5)
+    (
+]
+(set: $randomEncounter&#39;s &quot;Health&quot; to $randomEncounter&#39;s &quot;Max Health&quot;)
 ]
 ]</tw-passagedata><tw-passagedata pid="52" name="Resume" tags="" position="1675,675" size="100,100">(float-box:&quot;X&quot;,&quot;Y&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(css:&quot;margin-top:0px,margin-bottom:0px&quot;)[
 	(align:&quot;==&gt;&quot;)+(box:&quot;=====X&quot;)+(css:&quot;margin-top: 0px;offset-position: top 100px;&quot;)[
@@ -1040,7 +1068,7 @@ Their machine is part of your botnet now.
 &lt;!-- WIP Arrays for downloads--&gt;
 (display:&quot;Programs&quot;)
 (set: $downloads to (a:))
-(set: $downloads to it + (a:$ICEPick))
+(set: $downloads to it + (a:$bruteForce,$ICEPick))
 
 &lt;!-- emails reset --&gt;
 (set: $emailNotif to 0)
@@ -1273,12 +1301,11 @@ Description: (print:_core&#39;s &quot;Description&quot;)
 					Slot 2:
 					(print: $computerStats&#39;s &quot;Core2&quot;&#39;s &quot;Name&quot;)&lt;br&gt;
 					(if: $computerStats&#39;s &quot;Core3&quot; is not &quot;None&quot; and it is not &quot;Empty&quot;)[
-						Slot 3:
-						(print: $computerStats&#39;s &quot;Core3&quot;&#39;s &quot;Name&quot;)&lt;br&gt;
+						:
+						(print:&quot;Slot 3: &quot; +  $computerStats&#39;s &quot;Core3&quot;&#39;s &quot;Name&quot;)&lt;br&gt;
                     ]
                 	(if: $computerStats&#39;s &quot;Core3&quot; is &quot;Empty&quot;)[
-        				Slot 3:
-        				(print: &quot;Empty&quot;)&lt;br&gt;
+        				(print:&quot;Slot 3: &quot; + &quot;Empty&quot;)&lt;br&gt;
         			]
         				(if: $computerStats&#39;s &quot;Core4&quot; is not &quot;None&quot; and it is not &quot;Empty&quot;)[
                 			Slot 4:
@@ -1306,32 +1333,55 @@ Description: (print:_core&#39;s &quot;Description&quot;)
         				]
    						=|==
    						&lt;h3&gt;RAM&lt;/h3&gt;
+                        Slot 1:
    						(print: $computerStats&#39;s &quot;RAM Slot 1&quot;&#39;s &quot;Name&quot;)&lt;br&gt;
+                        Slot 2:
 						(print: $computerStats&#39;s &quot;RAM Slot 2&quot;&#39;s &quot;Name&quot;)&lt;br&gt;
-        				(if: $computerStats&#39;s &quot;RAM Slot 3&quot; is not &quot;None&quot;)[
-							(print: $computerStats&#39;s &quot;RAM Slot 3&quot;&#39;s &quot;Name&quot;)&lt;br&gt;
+        				(if: $computerStats&#39;s &quot;RAM Slot 3&quot; is not &quot;None&quot; and it is not &quot;Empty&quot;)[
+							(print:&quot;Slot 3: &quot; + $computerStats&#39;s &quot;RAM Slot 3&quot;&#39;s &quot;Name&quot;)&lt;br&gt;
                         ]
-        				(if: $computerStats&#39;s &quot;RAM Slot 4&quot; is not &quot;None&quot;)[
-							(print: $computerStats&#39;s &quot;RAM Slot 4&quot;&#39;s &quot;Name&quot;)&lt;br&gt;
+                        (if: $computerStats&#39;s &quot;RAM Slot 3&quot; is &quot;Empty&quot;)[
+							(print: &quot;Slot 3: Empty&quot;)&lt;br&gt;
                         ]
-        				(if: $computerStats&#39;s &quot;RAM Slot 5&quot; is not &quot;None&quot;)[
-							(print: $computerStats&#39;s &quot;RAM Slot 5&quot;&#39;s &quot;Name&quot;)&lt;br&gt;
+
+        				(if: $computerStats&#39;s &quot;RAM Slot 4&quot; is not &quot;None&quot; and it is not &quot;Empty&quot;)[
+							(print:&quot;Slot 4: &quot; +  $computerStats&#39;s &quot;RAM Slot 4&quot;&#39;s &quot;Name&quot;)&lt;br&gt;
                         ]
-        				(if: $computerStats&#39;s &quot;RAM Slot 6&quot; is not &quot;None&quot;)[
-							(print: $computerStats&#39;s &quot;RAM Slot 6&quot;&#39;s &quot;Name&quot;)&lt;br&gt;
+        				(if: $computerStats&#39;s &quot;RAM Slot 5&quot; is not &quot;None&quot; and it is not &quot;Empty&quot;)[
+							(print:&quot;Slot 5: &quot; +  $computerStats&#39;s &quot;RAM Slot 5&quot;&#39;s &quot;Name&quot;)&lt;br&gt;
+                        ]
+        				(if: $computerStats&#39;s &quot;RAM Slot 6&quot; is not &quot;None&quot; and it is not &quot;Empty&quot;)[
+							(print:&quot;Slot 6: &quot; +  $computerStats&#39;s &quot;RAM Slot 6&quot;&#39;s &quot;Name&quot;)&lt;br&gt;
                         ]        
-        				(if: $computerStats&#39;s &quot;RAM Slot 7&quot; is not &quot;None&quot;)[
-							(print: $computerStats&#39;s &quot;RAM Slot 7&quot;&#39;s &quot;Name&quot;)&lt;br&gt;
+        				(if: $computerStats&#39;s &quot;RAM Slot 7&quot; is not &quot;None&quot; and it is not &quot;Empty&quot;)[
+							(print:&quot;Slot 7: &quot; +  $computerStats&#39;s &quot;RAM Slot 7&quot;&#39;s &quot;Name&quot;)&lt;br&gt;
                         ]
-        				(if: $computerStats&#39;s &quot;RAM Slot 8&quot; is not &quot;None&quot;)[
-							(print: $computerStats&#39;s &quot;RAM Slot 8&quot;&#39;s &quot;Name&quot;)&lt;br&gt;
+        				(if: $computerStats&#39;s &quot;RAM Slot 8&quot; is not &quot;None&quot; and it is not &quot;Empty&quot;)[
+							(print:&quot;Slot 8: &quot; +  $computerStats&#39;s &quot;RAM Slot 8&quot;&#39;s &quot;Name&quot;)&lt;br&gt;
                          ]
+        				(if: $computerStats&#39;s &quot;RAM Slot 4&quot; is &quot;Empty&quot;)[
+							(print:&quot;Slot 4: &quot; +  &quot;Empty&quot;)&lt;br&gt;
+                        ]
+        				(if: $computerStats&#39;s &quot;RAM Slot 5&quot; is &quot;Empty&quot;)[
+							(print: &quot;Slot 5: Empty&quot;)&lt;br&gt;
+                        ]
+        				(if: $computerStats&#39;s &quot;RAM Slot 6&quot; is &quot;Empty&quot;)[
+							(print: &quot;Slot 6: Empty&quot;)&lt;br&gt;
+                        ]        
+        				(if: $computerStats&#39;s &quot;RAM Slot 7&quot; is &quot;Empty&quot;)[
+							(print: &quot;Slot 7: Empty&quot;)&lt;br&gt;
+                        ]
+        				(if: $computerStats&#39;s &quot;RAM Slot 8&quot; is &quot;Empty&quot;)[
+							(print: &quot;Slot 8: Empty&quot;)&lt;br&gt;
+                            ]
         				==|=
     					&lt;h3&gt;Motherboard&lt;/h3&gt;
     					(print:$computerStats&#39;s &quot;Motherboard&quot;&#39;s &quot;Name&quot;)
     					===|
     					&lt;h3&gt;Cooling System&lt;/h3&gt;
-    					(print: $computerStats&#39;s &quot;Cooling System&quot;&#39;s &quot;Name&quot;)
+                        (if: $computerStats&#39;s &quot;Cooling System&quot; is not &quot;Empty&quot;)[
+    					(print: $computerStats&#39;s &quot;Cooling System&quot;&#39;s &quot;Name&quot;)]
+                        (else:)[(print: &quot;Empty&quot;)]
    
    						|==|
    						&lt;h2&gt;Spare Parts&lt;/h2&gt;
