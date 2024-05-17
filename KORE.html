@@ -63,6 +63,12 @@ $playerMoney^^CR^^
 (if: $allKoresCores contains $sapphireCore)[
 	(for: each _Core where _Core is $sapphireCore or it is $diamondCore, ...$allKoresCores)[
     	(set: $playerMaxHealth to it +50)
+    	(if: $computerStats&#39;s &quot;Cooling System&quot; is $advancedCooler)[
+        	(set: $playerMaxHealth to it +100)
+            ]
+    	(else-if: $computerStats&#39;s &quot;Cooling System&quot; is $specialCooler)[
+        	(set: $playerMaxHealth to it +200)
+            ]
     ]
     (set: $playerHealth to $playerMaxHealth)
 ]
@@ -158,21 +164,23 @@ Machines:
 [[Mama Mia&#39;s]]
 &lt;br&gt;
 (button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))
-[[Level 5]] 
+[[Corporation 1]]
+
 =|=
 (button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))
 [[Un&#39;taeko Daily News]] 
 (button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))
-[[Level 6]]
+[[Corporation 2]] 
 =|=
 (button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))
-[[Level 3]] 
+[[TEC Studios]] 
 &lt;br&gt;
 (button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))
-[[Level 7]]
+[[Corporation 3]]
+
 =|=
 (button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))
-[[Level 4]] 
+[[SecCo]] 
 &lt;br&gt;
 (button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))
 [[Hack a Stranger]] 
@@ -643,7 +651,7 @@ Connection forced with Unknown Netrunner.
 
 (set:$RAM to 0)
 
-(set: $allRAM to (a:$computerStats&#39;s &quot;RAM Slot 1&quot;,  $computerStats&#39;s &quot;RAM Slot 2&quot;, $computerStats&#39;s &quot;RAM Slot 3&quot;, $computerStats&#39;s &quot;RAM Slot 4&quot;, $computerStats&#39;s &quot;RAM Slot 5&quot;, $computerStats&#39;s &quot;RAM Slot 6&quot;, $computerStats&#39;s &quot;RAM Slot 7&quot;, $computerStats&#39;s &quot;RAM Slot 8&quot;))
+(set: $allKoresRAM to (a:$computerStats&#39;s &quot;RAM Slot 1&quot;,  $computerStats&#39;s &quot;RAM Slot 2&quot;, $computerStats&#39;s &quot;RAM Slot 3&quot;, $computerStats&#39;s &quot;RAM Slot 4&quot;, $computerStats&#39;s &quot;RAM Slot 5&quot;, $computerStats&#39;s &quot;RAM Slot 6&quot;, $computerStats&#39;s &quot;RAM Slot 7&quot;, $computerStats&#39;s &quot;RAM Slot 8&quot;))
 
 	(for: each _RAMStick, ...$allRAM)[
 		(if: _RAMStick is not &quot;None&quot;)[
@@ -791,15 +799,45 @@ Hack the Newspaper?
 ]
 ]
 
-</tw-passagedata><tw-passagedata pid="32" name="Level 3" tags="" position="625,750" size="100,100">Coming Soon
+</tw-passagedata><tw-passagedata pid="32" name="TEC Studios" tags="" position="625,750" size="100,100">Welcome to TEC Studios! Our website is currently under construction.
+Please don&#39;t hack us! :)
 
-[[Browser]]</tw-passagedata><tw-passagedata pid="33" name="Level 4" tags="" position="750,750" size="100,100">Coming Soon
 
-[[Browser]]</tw-passagedata><tw-passagedata pid="34" name="Level 5" tags="" position="875,750" size="100,100">Coming Soon
 
-[[Browser]]</tw-passagedata><tw-passagedata pid="35" name="Level 6" tags="" position="1000,750" size="100,100">Coming Soon
+The Entertainment Company is a Corporation 2 Subsidiary and all rights belong to Corporation 2
+[[Browser]]</tw-passagedata><tw-passagedata pid="33" name="SecCo" tags="" position="750,750" size="100,100">&lt;h2&gt; SecCo &lt;/h2&gt;
 
-[[Browser]]</tw-passagedata><tw-passagedata pid="36" name="Level 7" tags="" position="1125,750" size="100,100">Coming Soon
+Welcome to SecCo, your first stop for all your security needs. 
+
+Need a personal security detail? Look no further than our professionally trained armed guards. 
+Our guards are trained in the same facility as C2 Security Forces, and will put their lives on the line to keep yours safe.
+Email one of our representatives today to get started.
+
+
+Need a home security system? We got you covered.
+
+Already have one?
+Login to access your home security system.
+
+[[Browser]]</tw-passagedata><tw-passagedata pid="34" name="Corporation 2" tags="" position="875,750" size="100,100">Welcome to the Corporation 2 Intranet
+
+Here you can access your records as a citizen of Un&#39;taeko, register a vehicle, update your drivers license, or request a travel permit.
+
+Login to get started.
+
+
+[[Browser]]</tw-passagedata><tw-passagedata pid="35" name="Corporation 3" tags="" position="1000,750" size="100,100">Welcome to the Corporation 3 Intranet
+
+Here you can access your records as a citizen of Jorto, register a vehicle, update your drivers license, or request a travel permit.
+
+Login to get started.
+
+[[Browser]]</tw-passagedata><tw-passagedata pid="36" name="Corporation 1" tags="" position="1125,750" size="100,100">Welcome to the Corporation 1 Intranet
+
+Here you can access your records as a citizen of Bae&#39;el, register a vehicle, update your drivers license, or request a travel permit.
+
+Login to get started.
+
 
 [[Browser]]</tw-passagedata><tw-passagedata pid="37" name="Load Game" tags="" position="750,325" size="100,100">{(if: (saved-games: ) contains &quot;Slot A&quot;)[
   (link: &quot;Load game&quot;)[(load-game:&quot;Slot A&quot;)]
@@ -1210,7 +1248,9 @@ Description: (print:_core&#39;s &quot;Description&quot;)
 ]]]]
 ]]
 
-RAM
+|==|
+
+&lt;h2&gt;RAM&lt;/h2&gt;
 (for: each _core, ...$allRAM)[
 
 (if:_core&#39;s &quot;Purchasable&quot; is true)[
@@ -1233,7 +1273,8 @@ Description: (print:_core&#39;s &quot;Description&quot;)
 ]]]
 ]] 
 
-Motherboards
+|==|
+&lt;h2&gt;Motherboards&lt;/h2&gt;
 (for: each _core, ...$allMotherboards)[
 
 (if:_core&#39;s &quot;Purchasable&quot; is true)[

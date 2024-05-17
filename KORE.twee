@@ -107,6 +107,12 @@ $playerMoney^^CR^^
 (if: $allKoresCores contains $sapphireCore)[
 	(for: each _Core where _Core is $sapphireCore or it is $diamondCore, ...$allKoresCores)[
     	(set: $playerMaxHealth to it +50)
+    	(if: $computerStats's "Cooling System" is $advancedCooler)[
+        	(set: $playerMaxHealth to it +100)
+            ]
+    	(else-if: $computerStats's "Cooling System" is $specialCooler)[
+        	(set: $playerMaxHealth to it +200)
+            ]
     ]
     (set: $playerHealth to $playerMaxHealth)
 ]
@@ -740,21 +746,23 @@ Machines:
 [[Mama Mia's]]
 <br>
 (button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))
-[[Level 5]] 
+[[Corporation 1]]
+
 =|=
 (button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))
 [[Un'taeko Daily News]] 
 (button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))
-[[Level 6]]
+[[Corporation 2]] 
 =|=
 (button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))
-[[Level 3]] 
+[[TEC Studios]] 
 <br>
 (button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))
-[[Level 7]]
+[[Corporation 3]]
+
 =|=
 (button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))
-[[Level 4]] 
+[[SecCo]] 
 <br>
 (button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))
 [[Hack a Stranger]] 
@@ -936,7 +944,9 @@ Description: (print:_core's "Description")
 ]]]]
 ]]
 
-RAM
+|==|
+
+<h2>RAM</h2>
 (for: each _core, ...$allRAM)[
 
 (if:_core's "Purchasable" is true)[
@@ -959,7 +969,8 @@ Description: (print:_core's "Description")
 ]]]
 ]] 
 
-Motherboards
+|==|
+<h2>Motherboards</h2>
 (for: each _core, ...$allMotherboards)[
 
 (if:_core's "Purchasable" is true)[
@@ -982,6 +993,38 @@ Description: (print:_core's "Description")
 ]]]
 ]]]
 
+
+
+:: Corporation 1 {"position":"1125,750","size":"100,100"}
+Welcome to the Corporation 1 Intranet
+
+Here you can access your records as a citizen of Bae'el, register a vehicle, update your drivers license, or request a travel permit.
+
+Login to get started.
+
+
+[[Browser]]
+
+
+:: Corporation 2 {"position":"875,750","size":"100,100"}
+Welcome to the Corporation 2 Intranet
+
+Here you can access your records as a citizen of Un'taeko, register a vehicle, update your drivers license, or request a travel permit.
+
+Login to get started.
+
+
+[[Browser]]
+
+
+:: Corporation 3 {"position":"1000,750","size":"100,100"}
+Welcome to the Corporation 3 Intranet
+
+Here you can access your records as a citizen of Jorto, register a vehicle, update your drivers license, or request a travel permit.
+
+Login to get started.
+
+[[Browser]]
 
 
 :: Darknet Shop {"position":"275,450","size":"100,100"}
@@ -1463,7 +1506,7 @@ Connection forced with Unknown Netrunner.
 
 (set:$RAM to 0)
 
-(set: $allRAM to (a:$computerStats's "RAM Slot 1",  $computerStats's "RAM Slot 2", $computerStats's "RAM Slot 3", $computerStats's "RAM Slot 4", $computerStats's "RAM Slot 5", $computerStats's "RAM Slot 6", $computerStats's "RAM Slot 7", $computerStats's "RAM Slot 8"))
+(set: $allKoresRAM to (a:$computerStats's "RAM Slot 1",  $computerStats's "RAM Slot 2", $computerStats's "RAM Slot 3", $computerStats's "RAM Slot 4", $computerStats's "RAM Slot 5", $computerStats's "RAM Slot 6", $computerStats's "RAM Slot 7", $computerStats's "RAM Slot 8"))
 
 	(for: each _RAMStick, ...$allRAM)[
 		(if: _RAMStick is not "None")[
@@ -1537,36 +1580,6 @@ Kore")
 (set:$winResult to (go-to:"Mama Mias Hacked"))
 ]
 (display:"Battle")
-
-
-:: Level 3 {"position":"625,750","size":"100,100"}
-Coming Soon
-
-[[Browser]]
-
-
-:: Level 4 {"position":"750,750","size":"100,100"}
-Coming Soon
-
-[[Browser]]
-
-
-:: Level 5 {"position":"875,750","size":"100,100"}
-Coming Soon
-
-[[Browser]]
-
-
-:: Level 6 {"position":"1000,750","size":"100,100"}
-Coming Soon
-
-[[Browser]]
-
-
-:: Level 7 {"position":"1125,750","size":"100,100"}
-Coming Soon
-
-[[Browser]]
 
 
 :: Load Game {"position":"750,325","size":"100,100"}
@@ -1781,7 +1794,7 @@ There are some various music files here. They're mostly alternative rock and edm
 (set: $computerStats to (dm: "Motherboard", $basicMotherboard, "Core1", $emeraldCore, "Core2", $sapphireCore, "Core3", "None", "Core4", "None", "Core5", "None", "Core6", "None", "RAM Slots", 2,"RAM Slot 1", $8GBRAM,"RAM Slot 2", $8GBRAM, "RAM Slot 3", "None", "RAM Slot 4", "None", "RAM Slot 5", "None", "RAM Slot 6", "None", "RAM Slot 7", "None", "RAM Slot 8", "None", "Cooling System", $basicCooler))
 	]
     (hook: "Kore's Spare Parts")[
-    (set: $koresSpareParts to (a: $rubyCore, $16GBRAM, $advancedMotherboard, $advancedCooler))
+    (set: $koresSpareParts to (a: $rubyCore))
 ]
 ]
 
@@ -1908,6 +1921,24 @@ ugh why am i even making this there's no one else to hire me anymore
 ]
 
 
+:: SecCo {"position":"750,750","size":"100,100"}
+<h2> SecCo </h2>
+
+Welcome to SecCo, your first stop for all your security needs. 
+
+Need a personal security detail? Look no further than our professionally trained armed guards. 
+Our guards are trained in the same facility as C2 Security Forces, and will put their lives on the line to keep yours safe.
+Email one of our representatives today to get started.
+
+
+Need a home security system? We got you covered.
+
+Already have one?
+Login to access your home security system.
+
+[[Browser]]
+
+
 :: Stranger Hacked {"position":"1250,875","size":"100,100"}
 (box: "X")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[
 You've hacked a complete stranger! That was nice of you.
@@ -1915,6 +1946,16 @@ Their machine is part of your botnet now.
 (set:$playerMoney to $playerMoney+5000)
 (print: "(set:$botnet to it + (a:+$enemyName" +")")
 (button:)[(link:"Browser")[(go-to:"Browser")]]]
+
+
+:: TEC Studios {"position":"625,750","size":"100,100"}
+Welcome to TEC Studios! Our website is currently under construction.
+Please don't hack us! :)
+
+
+
+The Entertainment Company is a Corporation 2 Subsidiary and all rights belong to Corporation 2
+[[Browser]]
 
 
 :: Trash {"position":"1500,300","size":"100,100"}
