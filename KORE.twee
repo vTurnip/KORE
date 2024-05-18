@@ -55,6 +55,7 @@ A few photos of a group of friends. A young redheaded man can be seen alone in a
 <!-- Computer Parts -->
 (display: "Computer Parts")
 (set: $koresPCParts to (a: ))
+(set: $usedRAM to 0)
 <!-- WIP Arrays for downloads-->
 (display:"Programs")
 (set: $downloads to (a:))
@@ -121,9 +122,9 @@ $playerMoney^^CR^^
 (set:$botnetHealth to $maxBotnetHealth)
 (set: $enemyHealth to $enemy's Health)
 (set:$enemyMaxHealth to $enemy's Health)
-(set:$enemyMaxICE to $enemy's "Max ICE")]
+(set:$enemyMaxICE to $enemy's "Max ICE")
+(set:$enemyICE to $enemy's "ICE")]
 (hook:"Battle")[(collapse:)[
-(set:$enemyICE to $enemy's "ICE")
 (if:$enemyHealth <1)[$winResult]]
 <div>(float-box:"X","Y")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[
 <div>
@@ -771,6 +772,97 @@ Machines:
 
 
 
+:: C1 Battle {"position":"1125,1150","size":"100,100"}
+(collapse:)[
+(display:"C1 Boss")
+(set:$enemyName to "C1 Server")
+(set:$enemy to $C1)
+(set:$winResult to (go-to:"C1 Won"))
+]
+(display:"Battle")
+
+
+:: C1 Boss {"position":"1125,1525","size":"100,100"}
+(hook:"C1 Boss")[(set: $C1Attacks to (ds: $ICEPick))
+(set: $C1 to (dm:"Max Health",400, "Health", 400, "Max ICE", 400, "ICE", 400, "Bandwidth", 4, "Attack",10, "Attacks", $C1Attacks,"Poisoned", false, "Glitched", false))]
+
+
+:: C1 Won {"position":"1125,1400","size":"100,100"}
+You found the documents detailing the experiments the government has been performing on Tren, his entire history and stuff.
+
+Don't worry, this game is still in alpha, and this page and all others will be updated.
+(set: $level7Complete to true)
+(set:$playerMoney to $playerMoney+50000)
+(set: $unsentEmails's 1st's "Sent" to true)
+(set: $specialCooler's "Purchasable" to true)
+(set:$botnet to it + (a:"C1 Server"))
+
+[[Browser]]
+
+[[Computer]] 
+
+
+:: C2 Battle {"position":"875,1150","size":"100,100"}
+(collapse:)[
+(display:"C2 Boss")
+(set:$enemyName to "C2 Server")
+(set:$enemy to $C2)
+(set:$winResult to (go-to:"C2 Won"))
+]
+(display:"Battle")
+
+
+:: C2 Boss {"position":"875,1525","size":"100,100"}
+(hook:"C2 Boss")[(set: $C2Attacks to (ds: $ICEPick))
+(set: $C2 to (dm:"Max Health",300, "Health", 300, "Max ICE", 300, "ICE", 300, "Bandwidth", 4, "Attack",10, "Attacks", $C2Attacks,"Poisoned", false, "Glitched", false))]
+
+
+:: C2 Won {"position":"875,1400","size":"100,100"}
+You discover an out of place txt document hidden in the system files of C2's server. It appears to be left by a boy named Tren calling for help from within a facility owned by Corporation 1, but the origins of how the note got here are unclear.
+
+It seems the boy has had experiments performed on him. They're injecting him with a strange glowing substance and making him perform magic with triistone.
+Is he an aelma? Or are they finding ways to make humans perform magic?
+(set: $level5Complete to true)
+(set:$playerMoney to $playerMoney+50000)
+(set: $unsentEmails's 1st's "Sent" to true)
+(set: $16GBRAM's "Purchasable" to true)
+(set: $defrag's "Purchasable" to true)
+(set:$botnet to it + (a:"C2 Server"))
+
+[[Browser]]
+
+[[Computer]] 
+
+
+:: C3 Battle {"position":"1000,1150","size":"100,100"}
+(collapse:)[
+(display:"C3 Boss")
+(set:$enemyName to "C3 Server")
+(set:$enemy to $C3)
+(set:$winResult to (go-to:"C3 Won"))
+]
+(display:"Battle")
+
+
+:: C3 Boss {"position":"1000,1525","size":"100,100"}
+(hook:"C3 Boss")[(set: $C3Attacks to (ds: $ICEPick))
+(set: $C3 to (dm:"Max Health",350, "Health", 350, "Max ICE", 350, "ICE", 350, "Bandwidth", 4, "Attack",10, "Attacks", $C3Attacks,"Poisoned", false, "Glitched", false))]
+
+
+:: C3 Won {"position":"1000,1400","size":"100,100"}
+You found the birth records of Dare and his parents, but Tren's are mysteriously missing
+
+(set: $level6Complete to true)
+(set:$playerMoney to $playerMoney+50000)
+(set: $unsentEmails's 1st's "Sent" to true)
+(set: $specialMotherboard's "Purchasable" to true)
+(set:$botnet to it + (a:"C3 Server"))
+
+[[Browser]]
+
+[[Computer]] 
+
+
 :: Computer {"position":"1100,50","size":"200,200"}
 {
 (for:each _emails, ...$unsentEmails)[
@@ -850,23 +942,19 @@ Machines:
 (set: $emeraldCore to (dm: "Name", "Emerald Core", "Element","Air", "Purchasable", true, "Price", 10000, "Description", "A green gem inscribed with draconic runes. Contains the element of air.", "Slot", "Core"))
 (set: $obsidianCore to (dm: "Name", "Obsidian Core", "Element","Aether", "Purchasable", false, "Price", 25000, "Description", "A red gem inscribed with draconic runes. Contains the element of aether.", "Slot", "Core"))
 (set: $diamondCore to (dm: "Name",  "Diamond Core", "Element","Light", "Purchasable", false, "Price", 25000, "Description", "A red gem inscribed with draconic runes. Contains the element of light.", "Slot", "Core"))
-(set:$allCores to (a: $rubyCore,$sapphireCore,$emeraldCore,$obsidianCore,$diamondCore))
 
 (set: $8GBRAM to  (dm: "Name", "8GB RAM Stick", "Price", 8000, "RAM", 8, "Description", "An 8GB RAM Stick", "Purchasable", true, "Slot", "RAM"))
 (set: $16GBRAM to (dm: "Name", "16GB RAM Stick", "Price", 16000, "RAM", 16, "Description", "A 16GB RAM Stick", "Purchasable", true, "Slot", "RAM"))
 (set: $32GBRAM to (dm: "Name", "32GB RAM Stick","Price", 32000, "RAM", 32, "Description", "A 32GB RAM Stick", "Purchasable", false, "Slot", "RAM"))
-(set: $allRAM to (a:$8GBRAM, $16GBRAM,$32GBRAM))
 
 (set: $basicCooler to (dm: "Name","Basic Cooling System", "Price", 10000, "Cooling", 10, "Description", "A basic cooling system for your machine's cores.", "Purchasable", true, "Slot", "Cooler"))
 (set: $advancedCooler to (dm: "Name","Advanced Cooling System", "Price", 50000, "Cooling", 50, "Description", "An advanced cooling system for your machine's cores.", "Purchasable", true, "Slot", "Cooler"))
 (set: $specialCooler to (dm: "Name", "Custom Cooling System", "Price", 75000, "Cooling", 75, "Description", "A custom cooling solution for your personal machine's cores.", "Purchasable", false, "Slot", "Cooler"))
-(set: $allCoolers to (a: $basicCooler, $advancedCooler, $specialCooler))
 
 (set: $basicMotherboard to (dm: "Name", "Basic Motherboard", "Core Slots", 2, "RAM Slots", 2, "Price", 8000, "Description", "A basic motherboard for a starter build. Can slot 2 cores and 2 RAM sticks.", "Purchasable", true, "Slot", "Motherboard")) 
 (set: $advancedMotherboard to (dm: "Name", "Advanced Motherboard", "Core Slots", 4, "RAM Slots", 4, "Price", 8000, "Description", "An advanced motherboard for a more powerful build. Can slot 4 cores and 4 RAM sticks.", "Purchasable", true, "Slot", "Motherboard"))
 (set: $specialMotherboard to (dm: "Name", "Special Motherboard", "Core Slots", 6, "RAM Slots", 8, "Price", 8000, "Description", "A special motherboard for a top of the line build. Can slot 6 cores and 8 RAM sticks.", "Purchasable", false, "Slot", "Motherboard"))
 (set: $allMotherboards to (a:$basicMotherboard, $advancedMotherboard, $specialMotherboard))
-(set: $allParts to (a:...$allCores, ...$allRAM, ...$allMotherboards, ...$allCoolers))
 ]
 
 
@@ -1003,6 +1091,13 @@ Here you can access your records as a citizen of Bae'el, register a vehicle, upd
 Login to get started.
 
 
+(if:$haveEnhancedICEPick is true)[
+Hack Corporation 1?
+
+(button:)[[Hack C1]]
+]
+
+
 [[Browser]]
 
 
@@ -1012,6 +1107,12 @@ Welcome to the Corporation 2 Intranet
 Here you can access your records as a citizen of Un'taeko, register a vehicle, update your drivers license, or request a travel permit.
 
 Login to get started.
+
+(if:$haveEnhancedICEPick is true)[
+Hack Corporation 2?
+
+(button:)[[Hack C2]]
+]
 
 
 [[Browser]]
@@ -1023,6 +1124,13 @@ Welcome to the Corporation 3 Intranet
 Here you can access your records as a citizen of Jorto, register a vehicle, update your drivers license, or request a travel permit.
 
 Login to get started.
+
+(if:$haveEnhancedICEPick is true)[
+Hack Corporation 3?
+
+(button:)[[Hack C3]]
+]
+
 
 [[Browser]]
 
@@ -1202,8 +1310,8 @@ GUNS", "Sent", false, "Read", false))
 		(set: $poisonDamage to it*1.5)
     ]
 (set:$enemyHealth to it - $poisonDamage)
-$enemyName's machine is infected with your poison.exe!
-$enemyName takes $poisonDamage from your poison.exe!
+$enemyName's machine is infected with your Outbreak.exe!
+$enemyName takes $poisonDamage from your Outbreak.exe!
 ]
 ]
 
@@ -1215,6 +1323,7 @@ $enemyName takes $poisonDamage from your poison.exe!
 	(if: $enemy's "Poisoned" is true)[
     	(display: "Enemy Status Effects")
         (if: $enemyHealth is < 1)[
+        	(set: $outbreakActive to false)
         	$winResult
         ]
     ]
@@ -1225,7 +1334,10 @@ $enemyName takes $poisonDamage from your poison.exe!
 (set:$enemyAttackName to "Name" of $enemyAttack)
 
 (if:$playerICE <1)[
-(set:$damage to "Damage" of $enemyAttack*16+(random:1,5))
+(set:$damage to "Damage" of $enemyAttack)
+(if: (random:1,20) >19)[
+	(set: $damage to it*(random:1,2))
+]
 (set:$playerHealth to it - $damage)]
 
 (if: $enemyAttack's Glitchery is true)[
@@ -1238,10 +1350,32 @@ $enemyName takes $poisonDamage from your poison.exe!
     (button:)[(link: "Oh no!")[(set:$log to "you")(rerun:?Battle)
     ]]
 ]
+                <!-- Heal -->
+                (if:_download's "Heal" is > 0)[
+                    (set:$healing to _download's "Heal"/2)
+                    (if: $allEnemysCores contains $sapphireCore)[
+                        (set: $healing to it*2)
+                    ]
+                	(set:$enemyrHealth to it + $healing)
+                    (if: $enemyHealth > $enemyMaxHealth)[
+                    	(set: $enemyHealth to $enemyMaxHealth)
+                     ]
+                	(set:$healCheck to true)
+                ] 
+
+                <!-- ICE Healing -->
+                (if:_download's "ICE Heal" is >0)[
+                (set:$ICEHealing to _download's "ICE Heal")
+                    (if: $allEnemysCores contains $sapphireCore)[
+                        (set: $ICEHealing to it*2)
+                    ]
+                (set:$enemyICE to it + $ICEHealing)
+                (set:$ICEHealCheck to true)
+                ]
 
 (else:)[
-(set:$damage to "Damage" of $enemyAttack*8+(random:1,5))
-(set:$ICEDamage to "ICE Damage" of $enemyAttack)
+(set:$damage to "Damage" of $enemyAttack)
+(set:$ICEDamage to $enemyAttack's "ICE Damage" + $enemyAttack's "Damage" + (random: 1,10))
 (set:$playerHealth to it - $damage)
 (set:$playerICE to it - $ICEDamage)
 $enemyName used $enemyAttackName, dealing $damage damage!
@@ -1256,6 +1390,10 @@ $enemyAttackName dealt $ICEDamage damage to your ICE!
 
 <!-- Player's Turn -->
 (else:)[
+(set: $damageCheck to false)
+(set: $ICEDamageCheck to false)
+(set: $healCheck to false)
+(set: $ICEHealCheck to false)
 (button:)[
 (link:"Next")[
 (set:$log to "you")
@@ -1282,7 +1420,7 @@ There is no escape
 [[Legends of Trii'el Kore]]
 
 
-:: Free Pizza for Life {"position":"375,1000","size":"100,100"}
+:: Free Pizza for Life {"position":"375,1400","size":"100,100"}
 <div>
 (box: "X")+(b4r:"solid","double","double","solid")+(b4r-colour:cyan)+(b4r-size: 20,20,30,30)[
 You've ordered a free pizza! Expect your prize in 30 minutes or less.
@@ -1302,17 +1440,186 @@ You've ordered a free pizza! Expect your prize in 30 minutes or less.
 
 :: Game Over {"position":"225,300","size":"100,100"}
 (box:"X")+(color:red)[
-Stay at your location. Corporation 2 Security Forces are on their way.]
-(display: "A) Startup")
-(display: "Email Passage")
+<h1>
+(hook: "gameOverText")[
+(set: $typewriterText to "Game Over.")
+{
+  <!-- Create a variable to track the position within the $typewriterText string -->
+  (set: $typewriterPos to 1)
+
+  <!-- Create a hook to hold the typed text -->
+  |typewriterOutput>[]
+
+  <!-- Set a delay of 10ms seconds per loop -->
+  (live: 50ms)[
+
+    <!-- Add the next character to the hook -->
+    (append: ?typewriterOutput)[(print: $typewriterText's $typewriterPos)]
+
+    <!-- Update the position -->
+    (set: $typewriterPos to it + 1)
+
+    <!-- If it's gone past the end, stop -->
+    (if: $typewriterPos is $typewriterText's length + 1)[
+      (stop:)
+    ]
+  ]
+}
+
+]</h1>
+
+(set: $SecCoGameOverText to "Remain at your location. SecCo officers are on their way.")
+{
+  <!-- Create a variable to track the position within the $typewriterText string -->
+  (set: $SecCoGameOverTextPos to 1)
+
+  <!-- Create a hook to hold the typed text -->
+  |SecCoGameOverTextPosOutput>[]
+
+  <!-- Set a delay of 10ms seconds per loop -->
+  (live: 10ms)[
+
+    <!-- Add the next character to the hook -->
+    (append: ?SecCoGameOverTextPosOutput)[(print: $SecCoGameOverText's $SecCoGameOverTextPos)]
+
+    <!-- Update the position -->
+    (set: $SecCoGameOverTextPos to it + 1)
+
+    <!-- If it's gone past the end, stop -->
+    (if: $SecCoGameOverTextPos is $SecCoGameOverText's length + 1)[
+      (stop:)
+    ]
+  ]
+}
+
 (live:2s)[
-(link-goto:"Main Menu","Legends of Trii'el Kore")]
+(button:)[(link:"Save game?")[
+  (if:(save-game:"Slot A"))[
+	(if: (saved-games:) contains "Slot A")[
+  	
+Saved to Slot A!
+]]]]
+(button:)[(link-goto:"Main Menu","Legends of Trii'el Kore")]]]
 
 
 :: Graduation Photos {"position":"1550,425","size":"100,100"}
 There are photos from Kore's graduation.
 
 [[Pictures]]
+
+
+:: Hack C1 {"position":"1125,875","size":"100,100"}
+<!-- Set the text to show -->
+(set: $typewriterText to "initializing...
+
+ICEBREAKER 2.2.25.111f
+
+Ready!
+
+What would you like to do?
+")
+
+{
+  <!-- Create a variable to track the position within the $typewriterText string -->
+  (set: $typewriterPos to 1)
+
+  <!-- Create a hook to hold the typed text -->
+  |typewriterOutput>[]
+
+  <!-- Set a delay of 20ms seconds per loop -->
+  (live: 20ms)[
+
+    <!-- Add the next character to the hook -->
+    (append: ?typewriterOutput)[(print: $typewriterText's $typewriterPos)]
+
+    <!-- Update the position -->
+    (set: $typewriterPos to it + 1)
+
+    <!-- If it's gone past the end, stop -->
+    (if: $typewriterPos is $typewriterText's length + 1)[
+      (stop:)
+    ]
+  ]
+}
+
+(live:4s)[
+[[C1 Battle]]]
+
+
+:: Hack C2 {"position":"875,875","size":"100,100"}
+<!-- Set the text to show -->
+(set: $typewriterText to "initializing...
+
+ICEBREAKER 2.2.25.111f
+
+Ready!
+
+What would you like to do?
+")
+
+{
+  <!-- Create a variable to track the position within the $typewriterText string -->
+  (set: $typewriterPos to 1)
+
+  <!-- Create a hook to hold the typed text -->
+  |typewriterOutput>[]
+
+  <!-- Set a delay of 20ms seconds per loop -->
+  (live: 20ms)[
+
+    <!-- Add the next character to the hook -->
+    (append: ?typewriterOutput)[(print: $typewriterText's $typewriterPos)]
+
+    <!-- Update the position -->
+    (set: $typewriterPos to it + 1)
+
+    <!-- If it's gone past the end, stop -->
+    (if: $typewriterPos is $typewriterText's length + 1)[
+      (stop:)
+    ]
+  ]
+}
+
+(live:4s)[
+[[C2 Battle]]]
+
+
+:: Hack C3 {"position":"1000,875","size":"100,100"}
+<!-- Set the text to show -->
+(set: $typewriterText to "initializing...
+
+ICEBREAKER 2.2.25.111f
+
+Ready!
+
+What would you like to do?
+")
+
+{
+  <!-- Create a variable to track the position within the $typewriterText string -->
+  (set: $typewriterPos to 1)
+
+  <!-- Create a hook to hold the typed text -->
+  |typewriterOutput>[]
+
+  <!-- Set a delay of 20ms seconds per loop -->
+  (live: 20ms)[
+
+    <!-- Add the next character to the hook -->
+    (append: ?typewriterOutput)[(print: $typewriterText's $typewriterPos)]
+
+    <!-- Update the position -->
+    (set: $typewriterPos to it + 1)
+
+    <!-- If it's gone past the end, stop -->
+    (if: $typewriterPos is $typewriterText's length + 1)[
+      (stop:)
+    ]
+  ]
+}
+
+(live:4s)[
+[[C3 Battle]]]
 
 
 :: Hack Newspaper {"position":"500,875","size":"100,100"}
@@ -1353,6 +1660,82 @@ What would you like to do?
 [[Hack the Newspaper]]]
 
 
+:: Hack SecCo {"position":"750,875","size":"100,100"}
+<!-- Set the text to show -->
+(set: $typewriterText to "initializing...
+
+ICEBREAKER 2.2.25.111f
+
+Ready!
+
+What would you like to do?
+")
+
+{
+  <!-- Create a variable to track the position within the $typewriterText string -->
+  (set: $typewriterPos to 1)
+
+  <!-- Create a hook to hold the typed text -->
+  |typewriterOutput>[]
+
+  <!-- Set a delay of 20ms seconds per loop -->
+  (live: 20ms)[
+
+    <!-- Add the next character to the hook -->
+    (append: ?typewriterOutput)[(print: $typewriterText's $typewriterPos)]
+
+    <!-- Update the position -->
+    (set: $typewriterPos to it + 1)
+
+    <!-- If it's gone past the end, stop -->
+    (if: $typewriterPos is $typewriterText's length + 1)[
+      (stop:)
+    ]
+  ]
+}
+
+(live:4s)[
+[[SecCo Battle]]]
+
+
+:: Hack TEC Studios {"position":"625,875","size":"100,100"}
+<!-- Set the text to show -->
+(set: $typewriterText to "initializing...
+
+ICEBREAKER 2.2.25.111f
+
+Ready!
+
+What would you like to do?
+")
+
+{
+  <!-- Create a variable to track the position within the $typewriterText string -->
+  (set: $typewriterPos to 1)
+
+  <!-- Create a hook to hold the typed text -->
+  |typewriterOutput>[]
+
+  <!-- Set a delay of 20ms seconds per loop -->
+  (live: 20ms)[
+
+    <!-- Add the next character to the hook -->
+    (append: ?typewriterOutput)[(print: $typewriterText's $typewriterPos)]
+
+    <!-- Update the position -->
+    (set: $typewriterPos to it + 1)
+
+    <!-- If it's gone past the end, stop -->
+    (if: $typewriterPos is $typewriterText's length + 1)[
+      (stop:)
+    ]
+  ]
+}
+
+(live:4s)[
+[[TEC Studios Battle]]]
+
+
 :: Hack a Stranger {"position":"1250,750","size":"100,100"}
 (collapse:)[
 (display:"Random Encounter")
@@ -1362,7 +1745,7 @@ What would you like to do?
 (display:"Battle")
 
 
-:: Hack the Newspaper {"position":"550,1000","size":"100,100"}
+:: Hack the Newspaper {"position":"500,1025","size":"100,100"}
 (set: $nespaperHacked to 0)
 <!-- Set the text to show -->
 (set: $clearText to 0)
@@ -1410,25 +1793,36 @@ Connection forced with Unknown Netrunner.
 
 :: Hacking Options {"position":"100,175","size":"100,100"}
 (collapse:)[
+	(set: $usedRAM to 0)
+    (if: $outbreakActive is true)[
+    (set: $usedRAM to 8)
+    ]
 	(hook: "Hack")[
 		<!-- Programs --> 
+        
 		(for: each _download, ...$downloads)[
     		(button:)[
 			(link:"Name" of _download)[
-				(set:$damage to _download's "Damage"*(random: 10,20))
+            	(set: $usedRAM to it +8)
+                (if: $availableRAM >= 0)[
+				(set:$damage to _download's "Damage")
             	(if: $allKoresCores contains $rubyCore)[
                 	(set: $allRubyCores to (find: $_rubies where _rubies is $rubyCore ...$allKoresCores)'s length)
-            		(set: $damage to it*1.25*$allRubyCores*1+it)]
+            		(set: $damage to it*1.25*$allRubyCores+it)]
                 (set: _criticalCheck to (random: 1,20))
                 (if: _criticalCheck is 20)[
                 	(set: $damage to it*2)
                 ]
-                
+                (if: $enemyICE <1)[
+                	(set: $damage to it*15*$allRubyCores+it)
+                    ]
 				(set:$ICEDamage to _download's "ICE Damage")
             	(if: $allKoresCores contains $diamondCore)[
             		(set: $ICEDamage to it*1.25)
                     ]
-                    
+                (if: (random: 1,20) is 20)[
+                	(set: $ICEDamage to it * 2)
+                ]
                 <!-- Poison -->
                 (if: _download's "Poison" is true)[
                     (set: _poisonCheck to (random: 1,4))
@@ -1443,11 +1837,14 @@ Connection forced with Unknown Netrunner.
                 ]
                 <!-- Heal -->
                 (if:_download's "Heal" is > 0)[
-                    (set:$healing to _download's "Heal")
+                    (set:$healing to _download's "Heal"/2)
                     (if: $allKoresCores contains $sapphireCore)[
                         (set: $healing to it*2)
                     ]
                 	(set:$playerHealth to it + $healing)
+                    (if: $playerHealth > $playerMaxHealth)[
+                    	(set: $playerHealth to $playerMaxHealth)
+                     ]
                 	(set:$healCheck to true)
                 ] 
 
@@ -1462,29 +1859,40 @@ Connection forced with Unknown Netrunner.
                 ]
 
                 <!-- ICE Damage-->
-                (if:$ICEDamage is > 0)[(set:$ICEDamageChecker to true)]
+                (if: _download's "ICE Damage" is > 0)[(set:$ICEDamageChecker to true)]
                 (if:"Poison" of _download is true)[(set:$enemy's "Poisoned" to true)
+                (set: $outbreakActive to true)
                 You've successfully installed poison.exe on $enemyName's computer]
                 (set:$enemyHealth to it - $damage)
                 (if:$enemyICE >0)[
-                	(set: $damage to it*.115*$allRubyCores+it)
-                    (set:$enemy's "ICE" to it - $ICEDamage)]
+                    (set:$enemyICE to it - $ICEDamage)]
                 (if:$healCheck is true)[
                     (print:"Name" of _download+"heals you for " + $healing + "points.")]
                     (if:$ICEHealCheck is true)[
                         (print:"Name" of _download +" repairs your ICE by " + $ICEHealing + "points.")]
                 (if:$damage >0)[(print:"Name" of _download) deals $damage damage to $enemyName's machine.]
                 (if:$ICEDamageChecker is true)[$enemyName's ICE lost $ICEDamage integrity.]
+                (set: $damageCheck to false)
+				(set: $ICEDamageCheck to false)
+				(set: $healCheck to false)
+				(set: $ICEHealCheck to false)
 
-                        (if:$enemyHealth <1)[$winResult]
-                        (else:)[
-                            (set:$log to "enemy")
-                            (rerun:?Battle)
-                        ]
+                        (if:$enemyHealth <1)[
+                        (set: $outbreakActive to false)
+                        $winResult]
+                        
                     ]
+                    (else:)[ Not enough RAM]
                 ]
             ]
         ]
+        ]
+        
+                                    (button:)[(link: "Next")[
+                            (set:$log to "enemy")
+                            (rerun:?Battle)]]
+                       
+        
     ]
 
 
@@ -1508,11 +1916,18 @@ Connection forced with Unknown Netrunner.
 
 (set: $allKoresRAM to (a:$computerStats's "RAM Slot 1",  $computerStats's "RAM Slot 2", $computerStats's "RAM Slot 3", $computerStats's "RAM Slot 4", $computerStats's "RAM Slot 5", $computerStats's "RAM Slot 6", $computerStats's "RAM Slot 7", $computerStats's "RAM Slot 8"))
 
+<!-- PC Part Stuff -->
+(set:$allCores to (a: $rubyCore,$sapphireCore,$emeraldCore,$obsidianCore,$diamondCore))
+(set: $allRAM to (a:$8GBRAM, $16GBRAM,$32GBRAM))
+(set: $allCoolers to (a: $basicCooler, $advancedCooler, $specialCooler))
+(set: $allParts to (a:...$allCores, ...$allRAM, ...$allMotherboards, ...$allCoolers))
+
 	(for: each _RAMStick, ...$allRAM)[
 		(if: _RAMStick is not "None")[
 			(set: $RAM to it + _RAMStick's RAM)
         ]
     ]
+    (set: $availableRAM to $RAM - $usedRAM)
 ]
 
 
@@ -1572,7 +1987,7 @@ Kore")
 (t8n-depart:"dissolve")+(t8n-arrive:"dissolve")+(button:)[[Press Start->Main Menu]]]
 
 
-:: Level 1 {"position":"375,750","size":"100,100"}
+:: Level 1 {"position":"375,1150","size":"100,100"}
 (collapse:)[
 (display:"Mama Mia")
 (set:$enemyName to "Mama Mia")
@@ -1623,12 +2038,12 @@ Kore")
 (link:"Load Game", (button:))[(go-to:"Load Game")]
 
 
-:: Mama Mia {"position":"100,500","size":"100,100"}
+:: Mama Mia {"position":"375,1525","size":"100,100"}
 (hook:"Mama Mia")[(set: $MamaMiasAttacks to (ds: $ICEPick))
-(set: $MamaMia to (dm:"Max Health",100, "Health", 100, "Max ICE", 100, "ICE", 100, "Bandwidth", 4, "Attack",10, "Attacks", $MamaMiasAttacks,"Poisoned", false))]
+(set: $MamaMia to (dm:"Max Health",100, "Health", 100, "Max ICE", 100, "ICE", 100, "Bandwidth", 4, "Attack",10, "Attacks", $MamaMiasAttacks,"Poisoned", false, "Glitched", false))]
 
 
-:: Mama Mia's {"position":"475,575","size":"100,100"}
+:: Mama Mia's {"position":"375,750","size":"100,100"}
 (collapse:)[(css: "z-index:0;")+(background:black)+(box:"X")[
 (css: "z-index:0; background-color: margin-top:0px; margin-bottom:0px")+(float-box:"X","Y")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[]
 	(align:"==>")+(box:"=====X")+(css:"margin-top: 0px;offset-position: top 100px;")[
@@ -1695,7 +2110,7 @@ Copyright 2035 Mama Mia's Pizzeria, a Corporation 2 Company
 ]]
 
 
-:: Mama Mias Hacked {"position":"375,875","size":"100,100"}
+:: Mama Mias Hacked {"position":"375,1275","size":"100,100"}
 (set: $pizzaPlaceHacked to true)
 <div>
 (box: "X")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[
@@ -1752,23 +2167,35 @@ There are some various music files here. They're mostly alternative rock and edm
 ]
 
 
-:: Newspaper Battle {"position":"550,1125","size":"100,100"}
+:: Newspaper Battle {"position":"500,1150","size":"100,100"}
 (collapse:)[
 (display:"Newspaper Runner")
 (set:$enemyName to "C2News Runner")
-(set:$enemy to $newspaperRunner)
+(set:$enemy to $newsRunner)
 (set:$winResult to (go-to:"Newspaper Battle Won"))
 ]
 (display:"Battle")
 
 
-:: Newspaper Battle Won {"position":"550,1250","size":"100,100"}
+:: Newspaper Battle Won {"position":"500,1400","size":"100,100"}
+You hack the Un'taeko Daily News, and discover emails between employees describing an active coverup regarding the recent terrorist attack at the stadium in the Capital.
+
+Would you like to vandalize the newspaper?
+(button:)[(link: "Vandalize the newspaper")[(set: $newspaperVandalized to true)]]
+
+(set: $level2Complete to true)
+(set:$playerMoney to $playerMoney+10000)
+(set: $unsentEmails's 2's "Sent" to true)
+(set: $diamondCore's "Purchasable" to true)
+(set:$botnet to it + (a:"Un'taeko Daily News Server"))
+
+[[Browser]] 
+[[Computer]] 
 
 
-
-:: Newspaper Runner {"position":"100,750","size":"100,100"}
+:: Newspaper Runner {"position":"500,1525","size":"100,100"}
 (hook:"newspaperRunner")[(set: $newsRunnerAttacks to (ds: $ICEPick,$poison))
-(set: $MamaMia to (dm:"Max Health",100, "Health", 100, "Max ICE", 100, "ICE", 100, "Bandwidth", 4, "Attack",10, "Attacks", $MamaMiasAttacks,"Poisoned", false))]
+(set: $newsRunner to (dm:"Max Health",200, "Health", 100, "Max ICE", 100, "ICE", 100, "Bandwidth", 4, "Attack",10, "Attacks", $newsRunnerAttacks,"Poisoned", false, "Glitched", false))]
 
 
 :: Pictures {"position":"1650,300","size":"100,100"}
@@ -1834,10 +2261,10 @@ There are some various music files here. They're mostly alternative rock and edm
 :: Programs {"position":"100,50","size":"100,100"}
 (collapse:)[
 <!-- BruteForceAttack -->
-(set: $bruteForce to (dm: "Name","BruteForceAttack.bat","ID", 01, "Price", 1000, "Damage",3, "ICE Damage", 0, "Poison",False, "Heal", 0, "ICE Heal", 0, "Description","An attack that deals a strong hit to your opponent, but only after their ICE is down.", "Purchasable", false, "Glitchery",false))
+(set: $bruteForce to (dm: "Name","BruteForceAttack.bat","ID", 01, "Price", 1000, "Damage",5, "ICE Damage", 0, "Poison",False, "Heal", 0, "ICE Heal", 0, "Description","An attack that deals a strong hit to your opponent, but only after their ICE is down.", "Purchasable", false, "Glitchery",false))
 
 <!-- ICEPick -->
-(set: $ICEPick to (dm: "Name","ICEPick.exe","ID", 01, "Price", 1000, "Damage",1, "ICE Damage", 25, "Poison",False, "Heal", 0, "ICE Heal", 0, "Description","A Hacker's primary tool to break through ICE (Intrusion Countermeasures Electronics)", "Purchasable", false, "Glitchery",false))
+(set: $ICEPick to (dm: "Name","ICEPick.exe","ID", 01, "Price", 1000, "Damage",1, "ICE Damage", 10, "Poison",False, "Heal", 0, "ICE Heal", 0, "Description","A Hacker's primary tool to break through ICE (Intrusion Countermeasures Electronics)", "Purchasable", false, "Glitchery",false))
  
 <!-- Enhanced ICEPick -->
 (set: $EnhancedICEPick to (dm: "Name","EnhancedICEPick.exe", "ID", 02, "Price", 1000, "Damage", 2, "ICE Damage", 50, "Poison",False, "Heal", 0, "ICE Heal", 0, "Description", "An Enhanced version of the ICEPick. Deals extra damage to ICE", "Purchasable", false, "Glitchery",false))
@@ -1854,9 +2281,13 @@ There are some various music files here. They're mostly alternative rock and edm
 
 <!-- DDOS -->
 
-(set: $DDOS to  (dm:"Name", "DDOS.bat", "ID", 06, "Price", 1000, "ICE Damage", 0, "Damage", 10*$botnetCount, "Poison",false, "Heal", 0, "ICE Heal", 0, "Description", "Overwhelms target's network, dealing damage to their system integrity based on the number of bots in your botnet.","Purchasable", true, "Glitchery",true))
+(set: $DDOS to  (dm:"Name", "DDOS.bat", "ID", 06, "Price", 1000, "ICE Damage", 0, "Damage", 3*$botnetCount, "Poison",false, "Heal", 0, "ICE Heal", 0, "Description", "Overwhelms target's network, dealing damage to their system integrity based on the number of bots in your botnet.","Purchasable", true, "Glitchery",true))
 
 (set:$programsCount to 0)
+
+<!-- defrag.exe -->
+(set: $defrag to (dm:"Name", "defrag.exe", "ID", 07, "Price", 5000, "ICE Damage", 0, "Damage", 0, "Poison", False, "Heal", 100, "ICE Heal", 0, "Description", "Quick repair for your HP","Purchasable", false, "Glitchery",false)) 
+
 
 (for:each _program, $allPrograms)[(set:$programsCount to it + 1)]
 ]
@@ -1874,8 +2305,9 @@ There are some various music files here. They're mostly alternative rock and edm
 
 
 
-:: Random Encounter {"position":"100,625","size":"100,100"}
+:: Random Encounter {"position":"1250,1525","size":"100,100"}
 (hook:"RandomEncounter")[(collapse:)[
+(display: "Randomized PC")
 (set:$enemyAttacks to (a:$ICEPick))
 (for: each _program, ...$allPrograms)[
 	(set:$flipResult to (random:0,1))
@@ -1883,15 +2315,52 @@ There are some various music files here. They're mostly alternative rock and edm
 		(set:$enemyAttacks to it + (a:_program))]
 	(set:$enemyName to $seed + (random:1,$seed))
 ]
-(set: $randomEncounter to (dm:"Max Health", (random:50, 200), "Health", 50, "Max ICE", 100, "ICE", 100, "Bandwidth", 4, "Attack",10, "Attacks", $enemyAttacks,"Poisoned", false))
+(set: $randomEncounter to (dm:"Max Health", (random:50, 200), "Health", 50, "Max ICE", 100, "ICE", 100, "Bandwidth", 4, "Attack",10, "Attacks", $enemyAttacks,"Poisoned", false, "Glitched", false))
 (set: _dieroll to (random: 1, 20))
 (if: _dieroll is < 5)[
 	(set: $randomEncounter's "Max Health" to it*5)
     (
 ]
 (set: $randomEncounter's "Health" to $randomEncounter's "Max Health")
+
 ]
 ]
+
+
+:: Randomized PC {"position":"1250,1650","size":"100,100"}
+(set: $randomizedPC to (dm: "Motherboard", $basicMotherboard, "Core1", $emeraldCore, "Core2", $sapphireCore, "Core3", "None", "Core4", "None", "Core5", "None", "Core6", "None", "RAM Slots", 2,"RAM Slot 1", $8GBRAM,"RAM Slot 2", $8GBRAM, "RAM Slot 3", "None", "RAM Slot 4", "None", "RAM Slot 5", "None", "RAM Slot 6", "None", "RAM Slot 7", "None", "RAM Slot 8", "None", "Cooling System", $basicCooler))
+
+(set: $dieroll to (random:1,20))
+(if: $dieroll is 20)[
+	(set: $randomizedRAM to (either: ...$allRAM))
+]
+(else:)[
+	(set: $randomizedRAM to (either: (a:$allRAM's 1st, $allRAM's 2nd)))
+]
+
+(set: $randomizedPC's "Motherboard" to (either: ...$allMotherboards))
+(set: $randomizedPC's "Core1" to (either: ...$allCores))
+(set: $randomizedPC's "Core2" to (either: ...$allCores))
+(set: $randomizedPC's "RAM Slot 1" to $randomizedRAM)
+(set: $randomizedPC's "RAM Slot 2" to $randomizedRAM)
+
+(if: $randomizedPC's "Motherboard" is $advancedMotherboard or it is $specialMotherboard)[
+	(set: $randomizedPC's "Core3" to (either: ...$allCores))
+    (set: $randomizedPC's "Core4" to (either: ...$allCores))
+	(set: $randomizedPC's "RAM Slot 3" to $randomizedRAM)
+	(set: $randomizedPC's "RAM Slot 4" to $randomizedRAM)
+]
+(if: $randomizedPC's "Motherboard" is $specialMotherboard)[
+	(set: $randomizedPC's "Core5" to (either: ...(a:$diamondCore, $obsidianCore,)))
+    (set: $randomizedPC's "Core6" to (either: ...$allCores))
+	(set: $randomizedPC's "RAM Slot 5" to $randomizedRAM)
+	(set: $randomizedPC's "RAM Slot 6" to $randomizedRAM)
+	(set: $randomizedPC's "RAM Slot 7" to $randomizedRAM)
+	(set: $randomizedPC's "RAM Slot 8" to $randomizedRAM)
+]
+
+(set: $allRandosCores to (a: $randomizedPC's "Core1",$randomizedPC's "Core2",$randomizedPC's "Core3",$randomizedPC's "Core4",$randomizedPC's "Core5",$randomizedPC's "Core6",))
+(if: $allRandosCores contains "None")[(set: $allRandosCores to it - (a:"None"))]
 
 
 :: Resume {"position":"1675,675","size":"100,100"}
@@ -1936,15 +2405,51 @@ Need a home security system? We got you covered.
 Already have one?
 Login to access your home security system.
 
+
+(if:$haveEnhancedICEPick is true)[
+Hack SecCo Server?
+
+(button:)[[Hack SecCo]]
+]
+]
+
 [[Browser]]
 
 
-:: Stranger Hacked {"position":"1250,875","size":"100,100"}
+:: SecCo Battle {"position":"750,1150","size":"100,100"}
+(collapse:)[
+(display:"SecCo Boss")
+(set:$enemyName to "SecCo Server")
+(set:$enemy to $SecCo)
+(set:$winResult to (go-to:"SecCo Won"))
+]
+(display:"Battle")
+
+
+:: SecCo Boss {"position":"750,1525","size":"100,100"}
+(hook:"SecCo")[(set: $SecCoAttacks to (ds: $ICEPick, $glitchery, $poison))
+(set: $SecCo to (dm:"Max Health",250, "Health", 250, "Max ICE", 250, "ICE", 250, "Bandwidth", 4, "Attack",10, "Attacks", $SecCoAttacks,"Poisoned", false, "Glitched", false))]
+
+
+:: SecCo Won {"position":"750,1400","size":"100,100"}
+You've disabled SecCo's server. What could go wrong?
+(set: $level4Complete to true)
+(set:$playerMoney to $playerMoney+25000)
+(set: $unsentEmails's 1st's "Sent" to true)
+(set: $advancedMotherboard's "Purchasable" to true)
+(set:$botnet to it + (a:"SecCo Server"))
+
+[[Browser]] 
+[[Computer]] 
+
+
+
+:: Stranger Hacked {"position":"1250,1300","size":"100,100"}
 (box: "X")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[
 You've hacked a complete stranger! That was nice of you.
 Their machine is part of your botnet now.
 (set:$playerMoney to $playerMoney+5000)
-(print: "(set:$botnet to it + (a:+$enemyName" +")")
+(set:$botnet to it + (a:$enemyName))
 (button:)[(link:"Browser")[(go-to:"Browser")]]]
 
 
@@ -1955,7 +2460,40 @@ Please don't hack us! :)
 
 
 The Entertainment Company is a Corporation 2 Subsidiary and all rights belong to Corporation 2
+
+(if:$haveEnhancedICEPick is true)[
+Hack the Newspaper?
+
+(button:)[[Hack TEC Studios]]
+]
+]
 [[Browser]]
+
+
+:: TEC Studios Battle {"position":"625,1150","size":"100,100"}
+(collapse:)[
+(display:"TEC Studios Boss")
+(set:$enemyName to "TEC Studios Server")
+(set:$enemy to $TECStudios)
+(set:$winResult to (go-to:"TEC Studios Won"))
+]
+(display:"Battle")
+
+
+:: TEC Studios Boss {"position":"625,1525","size":"100,100"}
+(hook:"TEC Studios")[(set: $TECAttacks to (ds: $ICEPick, $poison))
+(set: $TECStudios to (dm:"Max Health",200, "Health", 200, "Max ICE", 200, "ICE", 200, "Bandwidth", 4, "Attack",10, "Attacks", $TECAttacks,"Poisoned", false, "Glitched", false))]
+
+
+:: TEC Studios Won {"position":"625,1400","size":"100,100"}
+You've defeated TEC Studios, and uncovered some interesting things about the way they spread propoganda through their social media networks
+(set: $level3Complete to true)
+(set:$playerMoney to $playerMoney+15000)
+(set: $unsentEmails's 1's "Sent" to true)
+(set: $obsidianCore's "Purchasable" to true)
+(set:$botnet to it + (a:"TEC Studios Server"))
+[[Browser]]
+[[Computer]] 
 
 
 :: Trash {"position":"1500,300","size":"100,100"}
