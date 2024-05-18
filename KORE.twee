@@ -791,6 +791,8 @@ Machines:
 You found the documents detailing the experiments the government has been performing on Tren, his entire history and stuff.
 
 Don't worry, this game is still in alpha, and this page and all others will be updated.
+
+(set: $playerDataFragments to it + 4)
 (set: $level7Complete to true)
 (set:$playerMoney to $playerMoney+50000)
 (set: $unsentEmails's 1st's "Sent" to true)
@@ -822,6 +824,9 @@ You discover an out of place txt document hidden in the system files of C2's ser
 
 It seems the boy has had experiments performed on him. They're injecting him with a strange glowing substance and making him perform magic with triistone.
 Is he an aelma? Or are they finding ways to make humans perform magic?
+
+
+(set: $playerDataFragments to it + 4)
 (set: $level5Complete to true)
 (set:$playerMoney to $playerMoney+50000)
 (set: $unsentEmails's 1st's "Sent" to true)
@@ -852,6 +857,7 @@ Is he an aelma? Or are they finding ways to make humans perform magic?
 :: C3 Won {"position":"1000,1400","size":"100,100"}
 You found the birth records of Dare and his parents, but Tren's are mysteriously missing
 
+(set: $playerDataFragments to it + 4)
 (set: $level6Complete to true)
 (set:$playerMoney to $playerMoney+50000)
 (set: $unsentEmails's 1st's "Sent" to true)
@@ -1145,7 +1151,7 @@ Hack Corporation 3?
         ]]
 (for: each _program, ...$allPrograms)[
 
-(if:_program's "Purchasable" is true)[
+(if:_program's "Purchasable" is true and $downloads does not contain _program)[
 (print:_program's "Name")
 ==||=
 (print: _program's "Price")^^CR^^
@@ -1426,7 +1432,7 @@ There is no escape
 You've ordered a free pizza! Expect your prize in 30 minutes or less.
 
 
-
+(set: $playerDataFragments to it + 4)
 (set: $level1Complete to true)
 (set:$playerMoney to $playerMoney+5000)
 (set: $unsentEmails's 1st's "Sent" to true)
@@ -1945,12 +1951,28 @@ Connection forced with Unknown Netrunner.
 (float-box:"X","Y")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(css:"margin-top:0px,margin-bottom:0px")[
 	(align:"==>")+(box:"=====X")+(css:"margin-top: 0px;offset-position: top 100px;")[
     	(collapse:)[(float-box: "======================XXX=", "=YY=================")+(css: "overflow:hidden; padding:0.1px")+(b4r:"solid","double","double","solid")+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
-        	(hook: "exitButton")[(button:"X")+(css: ".enchantment-button:not(.link) tw-link {padding-top:0.1px; border:1px}")+(color:black)+(hover-style: (color:white))(link-goto:"X", "Computer")
+        	(hook: "exitButton")[
+            	(button:"X")+(css: ".enchantment-button:not(.link) tw-link {padding-top:0.1px; border:1px}")+(color:black)+(hover-style: (color:white))(link-goto:"X", "Computer")
+       					 ]
+       				 ]
+        		]
+        	]
+            (hook: "IDE")[
+			Data Fragments: $playerDataFragments
+        	(if: $playerDataFragments is > 3)[
+        		Craft a program:
+            	(for: each _program where $downloads does not contain _program, ...$allPrograms)[
+            		(button:)[(link: _program's Name)[
+                    	(set: $downloads to it +(a:_program))
+                        (set: $playerDataFragments to it - 4)
+                        (rerun: ?IDE)
+                    ]
+            	]
+            ]
         ]
-        ]
-        ]]
-There's some broken code here.
-]
+    (else:)[
+	There's some broken code here.
+]]]
 
 
 :: Legends of Trii'el Kore {"position":"475,300","size":"100,100"}
@@ -2183,6 +2205,7 @@ You hack the Un'taeko Daily News, and discover emails between employees describi
 Would you like to vandalize the newspaper?
 (button:)[(link: "Vandalize the newspaper")[(set: $newspaperVandalized to true)]]
 
+(set: $playerDataFragments to it + 4)
 (set: $level2Complete to true)
 (set:$playerMoney to $playerMoney+10000)
 (set: $unsentEmails's 2's "Sent" to true)
@@ -2216,6 +2239,7 @@ Would you like to vandalize the newspaper?
 		(set:$playerHealth to $playerStat's "Health")
 		(set:$playerICE to $playerStat's "ICE")
 		(set:$playerMoney to $playerStat's "Money")
+        (set: $playerDataFragments to 4)
 	]
 	(hook:"Kore's PC")[
 (set: $computerStats to (dm: "Motherboard", $basicMotherboard, "Core1", $emeraldCore, "Core2", $sapphireCore, "Core3", "None", "Core4", "None", "Core5", "None", "Core6", "None", "RAM Slots", 2,"RAM Slot 1", $8GBRAM,"RAM Slot 2", $8GBRAM, "RAM Slot 3", "None", "RAM Slot 4", "None", "RAM Slot 5", "None", "RAM Slot 6", "None", "RAM Slot 7", "None", "RAM Slot 8", "None", "Cooling System", $basicCooler))
@@ -2433,6 +2457,8 @@ Hack SecCo Server?
 
 :: SecCo Won {"position":"750,1400","size":"100,100"}
 You've disabled SecCo's server. What could go wrong?
+
+(set: $playerDataFragments to it + 4)
 (set: $level4Complete to true)
 (set:$playerMoney to $playerMoney+25000)
 (set: $unsentEmails's 1st's "Sent" to true)
@@ -2444,10 +2470,11 @@ You've disabled SecCo's server. What could go wrong?
 
 
 
-:: Stranger Hacked {"position":"1250,1300","size":"100,100"}
+:: Stranger Hacked {"position":"1250,1400","size":"100,100"}
 (box: "X")+(b4r:"solid","double","double","solid")+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[
 You've hacked a complete stranger! That was nice of you.
 Their machine is part of your botnet now.
+(set: $playerDataFragments to it + (random:1,4))
 (set:$playerMoney to $playerMoney+5000)
 (set:$botnet to it + (a:$enemyName))
 (button:)[(link:"Browser")[(go-to:"Browser")]]]
@@ -2487,6 +2514,8 @@ Hack the Newspaper?
 
 :: TEC Studios Won {"position":"625,1400","size":"100,100"}
 You've defeated TEC Studios, and uncovered some interesting things about the way they spread propoganda through their social media networks
+
+(set: $playerDataFragments to it + 4)
 (set: $level3Complete to true)
 (set:$playerMoney to $playerMoney+15000)
 (set: $unsentEmails's 1's "Sent" to true)

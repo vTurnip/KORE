@@ -263,7 +263,7 @@ Machines:
         ]]
 (for: each _program, ...$allPrograms)[
 
-(if:_program&#39;s &quot;Purchasable&quot; is true)[
+(if:_program&#39;s &quot;Purchasable&quot; is true and $downloads does not contain _program)[
 (print:_program&#39;s &quot;Name&quot;)
 ==||=
 (print: _program&#39;s &quot;Price&quot;)^^CR^^
@@ -491,7 +491,7 @@ Purchase the ICEPick?
 You&#39;ve ordered a free pizza! Expect your prize in 30 minutes or less.
 
 
-
+(set: $playerDataFragments to it + 4)
 (set: $level1Complete to true)
 (set:$playerMoney to $playerMoney+5000)
 (set: $unsentEmails&#39;s 1st&#39;s &quot;Sent&quot; to true)
@@ -784,12 +784,28 @@ Connection forced with Unknown Netrunner.
 (button:)[[Workbench -&gt;Bench]] </tw-passagedata><tw-passagedata pid="28" name="IDE" tags="" position="1500,50" size="100,100">(float-box:&quot;X&quot;,&quot;Y&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(css:&quot;margin-top:0px,margin-bottom:0px&quot;)[
 	(align:&quot;==&gt;&quot;)+(box:&quot;=====X&quot;)+(css:&quot;margin-top: 0px;offset-position: top 100px;&quot;)[
     	(collapse:)[(float-box: &quot;======================XXX=&quot;, &quot;=YY=================&quot;)+(css: &quot;overflow:hidden; padding:0.1px&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
-        	(hook: &quot;exitButton&quot;)[(button:&quot;X&quot;)+(css: &quot;.enchantment-button:not(.link) tw-link {padding-top:0.1px; border:1px}&quot;)+(color:black)+(hover-style: (color:white))(link-goto:&quot;X&quot;, &quot;Computer&quot;)
+        	(hook: &quot;exitButton&quot;)[
+            	(button:&quot;X&quot;)+(css: &quot;.enchantment-button:not(.link) tw-link {padding-top:0.1px; border:1px}&quot;)+(color:black)+(hover-style: (color:white))(link-goto:&quot;X&quot;, &quot;Computer&quot;)
+       					 ]
+       				 ]
+        		]
+        	]
+            (hook: &quot;IDE&quot;)[
+			Data Fragments: $playerDataFragments
+        	(if: $playerDataFragments is &gt; 3)[
+        		Craft a program:
+            	(for: each _program where $downloads does not contain _program, ...$allPrograms)[
+            		(button:)[(link: _program&#39;s Name)[
+                    	(set: $downloads to it +(a:_program))
+                        (set: $playerDataFragments to it - 4)
+                        (rerun: ?IDE)
+                    ]
+            	]
+            ]
         ]
-        ]
-        ]]
-There&#39;s some broken code here.
-]</tw-passagedata><tw-passagedata pid="29" name="Legends of Trii&#39;el Kore" tags="" position="475,300" size="100,100">&lt;h1&gt;(set: $typewriterText to &quot;Legends of Trii&#39;el:
+    (else:)[
+	There&#39;s some broken code here.
+]]]</tw-passagedata><tw-passagedata pid="29" name="Legends of Trii&#39;el Kore" tags="" position="475,300" size="100,100">&lt;h1&gt;(set: $typewriterText to &quot;Legends of Trii&#39;el:
 Kore&quot;)
 {
   &lt;!-- Create a variable to track the position within the $typewriterText string --&gt;
@@ -1140,6 +1156,7 @@ There are some various music files here. They&#39;re mostly alternative rock and
 Would you like to vandalize the newspaper?
 (button:)[(link: &quot;Vandalize the newspaper&quot;)[(set: $newspaperVandalized to true)]]
 
+(set: $playerDataFragments to it + 4)
 (set: $level2Complete to true)
 (set:$playerMoney to $playerMoney+10000)
 (set: $unsentEmails&#39;s 2&#39;s &quot;Sent&quot; to true)
@@ -1161,6 +1178,7 @@ Would you like to vandalize the newspaper?
 		(set:$playerHealth to $playerStat&#39;s &quot;Health&quot;)
 		(set:$playerICE to $playerStat&#39;s &quot;ICE&quot;)
 		(set:$playerMoney to $playerStat&#39;s &quot;Money&quot;)
+        (set: $playerDataFragments to 4)
 	]
 	(hook:&quot;Kore&#39;s PC&quot;)[
 (set: $computerStats to (dm: &quot;Motherboard&quot;, $basicMotherboard, &quot;Core1&quot;, $emeraldCore, &quot;Core2&quot;, $sapphireCore, &quot;Core3&quot;, &quot;None&quot;, &quot;Core4&quot;, &quot;None&quot;, &quot;Core5&quot;, &quot;None&quot;, &quot;Core6&quot;, &quot;None&quot;, &quot;RAM Slots&quot;, 2,&quot;RAM Slot 1&quot;, $8GBRAM,&quot;RAM Slot 2&quot;, $8GBRAM, &quot;RAM Slot 3&quot;, &quot;None&quot;, &quot;RAM Slot 4&quot;, &quot;None&quot;, &quot;RAM Slot 5&quot;, &quot;None&quot;, &quot;RAM Slot 6&quot;, &quot;None&quot;, &quot;RAM Slot 7&quot;, &quot;None&quot;, &quot;RAM Slot 8&quot;, &quot;None&quot;, &quot;Cooling System&quot;, $basicCooler))
@@ -1242,9 +1260,10 @@ Tonii Piroa | Coworker
 Tonii.Piroa@Corp2.corp
 
 ugh why am i even making this there&#39;s no one else to hire me anymore
-]</tw-passagedata><tw-passagedata pid="53" name="Stranger Hacked" tags="" position="1250,1300" size="100,100">(box: &quot;X&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[
+]</tw-passagedata><tw-passagedata pid="53" name="Stranger Hacked" tags="" position="1250,1400" size="100,100">(box: &quot;X&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[
 You&#39;ve hacked a complete stranger! That was nice of you.
 Their machine is part of your botnet now.
+(set: $playerDataFragments to it + (random:1,4))
 (set:$playerMoney to $playerMoney+5000)
 (set:$botnet to it + (a:$enemyName))
 (button:)[(link:&quot;Browser&quot;)[(go-to:&quot;Browser&quot;)]]]</tw-passagedata><tw-passagedata pid="54" name="Trash" tags="" position="1500,300" size="100,100">It&#39;s empty...
@@ -2219,6 +2238,8 @@ What would you like to do?
 (set:$winResult to (go-to:&quot;TEC Studios Won&quot;))
 ]
 (display:&quot;Battle&quot;)</tw-passagedata><tw-passagedata pid="72" name="SecCo Won" tags="" position="750,1400" size="100,100">You&#39;ve disabled SecCo&#39;s server. What could go wrong?
+
+(set: $playerDataFragments to it + 4)
 (set: $level4Complete to true)
 (set:$playerMoney to $playerMoney+25000)
 (set: $unsentEmails&#39;s 1st&#39;s &quot;Sent&quot; to true)
@@ -2231,6 +2252,9 @@ What would you like to do?
 
 It seems the boy has had experiments performed on him. They&#39;re injecting him with a strange glowing substance and making him perform magic with triistone.
 Is he an aelma? Or are they finding ways to make humans perform magic?
+
+
+(set: $playerDataFragments to it + 4)
 (set: $level5Complete to true)
 (set:$playerMoney to $playerMoney+50000)
 (set: $unsentEmails&#39;s 1st&#39;s &quot;Sent&quot; to true)
@@ -2243,6 +2267,7 @@ Is he an aelma? Or are they finding ways to make humans perform magic?
 [[Computer]] </tw-passagedata><tw-passagedata pid="74" name="C2 Boss" tags="" position="875,1525" size="100,100">(hook:&quot;C2 Boss&quot;)[(set: $C2Attacks to (ds: $ICEPick))
 (set: $C2 to (dm:&quot;Max Health&quot;,300, &quot;Health&quot;, 300, &quot;Max ICE&quot;, 300, &quot;ICE&quot;, 300, &quot;Bandwidth&quot;, 4, &quot;Attack&quot;,10, &quot;Attacks&quot;, $C2Attacks,&quot;Poisoned&quot;, false, &quot;Glitched&quot;, false))]</tw-passagedata><tw-passagedata pid="75" name="C3 Won" tags="" position="1000,1400" size="100,100">You found the birth records of Dare and his parents, but Tren&#39;s are mysteriously missing
 
+(set: $playerDataFragments to it + 4)
 (set: $level6Complete to true)
 (set:$playerMoney to $playerMoney+50000)
 (set: $unsentEmails&#39;s 1st&#39;s &quot;Sent&quot; to true)
@@ -2252,6 +2277,8 @@ Is he an aelma? Or are they finding ways to make humans perform magic?
 [[Browser]]
 
 [[Computer]] </tw-passagedata><tw-passagedata pid="76" name="TEC Studios Won" tags="" position="625,1400" size="100,100">You&#39;ve defeated TEC Studios, and uncovered some interesting things about the way they spread propoganda through their social media networks
+
+(set: $playerDataFragments to it + 4)
 (set: $level3Complete to true)
 (set:$playerMoney to $playerMoney+15000)
 (set: $unsentEmails&#39;s 1&#39;s &quot;Sent&quot; to true)
@@ -2287,6 +2314,8 @@ Is he an aelma? Or are they finding ways to make humans perform magic?
 (set: $C1 to (dm:&quot;Max Health&quot;,400, &quot;Health&quot;, 400, &quot;Max ICE&quot;, 400, &quot;ICE&quot;, 400, &quot;Bandwidth&quot;, 4, &quot;Attack&quot;,10, &quot;Attacks&quot;, $C1Attacks,&quot;Poisoned&quot;, false, &quot;Glitched&quot;, false))]</tw-passagedata><tw-passagedata pid="83" name="C1 Won" tags="" position="1125,1400" size="100,100">You found the documents detailing the experiments the government has been performing on Tren, his entire history and stuff.
 
 Don&#39;t worry, this game is still in alpha, and this page and all others will be updated.
+
+(set: $playerDataFragments to it + 4)
 (set: $level7Complete to true)
 (set:$playerMoney to $playerMoney+50000)
 (set: $unsentEmails&#39;s 1st&#39;s &quot;Sent&quot; to true)
