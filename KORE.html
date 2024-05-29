@@ -9,7 +9,7 @@
 </head>
 <body>
 <tw-story><noscript><tw-noscript>JavaScript needs to be enabled to play KORE.</tw-noscript></noscript></tw-story>
-<tw-storydata name="KORE" startnode="29" creator="Twine" creator-version="2.8.1" format="Harlowe" format-version="3.3.8" ifid="F2E45620-03C3-48AB-B787-4F1FACFCE5F3" options="" tags="" zoom="0.6" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">.enchantment-button {
+<tw-storydata name="KORE" startnode="28" creator="Twine" creator-version="2.8.1" format="Harlowe" format-version="3.3.8" ifid="F2E45620-03C3-48AB-B787-4F1FACFCE5F3" options="" tags="" zoom="0.6" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">.enchantment-button {
   color: #af8aff;
 }
 
@@ -30,23 +30,11 @@ color: rgb(175, 138, 255);
   padding-top: 25px;
   padding-bottom:25px;
   margin:0.1px;
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-tag name="header" color="purple"></tw-tag><tw-tag name="Battle" color="red"></tw-tag><tw-tag name="startup" color="yellow"></tw-tag><tw-tag name="footer" color="orange"></tw-tag><tw-passagedata pid="1" name="2036 Summer" tags="" position="1650,425" size="100,100">Some old photos of a group of friends celebrating. A young redheaded man can be seen kissing a blond girl in one of the photos
+}</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-tag name="header" color="purple"></tw-tag><tw-tag name="Battle" color="red"></tw-tag><tw-tag name="startup" color="yellow"></tw-tag><tw-tag name="footer" color="orange"></tw-tag><tw-passagedata pid="1" name="2036 Summer" tags="" position="1450,175" size="100,100">Some old photos of a group of friends celebrating. A young redheaded man can be seen kissing a blond girl in one of the photos
 
-[[Pictures]]</tw-passagedata><tw-passagedata pid="2" name="2037 Spring" tags="" position="1750,425" size="100,100">A few photos of a group of friends. A young redheaded man can be seen alone in a few of the photos.
+[[Pictures]]</tw-passagedata><tw-passagedata pid="2" name="2037 Spring" tags="" position="1550,175" size="100,100">A few photos of a group of friends. A young redheaded man can be seen alone in a few of the photos.
 
-[[Pictures]]</tw-passagedata><tw-passagedata pid="3" name="Bank" tags="" position="975,450" size="100,100">(collapse:)[(float-box:&quot;X&quot;,&quot;Y&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(css:&quot;margin-top:0px,margin-bottom:0px&quot;)[
-	(align:&quot;==&gt;&quot;)+(box:&quot;=====X&quot;)+(css:&quot;margin-top: 0px;offset-position: top 100px;&quot;)[
-    	(collapse:)[(float-box: &quot;========X&quot;, &quot;Y===========&quot;)+(css: &quot;overflow:hidden&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
-        	(hook: &quot;exitButton&quot;)[(button:&quot;X&quot;)+(css: &quot;border:1px&quot;)+(color:white)+(hover-style: (color:black))(link-goto:&quot;X&quot;, &quot;Computer&quot;)
-        ]]
-        ]]		(box:&quot;X=====&quot;)[
-        (float-box: &quot;X========&quot;, &quot;Y===========&quot;)+(css: &quot;overflow:hidden;&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
-        	(button:&quot;X&quot;)+(css: &quot;border:1px&quot;)+(color:black)+(hover-style: (color:white))(link-goto:&quot;&lt;-&quot;, &quot;Browser&quot;)
-        ]]]
-        =|=
-&lt;br&gt;
-&lt;br&gt;
-&lt;h4&gt;Welcome to&lt;/h4&gt;
+[[Pictures]]</tw-passagedata><tw-passagedata pid="3" name="Bank" tags="" position="250,750" size="100,100">&lt;h4&gt;Welcome to&lt;/h4&gt;
 &lt;br&gt;
 &lt;h3&gt;1st Bank of Un&#39;taeko&lt;/h3&gt;
 &lt;br&gt;
@@ -57,9 +45,18 @@ Checking Account ending in 31173:
 &lt;br&gt;
 Current Balance:
 $playerMoney^^CR^^
-]</tw-passagedata><tw-passagedata pid="4" name="Battle" tags="" position="350,175" size="100,100">(collapse:)[
+
+</tw-passagedata><tw-passagedata pid="4" name="Battle" tags="" position="2050,1050" size="200,200">(collapse:)[
+&lt;!-- Enemy Core Check --&gt;
+(set: $allEnemyCores to (a:$enemyPC&#39;s &quot;Core1&quot;, $enemyPC&#39;s &quot;Core2&quot;, $enemyPC&#39;s &quot;Core3&quot;, $enemyPC&#39;s &quot;Core4&quot;, $enemyPC&#39;s &quot;Core5&quot;, $enemyPC&#39;s &quot;Core6&quot;, ))
+(set: $rubyMultiplier to 1)
+(for: each _core where _core is $rubyCore, $allEnemyCores)[
+	(set: $rubyMultiplier to it*2)
+]
+
 (set: $playerHealth to $playerMaxHealth)
-        
+(set: $activeBots to (a:))
+(set: $availableBots to $botnet)
 (if: $allKoresCores contains $sapphireCore)[
 	(for: each _Core where _Core is $sapphireCore or it is $diamondCore, ...$allKoresCores)[
     	(set: $playerMaxHealth to it +50)
@@ -84,20 +81,38 @@ $playerMoney^^CR^^
 &lt;div&gt;(float-box:&quot;X&quot;,&quot;Y&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[
 &lt;div&gt;
 =|=
-&lt;div&gt;(box:&quot;X=&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(b4r-size:5,5,10,10)
-[Kore HP: 
-$playerHealth/$playerMaxHealth
-ICE:
-$playerICE/$playerMaxICE
-Botnet:
-$botnetHealth/$maxBotnetHealth]
-&lt;/div&gt;
+&lt;div&gt;{
+(css: &quot;margin: 0.1px; width: 20em; height: 9em; overflow:hidden;&quot;)+(float-box: &quot;=X====&quot;,&quot;=Y====&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(b4r-size:5,5,10,10)[
+	Kore HP:     	$playerHealth/$playerMaxHealth
+	{
+	(box:&quot;X&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-size: 2,4,4,2)+(b4r-color: red)+(css:&quot;padding:0.1px; margin:0.1px;&quot;)[
+    	(meter:bind $playerHealth, $playerMaxHealth, &quot;X&quot;,(gradient: 90, 0, red, 1, orange))
+    ]}
+	ICE:
+	$playerICE/$playerMaxICE
+    
+    	(box:&quot;X&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-size: 2,4,4,2)+(b4r-color: blue)+(css:&quot;padding:0.1px; margin:0.1px;&quot;)[
+
+	(meter:bind $playerICE, $playerMaxICE, &quot;X&quot;,(gradient: 90, 0, blue, 1, purple))
+    ]
+]
 =|=
-(box:&quot;=X&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-color:red)+(b4r-size:5,5,10,10)
-[$enemyName HP: $enemyHealth/$enemyMaxHealth
-ICE: $enemyICE/$enemyMaxICE]&lt;/div&gt;
+(float-box:&quot;====X=&quot;,&quot;=Y====&quot;)+(css:&quot;padding: 15px; margin: 0.1px; width: 50em; height: 9em; overflow:hidden;&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-color:red)+(b4r-size:5,5,10,10)[
+	(print: (str:$enemyName) + &quot; HP: &quot; + (str:$enemyHealth) + &quot;/&quot; +(str:$enemyMaxHealth))
+	(box:&quot;X&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-size: 2,4,4,2)+(b4r-color: red)+(css:&quot;padding:0.1px; margin:0.1px;&quot;)[
+    	(meter:bind $enemyHealth, $enemyMaxHealth, &quot;X&quot;,(gradient: 90, 0, red, 1, orange))
+    ]
+ICE: $enemyICE/$enemyMaxICE
+    
+    	(box: &quot;X&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-size: 2,4,4,2)+(b4r-color: blue)+(css:&quot;padding:0.1px; margin:0.1px;&quot;)[
+
+	(meter:bind $enemyICE, $enemyMaxICE, &quot;X&quot;,(gradient: 90, 0, blue, 1, purple))
+    ]]}
+]&lt;/div&gt;
+&lt;/div&gt;
 &lt;div id=&quot;log&quot;&gt;
-(display:&quot;Log&quot;)
+(float-box: &quot;=XXXXXXXX=&quot;,&quot;=======YYYYYYYY=&quot;)[
+(display:&quot;Log&quot;)]
 &lt;/div&gt;
 &lt;/div&gt;
 
@@ -144,49 +159,81 @@ Botnet:
 You have $botnetCount machines under your control
 
 Machines:
-(for: each _machine, ...$botnet)[_machine]
+&lt;br&gt;
+(for: each _machine, ...$botnet)[(print:_machine&#39;s &quot;Name&quot;)&lt;br&gt;]
 
-]]</tw-passagedata><tw-passagedata pid="7" name="Browser" tags="" position="775,550" size="100,100">(collapse:)[(float-box:&quot;X&quot;,&quot;Y&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(css:&quot;margin-top:0px,margin-bottom:0px&quot;)[
+]]</tw-passagedata><tw-passagedata pid="7" name="Browser" tags="" position="725,525" size="200,200">(collapse:)[
+	(hook:&quot;browser&quot;)[
+    	(float-box:&quot;X&quot;,&quot;Y&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(css:&quot;margin-top:0px,margin-bottom:0px&quot;)[
+            (if:$hackSelection is not 0 and $hackableSites contains $hackSelection)[
+				(align:&quot;&lt;==&quot;)+(box:&quot;X=====&quot;)+(css:&quot;margin-top: 0px; offset-position: top 100px;&quot;)[
+        			(float-box: &quot;=XXX======================&quot;, &quot;=YY=================&quot;)+(css: &quot;overflow:hidden; padding-top: 0.1px;&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
+        				(hook: &quot;hackButton&quot;)[
+                        	(button:&quot;X&quot;)+(css: &quot;.enchantment-button:not(.link) tw-link {padding-top:0.1px; border:1px}&quot;)+(color:black)+(hover-style:(color:(mix: 0.5, white, 0.5, #00f))+(background:black))[
+            					(link-goto:&quot;Hack&quot;, $hackSelection)
+        		]
+        	]
+        ]
+    ]
+
+    ]]
 	(align:&quot;==&gt;&quot;)+(box:&quot;=====X&quot;)+(css:&quot;margin-top: 0px;offset-position: top 100px;&quot;)[
     	(collapse:)[(float-box: &quot;======================XXX=&quot;, &quot;=YY=================&quot;)+(css: &quot;overflow:hidden; padding-top: 0.1px;&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
         	(hook: &quot;exitButton&quot;)[(button:&quot;X&quot;)+(css: &quot;.enchantment-button:not(.link) tw-link {padding-top:0.1px; border:1px}&quot;)+(color:black)+(hover-style:(color:(mix: 0.5, white, 0.5, #00f))+(background:black))(link-goto:&quot;X&quot;, &quot;Computer&quot;)
         ]]
-        ]]]	
+        ]]]
 ]
-=|=
-(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))
-[[Bank]] 
-&lt;br&gt;
-(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))
-[[Darknet Shop]] 
-=|=
-(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))
-[[Mama Mia&#39;s]]
-&lt;br&gt;
-(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))
-[[Corporation 1]]
 
+(float-box: &quot;=XXX=&quot;,&quot;=YYY===========&quot;)+(css:&quot;margin:0.1px; padding:0.1px;font-size:10px;&quot;)[(collapse:)[
 =|=
-(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))
-[[Un&#39;taeko Daily News]] 
-(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))
-[[Corporation 2]] 
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))[(link-rerun: &quot;Bank&quot;)[(set: $hackSelection to &quot;Bank Battle&quot;)
+(set: $selection to &quot;Bank&quot;)(rerun:?browser)]]
 =|=
-(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))
-[[TEC Studios]] 
-&lt;br&gt;
-(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))
-[[Corporation 3]]
-
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))[
+(link-rerun:&quot;Darknet Shop&quot;)[(set: $selection to &quot;Darknet Shop&quot;)(set: $hackSelection to 0)(rerun:?browser)]]
 =|=
-(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))
-[[SecCo]] 
-&lt;br&gt;
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))[
+(link-rerun:&quot;Pizza&quot;)[(set: $selection to &quot;Mama Mia&#39;s&quot;)(set: $hackSelection to &quot;Level 1&quot;)
+(rerun:?browser)]]
+=|=
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))[
+(link-rerun:&quot;News&quot;)[(set: $selection to &quot;Un&#39;taeko Daily News&quot;)(set: $hackSelection to &quot;Newspaper Battle&quot;)
+(rerun:?browser)]]
+=|=
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))[
+(link-rerun:&quot;TEC&quot;)[(set: $selection to &quot;TEC Studios&quot;)(set: $hackSelection to &quot;TEC Studios Battle&quot;)
+(rerun:?browser)]]
+=|=
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))[
+(link-rerun:&quot;SecCo&quot;)[(set: $hackSelection to &quot;SecCo Battle&quot;)
+(set: $selection to &quot;SecCo&quot;)(rerun:?browser)]]
+=|=
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))[
+(link-rerun:&quot;C2&quot;)[(set: $selection to &quot;Corporation 2&quot;)(set: $hackSelection to &quot;C2 Battle&quot;)
+(rerun:?browser)]]
+=|=
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))[
+(link-rerun:&quot;C3&quot;)[(set: $selection to &quot;Corporation 3&quot;)(set: $hackSelection to &quot;C3 Battle&quot;)
+(rerun:?browser)]]
+=|=
+(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))[
+(link-rerun:&quot;C1&quot;)[(set: $selection to &quot;Corporation 1&quot;)(set: $hackSelection to &quot;C1 Battle&quot;)
+(rerun:?browser)]]
+=|=
 (button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(color:black))
 [[Hack a Stranger]] 
+]]
+(hook: &quot;browser&quot;)[
+(float-box:&quot;=XXXXXXXXXXXX=&quot;,&quot;===YYYYYYYYYY=&quot;)+(b4r:&quot;Solid&quot;,&quot;Double&quot;,&quot;Double&quot;,&quot;Solid&quot;)+(color:(mix: 0.5, white, 0.5, #00f))+(bg: #121212)[
+(if: $selection is 0)[
+	(display: &quot;Browser Home&quot;)
+]
+(if: $selection is not 0)[
+(display: $selection)
+(set: $selection to 0)]
 
-&lt;/div&gt;
-</tw-passagedata><tw-passagedata pid="8" name="Computer" tags="" position="1100,50" size="200,200">{
+]]]
+ </tw-passagedata><tw-passagedata pid="8" name="Computer" tags="" position="1100,50" size="200,200">{
 (for:each _emails, ...$unsentEmails)[
 	(if: _emails&#39;s Sent is true)[
 		(set: $koreEmails to it + (a:_emails))
@@ -202,71 +249,68 @@ Machines:
 ]
 
 
-}(float-box: &quot;X&quot;,&quot;Y&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)
+}(float-box: &quot;X&quot;,&quot;Y&quot;)+(bg: (gradient:135, .75, black,  .25, (rgb:93, 63, 211))) +(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)
 [
 &lt;br&gt;
 &lt;br&gt;
 &lt;br&gt;
 =|=
-(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(text-color:black))
+(button:)+(bg:black)+(color:(mix: 0.6, white, 0.4, #00f))+(hover-style: (bg:(mix: 0.5, white, 0.5, #00f))+(text-color:black))
 [[Documents]]
 
 
 
-(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(text-color:black))
+(button:)+(bg:black)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(text-color:black))
 [[Pictures]]
 
 =|=
-(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(text-color:black))
+(button:)+(bg:black)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(text-color:black))
 [[Downloads]]
 
 (if:$emailNotif &gt;0)[
-(button:)+(color:#FF69B4)+(hover-style:(background:#FF69B4)+(text-color:black))
+(button:)+(bg:black)+(color:#FF69B4)+(hover-style:(background:#FF69B4)+(text-color:black))
 [[Mail ($emailNotif) -&gt;Email]]
 ](else:)[
-(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(text-color:black))
+(button:)+(bg:black)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(text-color:black))
 [[Mail -&gt;Email]]
 ]
 =|=
-(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(text-color:black))
+(button:)+(bg:black)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(text-color:black))
 [[Music]]
 
 
 
-(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(text-color:black))
+(button:)+(bg:black)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(text-color:black))
 [[Browser]]
 
 =|=
-(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(text-color:black))
+(button:)+(bg:black)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(text-color:black))
 [[Botnet]]
 
 
 
-(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(text-color:black))
+(button:)+(bg:black)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(text-color:black))
 [[IDE]]
 
 =|=
-(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(text-color:black))
+(button:)+(bg:black)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(text-color:black))
 [[Trash]]
 
 
 
-(button:)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(text-color:black))
+(button:)+(bg:black)+(color:(mix: 0.5, white, 0.5, #00f))+(hover-style:(background:(mix: 0.5, white, 0.5, #00f))+(text-color:black))
 [[Turn off Computer-&gt;Home]]
 |==|
-]</tw-passagedata><tw-passagedata pid="9" name="Darknet Shop" tags="" position="275,450" size="100,100">&lt;div&gt;
-(float-box:&quot;X&quot;,&quot;Y&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(css:&quot;margin-top:0px,margin-bottom:0px&quot;)[
-	(align:&quot;==&gt;&quot;)+(box:&quot;=====X&quot;)+(css:&quot;margin-top: 0px;offset-position: top 100px;&quot;)[
-    	(collapse:)[(float-box: &quot;========X&quot;, &quot;Y===========&quot;)+(css: &quot;overflow:hidden&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
-        	(button:&quot;X&quot;)+(css: &quot;border:1px&quot;)+(color:black)+(hover-style: (color:white))(link-goto:&quot;X&quot;, &quot;Computer&quot;)
-        ]
-        ]]
-(for: each _program, ...$allPrograms)[
-
-(if:_program&#39;s &quot;Purchasable&quot; is true and $downloads does not contain _program)[
-(print:_program&#39;s &quot;Name&quot;)
+]</tw-passagedata><tw-passagedata pid="9" name="Darknet Shop" tags="" position="275,450" size="100,100">{
+&lt;h2&gt;Zero Day Market&lt;/h2&gt;
+&lt;br&gt;
+&lt;h4&gt;Exploits, Viruses, and more&lt;/h4&gt;
+&lt;br&gt;
+(for: each _program, ...$purchasablePrograms)[
+(if: $downloads does not contain _program)[
+&lt;h3&gt;(print:_program&#39;s &quot;Name&quot;)&lt;/h3&gt;
 ==||=
-(print: _program&#39;s &quot;Price&quot;)^^CR^^
+(color:red)[(print: _program&#39;s &quot;Price&quot;)^^CR^^]
 (print:_program&#39;s &quot;Description&quot;)
 
 
@@ -277,13 +321,18 @@ Machines:
     
 	(print: &quot;(link: &#39;Purchase &quot; + (text: _program&#39;s Name) + &quot;&quot; + &#39;?&#39; + &quot;&#39;)[(set: $selected to &quot; +&quot;&#39;&quot; + (text: _program&#39;s Name) + &quot;&#39;&quot; + &quot;)
 (display: &quot; + &quot;&#39;Purchase Confirmation&#39;&quot; + &quot;)(show: ?purchaseConfirmation)]&quot;)
+	(if: _program is $EnhancedICEPick)[
+     	(set: $hackableSites to it + (a: &quot;Newspaper Battle&quot;, &quot;TEC Studios Battle&quot;, &quot;SecCo Battle&quot;, &quot;C2 Battle&quot;, &quot;C3 Battle&quot;, &quot;C1 Battle&quot;))
+    ]
 ]
-
+&lt;br&gt;
 (else:)[Insufficient Funds]
-]]]
-]]]
+]]
+&lt;br&gt;
+]
+]]
 
-
+}
 
 
 
@@ -303,7 +352,7 @@ Machines:
 (button:)[
 [[Employment]]]
 
-]]</tw-passagedata><tw-passagedata pid="12" name="Downloads" tags="" position="225,50" size="100,100">(float-box:&quot;X&quot;,&quot;Y&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(css:&quot;margin-top:0px,margin-bottom:0px&quot;)[
+]]</tw-passagedata><tw-passagedata pid="12" name="Downloads" tags="" position="1925,925" size="100,100">(float-box:&quot;X&quot;,&quot;Y&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(css:&quot;margin-top:0px,margin-bottom:0px&quot;)[
 	(align:&quot;==&gt;&quot;)+(box:&quot;=====X&quot;)+(css:&quot;margin-top: 0px;offset-position: top 100px;&quot;)[
     	(collapse:)[(float-box: &quot;========X&quot;, &quot;Y===========&quot;)+(css: &quot;overflow:hidden&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
         	(button:&quot;X&quot;)+(css: &quot;border:1px&quot;)+(color:black)+(hover-style: (color:white))(link-goto:&quot;X&quot;, &quot;Computer&quot;)
@@ -394,7 +443,8 @@ GUNS&quot;, &quot;Sent&quot;, false, &quot;Read&quot;, false))
 [[Resume]]
 
 [[Documents]]
-]</tw-passagedata><tw-passagedata pid="16" name="Enemy Turn" tags="" position="100,300" size="100,100">(hook:&quot;enemyTurn&quot;)[(collapse:)[
+]</tw-passagedata><tw-passagedata pid="16" name="Enemy Turn" tags="" position="1800,1175" size="100,100">(hook:&quot;enemyTurn&quot;)[(collapse:)[
+
 
 &lt;!-- Poison Check --&gt;
 	(if: $enemy&#39;s &quot;Poisoned&quot; is true)[
@@ -413,10 +463,12 @@ GUNS&quot;, &quot;Sent&quot;, false, &quot;Read&quot;, false))
 (if:$playerICE &lt;1)[
 (set:$damage to &quot;Damage&quot; of $enemyAttack)
 (if: (random:1,20) &gt;19)[
-	(set: $damage to it*(random:1,2))
+	(set: $damage to it*2)
 ]
 (set:$playerHealth to it - $damage)]
-
+(else:)[
+	(set: $damage to &quot;Damage&quot; of $enemyAttack/10)
+]
 (if: $enemyAttack&#39;s Glitchery is true)[
 	(set: $playerStat&#39;s Glitched to true)
 ]
@@ -424,16 +476,15 @@ GUNS&quot;, &quot;Sent&quot;, false, &quot;Read&quot;, false))
 (else-if: $enemyAttack&#39;s Poison is true)[
 	(set: $playerStat&#39;s Poisoned to true)
     Your computer has been infected by your opponent&#39;s (print:$enemyAttack&#39;s &quot;Name&quot;)!
-    (button:)[(link: &quot;Oh no!&quot;)[(set:$log to &quot;you&quot;)(rerun:?Battle)
-    ]]
 ]
                 &lt;!-- Heal --&gt;
-                (if:_download&#39;s &quot;Heal&quot; is &gt; 0)[
-                    (set:$healing to _download&#39;s &quot;Heal&quot;/2)
-                    (if: $allEnemysCores contains $sapphireCore)[
+                (if:$enemyAttack&#39;s &quot;Heal&quot; is &gt; 0)[
+                    (set:$healing to$enemyAttack&#39;s &quot;Heal&quot;/2)
+                    (if: $allEnemyCores contains $sapphireCore)[
                         (set: $healing to it*2)
                     ]
                 	(set:$enemyrHealth to it + $healing)
+                    $enemyName restored $healing system health.
                     (if: $enemyHealth &gt; $enemyMaxHealth)[
                     	(set: $enemyHealth to $enemyMaxHealth)
                      ]
@@ -441,13 +492,14 @@ GUNS&quot;, &quot;Sent&quot;, false, &quot;Read&quot;, false))
                 ] 
 
                 &lt;!-- ICE Healing --&gt;
-                (if:_download&#39;s &quot;ICE Heal&quot; is &gt;0)[
-                (set:$ICEHealing to _download&#39;s &quot;ICE Heal&quot;)
-                    (if: $allEnemysCores contains $sapphireCore)[
+                (if:$enemyAttack&#39;s &quot;ICE Heal&quot; is &gt;0)[
+                (set:$ICEHealing to $enemyAttack&#39;s &quot;ICE Heal&quot;)
+                    (if: $allEnemyCores contains $sapphireCore)[
                         (set: $ICEHealing to it*2)
                     ]
                 (set:$enemyICE to it + $ICEHealing)
                 (set:$ICEHealCheck to true)
+                $enemyName restored $ICEHealing integrity to it&#39;s Intrusion Countermeasure Electronics.
                 ]
 
 (else:)[
@@ -475,32 +527,27 @@ $enemyAttackName dealt $ICEDamage damage to your ICE!
 (link:&quot;Next&quot;)[
 (set:$log to &quot;you&quot;)
 (rerun:?Battle)]
-]]]]]</tw-passagedata><tw-passagedata pid="17" name="Enhanced ICEPick" tags="" position="250,600" size="100,100">(if:$playerMoney is &gt;2499)[
+]]]]]</tw-passagedata><tw-passagedata pid="17" name="Exit" tags="" position="600,425" size="100,100">There is no escape 
 
-Purchase the ICEPick?
-[[Darknet Shop]]
-
-[[Browser]]]
-(else:)[
-[[Darknet Shop]]
-
-[[Browser]]]</tw-passagedata><tw-passagedata pid="18" name="Exit" tags="" position="600,425" size="100,100">There is no escape 
-
-[[Legends of Trii&#39;el Kore]]</tw-passagedata><tw-passagedata pid="19" name="Free Pizza for Life" tags="" position="375,1400" size="100,100">&lt;div&gt;
+[[Legends of Trii&#39;el Kore]]</tw-passagedata><tw-passagedata pid="18" name="Free Pizza for Life" tags="" position="375,1400" size="100,100">&lt;div&gt;
 (box: &quot;X&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:cyan)+(b4r-size: 20,20,30,30)[
 You&#39;ve ordered a free pizza! Expect your prize in 30 minutes or less.
 
-
+{
 (set: $playerDataFragments to it + 4)
 (set: $level1Complete to true)
 (set:$playerMoney to $playerMoney+5000)
 (set: $unsentEmails&#39;s 1st&#39;s &quot;Sent&quot; to true)
+(set:$allPrograms to it - (a:$EnhancedICEPick))
 (set: $EnhancedICEPick&#39;s &quot;Purchasable&quot; to true)
-(set:$botnet to it + (a:&quot;Pizza Planet&quot;))
+(set:$allPrograms to it + (a:$EnhancedICEPick))
+(set: $purchasablePrograms to it + (a:$EnhancedICEPick))
+(set:$botnet to it + (a:$MamaMiaServer))
+}
 (button:)[
 [[Desktop -&gt;Computer]] ]
 ]
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="20" name="Game Over" tags="" position="225,300" size="100,100">(box:&quot;X&quot;)+(color:red)[
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="19" name="Game Over" tags="" position="1925,1175" size="100,100">(box:&quot;X&quot;)+(color:red)[
 &lt;h1&gt;
 (hook: &quot;gameOverText&quot;)[
 (set: $typewriterText to &quot;Game Over.&quot;)
@@ -559,10 +606,13 @@ You&#39;ve ordered a free pizza! Expect your prize in 30 minutes or less.
 	(if: (saved-games:) contains &quot;Slot A&quot;)[
   	
 Saved to Slot A!
+(set: $playerHealth to $playerMaxHealth)
+(set: $playerICE to $playerMaxICE)
 ]]]]
-(button:)[(link-goto:&quot;Main Menu&quot;,&quot;Legends of Trii&#39;el Kore&quot;)]]]</tw-passagedata><tw-passagedata pid="21" name="Graduation Photos" tags="" position="1550,425" size="100,100">There are photos from Kore&#39;s graduation.
+(button:)[(link-goto:&quot;Main Menu&quot;,&quot;Legends of Trii&#39;el Kore&quot;)[(set: $playerHealth to $playerMaxHealth)]
+(set: $playerICE to $playerMaxICE)]]]</tw-passagedata><tw-passagedata pid="20" name="Graduation Photos" tags="" position="1350,175" size="100,100">There are photos from Kore&#39;s graduation.
 
-[[Pictures]]</tw-passagedata><tw-passagedata pid="22" name="Hack Newspaper" tags="" position="500,875" size="100,100">&lt;!-- Set the text to show --&gt;
+[[Pictures]]</tw-passagedata><tw-passagedata pid="21" name="Hack Newspaper" tags="" position="500,875" size="100,100">&lt;!-- Set the text to show --&gt;
 (set: $typewriterText to &quot;initializing...
 
 ICEBREAKER 2.2.25.111f
@@ -596,12 +646,12 @@ What would you like to do?
 }
 
 (live:4s)[
-[[Hack the Newspaper]]]</tw-passagedata><tw-passagedata pid="23" name="Hack a Stranger" tags="" position="1250,750" size="100,100">(collapse:)[
+[[Hack the Newspaper]]]</tw-passagedata><tw-passagedata pid="22" name="Hack a Stranger" tags="" position="1250,750" size="100,100">(collapse:)[
 (display:&quot;Random Encounter&quot;)
 (set:$enemy to $randomEncounter)
 (set:$winResult to (go-to:&quot;Stranger Hacked&quot;))
 ]
-(display:&quot;Battle&quot;)</tw-passagedata><tw-passagedata pid="24" name="Hack the Newspaper" tags="" position="500,1025" size="100,100">(set: $nespaperHacked to 0)
+(display:&quot;Battle&quot;)</tw-passagedata><tw-passagedata pid="23" name="Hack the Newspaper" tags="" position="500,1025" size="100,100">(set: $nespaperHacked to 0)
 &lt;!-- Set the text to show --&gt;
 (set: $clearText to 0)
 (if:$clearText &lt;1)[ 
@@ -643,116 +693,36 @@ Connection forced with Unknown Netrunner.
       ]
     ]
   ]
-}</tw-passagedata><tw-passagedata pid="25" name="Hacking Options" tags="" position="100,175" size="100,100">(collapse:)[
+}</tw-passagedata><tw-passagedata pid="24" name="Hacking Options" tags="" position="1800,1050" size="100,100">(collapse:)[
 	(set: $usedRAM to 0)
     (if: $outbreakActive is true)[
-    (set: $usedRAM to 8)
+    	(set: $usedRAM to 8)
     ]
 	(hook: &quot;Hack&quot;)[
 		&lt;!-- Programs --&gt; 
-        
-		(for: each _download, ...$downloads)[
-    		(button:)[
-			(link:&quot;Name&quot; of _download)[
-            	(set: $usedRAM to it +8)
-                (if: $availableRAM &gt;= 0)[
-				(set:$damage to _download&#39;s &quot;Damage&quot;)
-            	(if: $allKoresCores contains $rubyCore)[
-                	(set: $allRubyCores to (find: $_rubies where _rubies is $rubyCore ...$allKoresCores)&#39;s length)
-            		(set: $damage to it*1.25*$allRubyCores+it)]
-                (set: _criticalCheck to (random: 1,20))
-                (if: _criticalCheck is 20)[
-                	(set: $damage to it*2)
-                ]
-                (if: $enemyICE &lt;1)[
-                	(set: $damage to it*15*$allRubyCores+it)
-                    ]
-				(set:$ICEDamage to _download&#39;s &quot;ICE Damage&quot;)
-            	(if: $allKoresCores contains $diamondCore)[
-            		(set: $ICEDamage to it*1.25)
-                    ]
-                (if: (random: 1,20) is 20)[
-                	(set: $ICEDamage to it * 2)
-                ]
-                &lt;!-- Poison --&gt;
-                (if: _download&#39;s &quot;Poison&quot; is true)[
-                    (set: _poisonCheck to (random: 1,4))
-                    (if: _poisonCheck is 4)[
-                        (set: $enemy&#39;s &quot;Poisoned&quot; to true)
-                    ]
-                    (if: _poisonCheck is 3 and $allKoresCores contains $obsidianCore)[
-                    	(set: $enemy&#39;s &quot;Poisoned&quot; to true)
-                    ]
-                    (set: $log to &quot;enemy&quot;)
-                    (rerun: ?Battle)
-                ]
-                &lt;!-- Heal --&gt;
-                (if:_download&#39;s &quot;Heal&quot; is &gt; 0)[
-                    (set:$healing to _download&#39;s &quot;Heal&quot;/2)
-                    (if: $allKoresCores contains $sapphireCore)[
-                        (set: $healing to it*2)
-                    ]
-                	(set:$playerHealth to it + $healing)
-                    (if: $playerHealth &gt; $playerMaxHealth)[
-                    	(set: $playerHealth to $playerMaxHealth)
-                     ]
-                	(set:$healCheck to true)
-                ] 
+    	(if: $enemy&#39;s &quot;Poisoned&quot; is false)[
 
-                &lt;!-- ICE Healing --&gt;
-                (if:_download&#39;s &quot;ICE Heal&quot; is &gt;0)[
-                (set:$ICEHealing to _download&#39;s &quot;ICE Heal&quot;)
-                    (if: $allKoresCores contains $sapphireCore)[
-                        (set: $ICEHealing to it*2)
-                    ]
-                (set:$playerICE to it + $ICEHealing)
-                (set:$ICEHealCheck to true)
+			(for: each _download, ...$downloads)[
+				(display: &quot;Hack Button&quot;)
                 ]
-
-                &lt;!-- ICE Damage--&gt;
-                (if: _download&#39;s &quot;ICE Damage&quot; is &gt; 0)[(set:$ICEDamageChecker to true)]
-                (if:&quot;Poison&quot; of _download is true)[(set:$enemy&#39;s &quot;Poisoned&quot; to true)
-                (set: $outbreakActive to true)
-                You&#39;ve successfully installed poison.exe on $enemyName&#39;s computer]
-                (set:$enemyHealth to it - $damage)
-                (if:$enemyICE &gt;0)[
-                    (set:$enemyICE to it - $ICEDamage)]
-                (if:$healCheck is true)[
-                    (print:&quot;Name&quot; of _download+&quot;heals you for &quot; + $healing + &quot;points.&quot;)]
-                    (if:$ICEHealCheck is true)[
-                        (print:&quot;Name&quot; of _download +&quot; repairs your ICE by &quot; + $ICEHealing + &quot;points.&quot;)]
-                (if:$damage &gt;0)[(print:&quot;Name&quot; of _download) deals $damage damage to $enemyName&#39;s machine.]
-                (if:$ICEDamageChecker is true)[$enemyName&#39;s ICE lost $ICEDamage integrity.]
-                (set: $damageCheck to false)
-				(set: $ICEDamageCheck to false)
-				(set: $healCheck to false)
-				(set: $ICEHealCheck to false)
-
-                        (if:$enemyHealth &lt;1)[
-                        (set: $outbreakActive to false)
-                        $winResult]
-                        
-                    ]
-                    (else:)[ Not enough RAM]
-                ]
-            ]
         ]
+        (else:)[
+        	(for: each _download where _download&#39;s &quot;Name&quot; is not &quot;Outbreak.dll&quot;, ...$downloads)[
+				(display: &quot;Hack Button&quot;)
+        	]
         ]
-        
-                                    (button:)[(link: &quot;Next&quot;)[
-                            (set:$log to &quot;enemy&quot;)
-                            (rerun:?Battle)]]
+    ]
+
                        
         
     ]
-</tw-passagedata><tw-passagedata pid="26" name="Header" tags="header" position="600,50" size="100,100">(collapse:)[
-(display: &quot;Programs&quot;)
-(set: $allPrograms to (a:$ICEPick))
-(set: $allPrograms to it + (a:$EnhancedICEPick))
-(set: $allPrograms to it+ (a:$poison))
-(set:$allPrograms to it + (a:$repairICE)) 
-(set:$allPrograms to it + (a:$glitchery))
-(set:$allPrograms to it + (a:$DDOS))
+</tw-passagedata><tw-passagedata pid="25" name="Header" tags="header" position="600,50" size="100,100">(collapse:)[
+(set: $purchasablePrograms to (a:))
+(for: each _program, ...$allPrograms)[
+	(if: _program&#39;s &quot;Purchasable&quot; is true)[
+    	(set: $purchasablePrograms to it + (a:_program))
+    ]
+]
 
 (set:$botnetCount to 0)
 (for: each _machine, ...$botnet)[(set:$botnetCount to it+1)]
@@ -775,13 +745,13 @@ Connection forced with Unknown Netrunner.
         ]
     ]
     (set: $availableRAM to $RAM - $usedRAM)
-]</tw-passagedata><tw-passagedata pid="27" name="Home" tags="" position="900,200" size="100,100">(button:)[[Boot PC -&gt;Computer]]
+]</tw-passagedata><tw-passagedata pid="26" name="Home" tags="" position="900,200" size="100,100">(button:)[[Boot PC -&gt;Computer]]
 
 (button:)[[Go to bed -&gt;Bed]]
 
 (button:)[[Go to Computer Shop -&gt;Computer Shop]] 
 
-(button:)[[Workbench -&gt;Bench]] </tw-passagedata><tw-passagedata pid="28" name="IDE" tags="" position="1500,50" size="100,100">(float-box:&quot;X&quot;,&quot;Y&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(css:&quot;margin-top:0px,margin-bottom:0px&quot;)[
+(button:)[[Workbench -&gt;Bench]] </tw-passagedata><tw-passagedata pid="27" name="IDE" tags="" position="975,550" size="100,100">(float-box:&quot;X&quot;,&quot;Y&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(css:&quot;margin-top:0px,margin-bottom:0px&quot;)[
 	(align:&quot;==&gt;&quot;)+(box:&quot;=====X&quot;)+(css:&quot;margin-top: 0px;offset-position: top 100px;&quot;)[
     	(collapse:)[(float-box: &quot;======================XXX=&quot;, &quot;=YY=================&quot;)+(css: &quot;overflow:hidden; padding:0.1px&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
         	(hook: &quot;exitButton&quot;)[
@@ -805,7 +775,7 @@ Connection forced with Unknown Netrunner.
         ]
     (else:)[
 	There&#39;s some broken code here.
-]]]</tw-passagedata><tw-passagedata pid="29" name="Legends of Trii&#39;el Kore" tags="" position="475,300" size="100,100">&lt;h1&gt;(set: $typewriterText to &quot;Legends of Trii&#39;el:
+]]]</tw-passagedata><tw-passagedata pid="28" name="Legends of Trii&#39;el Kore" tags="" position="100,0" size="100,100">&lt;h1&gt;(set: $typewriterText to &quot;Legends of Trii&#39;el:
 Kore&quot;)
 {
   &lt;!-- Create a variable to track the position within the $typewriterText string --&gt;
@@ -835,35 +805,17 @@ Kore&quot;)
 
 
 
-(t8n-depart:&quot;dissolve&quot;)+(t8n-arrive:&quot;dissolve&quot;)+(button:)[[Press Start-&gt;Main Menu]]]</tw-passagedata><tw-passagedata pid="30" name="Level 1" tags="" position="375,1150" size="100,100">(collapse:)[
+(t8n-depart:&quot;dissolve&quot;)+(t8n-arrive:&quot;dissolve&quot;)+(button:)[[Press Start-&gt;Main Menu]]]</tw-passagedata><tw-passagedata pid="29" name="Level 1" tags="" position="375,1150" size="100,100">(collapse:)[
 (display:&quot;Mama Mia&quot;)
 (set:$enemyName to &quot;Mama Mia&quot;)
 (set:$enemy to $MamaMia)
 (set:$winResult to (go-to:&quot;Mama Mias Hacked&quot;))
+(set: $enemyPC to $MamaMiaServer)
+(set: $hackSelection to 0)
 ]
-(display:&quot;Battle&quot;)</tw-passagedata><tw-passagedata pid="31" name="Un&#39;taeko Daily News" tags="" position="500,750" size="100,100">(float-box:&quot;X&quot;,&quot;Y&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(css:&quot;margin-top:0.1px,margin-bottom:0.1px&quot;)[
-	(align:&quot;==&gt;&quot;)+(box:&quot;=====X&quot;)+(css:&quot;margin-top: 0.1px;offset-position: top 100px;padding:0.1px;&quot;)[
-    	(collapse:)[(float-box: &quot;========X&quot;, &quot;Y===========&quot;)+(css: &quot;overflow:hidden&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
-        	(button:&quot;X&quot;)+(css: &quot;border:1px&quot;)+(color:black)+(hover-style: (color:white))(link-goto:&quot;X&quot;, &quot;Computer&quot;)
-	        ]
-        ]{
-	(box:&quot;X=====&quot;)+(css: &quot;padding:0.1px; margin:0.1px&quot;)[
-        (float-box: &quot;X========&quot;, &quot;Y===========&quot;)+(css: &quot;overflow:hidden;&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
-        	(button:&quot;X&quot;)+(css: &quot;border:1px&quot;)+(color:black)+(hover-style: (color:white))(link-goto:&quot;&lt;-&quot;, &quot;Browser&quot;)
-        ]
-    ]
-    &lt;style&gt;
-    .article {
-  border: 5px outset purple;
-  background-color: black;
-  text-align: center;
-  padding: 0.1px;
-  margin: 0.1px;
-  }
-  &lt;/style&gt;
-}]
-(box:&quot;=XXX=&quot;)[
-&lt;div class=&quot;article&quot;&gt;
+(display:&quot;Battle&quot;)
+
+</tw-passagedata><tw-passagedata pid="30" name="Un&#39;taeko Daily News" tags="" position="500,750" size="100,100">(box:&quot;=XXX=&quot;)[
 &lt;h2&gt;Un&#39;taeko Daily News&lt;/h2&gt;
 &lt;/div&gt;
 ]
@@ -925,27 +877,16 @@ Un&#39;taeko Daily News is a member of the Corporation 2 family
 
 &lt;/div&gt;
 
-(if:$haveEnhancedICEPick is true)[
-Hack the Newspaper?
+(set: $hackSelection to &quot;Hack Newspaper&quot;)
 
-(button:)[[Hack Newspaper]]
-]
-]
-
-</tw-passagedata><tw-passagedata pid="32" name="TEC Studios" tags="" position="625,750" size="100,100">Welcome to TEC Studios! Our website is currently under construction.
-Please don&#39;t hack us! :)
-
+</tw-passagedata><tw-passagedata pid="31" name="TEC Studios" tags="" position="625,750" size="100,100">|==|
+&lt;h1&gt;TEC Studios&lt;/h1&gt;
 
 
 The Entertainment Company is a Corporation 2 Subsidiary and all rights belong to Corporation 2
 
-(if:$haveEnhancedICEPick is true)[
-Hack the Newspaper?
-
-(button:)[[Hack TEC Studios]]
-]
-]
-[[Browser]]</tw-passagedata><tw-passagedata pid="33" name="SecCo" tags="" position="750,750" size="100,100">&lt;h2&gt; SecCo &lt;/h2&gt;
+(set: $hackSelection to &quot;Hack TEC Studios&quot;)
+</tw-passagedata><tw-passagedata pid="32" name="SecCo" tags="" position="750,750" size="100,100">&lt;h2&gt; SecCo &lt;/h2&gt;
 
 Welcome to SecCo, your first stop for all your security needs. 
 
@@ -960,56 +901,31 @@ Already have one?
 Login to access your home security system.
 
 
-(if:$haveEnhancedICEPick is true)[
-Hack SecCo Server?
-
-(button:)[[Hack SecCo]]
-]
-]
-
-[[Browser]]</tw-passagedata><tw-passagedata pid="34" name="Corporation 2" tags="" position="875,750" size="100,100">Welcome to the Corporation 2 Intranet
+(set: $hackSelection to &quot;Hack SecCo&quot;)
+</tw-passagedata><tw-passagedata pid="33" name="Corporation 2" tags="" position="875,750" size="100,100">&lt;h2&gt;Welcome to the Corporation 2 Intranet&lt;/h2&gt;
 
 Here you can access your records as a citizen of Un&#39;taeko, register a vehicle, update your drivers license, or request a travel permit.
 
 Login to get started.
 
-(if:$haveEnhancedICEPick is true)[
-Hack Corporation 2?
-
-(button:)[[Hack C2]]
-]
-
-
-[[Browser]]</tw-passagedata><tw-passagedata pid="35" name="Corporation 3" tags="" position="1000,750" size="100,100">Welcome to the Corporation 3 Intranet
+(set: $hackSelection to &quot;Hack C2&quot;)
+</tw-passagedata><tw-passagedata pid="34" name="Corporation 3" tags="" position="1000,750" size="100,100">&lt;h2&gt;Welcome to the Corporation 3 Intranet&lt;/h2&gt;
 
 Here you can access your records as a citizen of Jorto, register a vehicle, update your drivers license, or request a travel permit.
 
 Login to get started.
 
-(if:$haveEnhancedICEPick is true)[
-Hack Corporation 3?
-
-(button:)[[Hack C3]]
-]
-
-
-[[Browser]]</tw-passagedata><tw-passagedata pid="36" name="Corporation 1" tags="" position="1125,750" size="100,100">Welcome to the Corporation 1 Intranet
+(set: $hackSelection to &quot;Hack C3&quot;)
+</tw-passagedata><tw-passagedata pid="35" name="Corporation 1" tags="" position="1125,750" size="100,100">&lt;h2&gt;Welcome to the Corporation 1 Intranet&lt;/h2&gt;
 
 Here you can access your records as a citizen of Bae&#39;el, register a vehicle, update your drivers license, or request a travel permit.
 
 Login to get started.
 
-
-(if:$haveEnhancedICEPick is true)[
-Hack Corporation 1?
-
-(button:)[[Hack C1]]
-]
-
-
-[[Browser]]</tw-passagedata><tw-passagedata pid="37" name="Load Game" tags="" position="750,325" size="100,100">{(if: (saved-games: ) contains &quot;Slot A&quot;)[
-  (link: &quot;Load game&quot;)[(load-game:&quot;Slot A&quot;)]
-]}</tw-passagedata><tw-passagedata pid="38" name="Log" tags="" position="225,175" size="100,100">(hook:&quot;Log&quot;)[(collapse:)[
+(set: $hackSelection to &quot;Hack C1&quot;)
+</tw-passagedata><tw-passagedata pid="36" name="Load Game" tags="" position="750,325" size="100,100">{(if: (saved-games: ) contains &quot;Slot A&quot;)[
+  (link: &quot;Load game&quot;)[(load-game:&quot;Slot A&quot;)(go-to:&quot;Home&quot;)]
+]}</tw-passagedata><tw-passagedata pid="37" name="Log" tags="" position="1925,1050" size="100,100">(hook:&quot;Log&quot;)[(collapse:)[
 	(box:&quot;X&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(b4r-size:10,10,15,15)[
 		(if:$log is &quot;you&quot;)[
 			(if:$playerStat&#39;s &quot;Poisoned&quot; is true or $playerStat&#39;s &quot;Glitched&quot; is true)[
@@ -1017,7 +933,44 @@ Hack Corporation 1?
             	]
     
 		(else:)[
-			(button:)+(box:&quot;X==&quot;)[
+        (if: $availableBots is not (a:))[
+        =|=
+        	(button:)[
+            	(link: &quot;Deploy Bot&quot;)[
+                	(set: $botActive to true)
+                    (for: each _bot, ...$availableBots)[
+                    	(button:)[(link: _bot&#39;s &quot;Name&quot;)[
+                    		(set: $activeBots to it + (a:_bot))
+                            (set: $availableBots to it - (a:_bot))
+                            (if: $activeBots contains 0)[
+                            	(set: $activeBots to it - (a:0))
+                            ]
+                    ]]
+                	]
+                ]
+            ]]
+           (if: $botActive is true)[
+           		(for: each _bot, ...$activeBots)[
+                	(set: _rubyCoreCount to 0)
+                    (set: _cores to (a:_bot&#39;s &quot;Core1&quot;,_bot&#39;s &quot;Core2&quot;,_bot&#39;s &quot;Core3&quot;,_bot&#39;s &quot;Core4&quot;,_bot&#39;s &quot;Core5&quot;,_bot&#39;s &quot;Core6&quot;))
+                    (if: _cores contains &quot;None&quot;)[
+                    	(set: _cores to it - (a:&quot;None&quot;))
+                    ]
+                    (for: each _core where _core is $rubyCore, _cores)[
+                    	(set: _rubyCoreCount to it + 1)
+                    ]
+                	(set: _coreBonus to _rubyCoreCount)
+                	(set: $botDamage to it + (random: 5, 10)*(random:1,2)*(_coreBonus+1))
+                    (if: $enemyICE &gt;= 1)[
+                    	(set: $enemyICE to it - $botDamage)]
+                    (else:)[
+                    (set: $enemyHealth to it - $botDamage)
+                    ]
+                ]
+                (print: (str:$enemyName)+&quot; took &quot; + (str:$botDamage) + &quot; damage from your botnet!&quot;)
+           ]
+           =|=
+			(button:)[
 				(link:&quot;Hack&quot;)[
 					(set:$log to &quot;hacking&quot;)
 					(rerun:?Battle)
@@ -1026,7 +979,7 @@ Hack Corporation 1?
         	]
     	]
 		(else-if:$log is &quot;enemy&quot;)[
-        (button:)+(box:&quot;X==&quot;)[
+        (button:)+(box:&quot;X&quot;)[
         	(link: &quot;Enemies Turn&quot;)[
     		(display:&quot;Enemy Turn&quot;)
             ]
@@ -1034,10 +987,13 @@ Hack Corporation 1?
 		(else-if:$log is &quot;hacking&quot;)[(display:&quot;Hacking Options&quot;)]
 		]
 	]
-]</tw-passagedata><tw-passagedata pid="39" name="Main Menu" tags="" position="600,300" size="100,100">(link:&quot;New Game&quot;,(button:))[(go-to:&quot;New Game&quot;)]
+]</tw-passagedata><tw-passagedata pid="38" name="Main Menu" tags="" position="600,300" size="100,100">(button:)[(link-goto:&quot;New Game&quot;)]
 
-(link:&quot;Load Game&quot;, (button:))[(go-to:&quot;Load Game&quot;)]</tw-passagedata><tw-passagedata pid="40" name="Mama Mia" tags="" position="375,1525" size="100,100">(hook:&quot;Mama Mia&quot;)[(set: $MamaMiasAttacks to (ds: $ICEPick))
-(set: $MamaMia to (dm:&quot;Max Health&quot;,100, &quot;Health&quot;, 100, &quot;Max ICE&quot;, 100, &quot;ICE&quot;, 100, &quot;Bandwidth&quot;, 4, &quot;Attack&quot;,10, &quot;Attacks&quot;, $MamaMiasAttacks,&quot;Poisoned&quot;, false, &quot;Glitched&quot;, false))]</tw-passagedata><tw-passagedata pid="41" name="Mama Mias Hacked" tags="" position="375,1275" size="100,100">(set: $pizzaPlaceHacked to true)
+(button:)[(link-goto:&quot;Load Game&quot;)]</tw-passagedata><tw-passagedata pid="39" name="Mama Mia" tags="" position="375,1525" size="100,100">(hook:&quot;Mama Mia&quot;)[(collapse:)[(set: $MamaMiasAttacks to (ds: $bruteForce,$ICEPick))
+(set: $MamaMia to (dm:&quot;Name&quot;, &quot;Mama Mia Runner&quot;,&quot;Max Health&quot;,100, &quot;Health&quot;, 100, &quot;Max ICE&quot;, 100, &quot;ICE&quot;, 100, &quot;Bandwidth&quot;, 4, &quot;Attack&quot;,10, &quot;Attacks&quot;, $MamaMiasAttacks,&quot;Poisoned&quot;, false, &quot;Glitched&quot;, false))
+
+(set: $MamaMiaServer to (dm: &quot;Name&quot;, &quot;Mama Mias Restaurants Ltd&quot;,&quot;Motherboard&quot;, $basicMotherboard, &quot;Core1&quot;, $emeraldCore, &quot;Core2&quot;, $sapphireCore, &quot;Core3&quot;, &quot;None&quot;, &quot;Core4&quot;, &quot;None&quot;, &quot;Core5&quot;, &quot;None&quot;, &quot;Core6&quot;, &quot;None&quot;, &quot;RAM Slots&quot;, 2,&quot;RAM Slot 1&quot;, $8GBRAM,&quot;RAM Slot 2&quot;, $8GBRAM, &quot;RAM Slot 3&quot;, &quot;None&quot;, &quot;RAM Slot 4&quot;, &quot;None&quot;, &quot;RAM Slot 5&quot;, &quot;None&quot;, &quot;RAM Slot 6&quot;, &quot;None&quot;, &quot;RAM Slot 7&quot;, &quot;None&quot;, &quot;RAM Slot 8&quot;, &quot;None&quot;, &quot;Cooling System&quot;, $basicCooler, &quot;Network Card&quot;, $basicNetworkCard))
+]]</tw-passagedata><tw-passagedata pid="40" name="Mama Mias Hacked" tags="" position="375,1275" size="100,100">(set: $pizzaPlaceHacked to true)
 &lt;div&gt;
 (box: &quot;X&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[
 Welcome to MAMA MIA&#39;S!
@@ -1047,23 +1003,7 @@ You have 999999999999999999999999999999999 free pizzas!
 Would you like to redeem a free pizza?
 (button:)[
 [[Redeem -&gt;Free Pizza for Life]]]]
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="42" name="Mama Mia&#39;s" tags="" position="375,750" size="100,100">(collapse:)[(css: &quot;z-index:0;&quot;)+(background:black)+(box:&quot;X&quot;)[
-(css: &quot;z-index:0; background-color: margin-top:0px; margin-bottom:0px&quot;)+(float-box:&quot;X&quot;,&quot;Y&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[]
-	(align:&quot;==&gt;&quot;)+(box:&quot;=====X&quot;)+(css:&quot;margin-top: 0px;offset-position: top 100px;&quot;)[
-    	(float-box: &quot;========X&quot;, &quot;YY===========&quot;)+(css: &quot;overflow:hidden&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
-        	(button:&quot;X&quot;)+(css: &quot;border:1px&quot;)+(color:black)+(hover-style: (color:white))(link-goto:&quot;X&quot;, &quot;Computer&quot;)
-        ]
-        ]
-	(box:&quot;X=====&quot;)[
-        (float-box: &quot;X========&quot;, &quot;YY===========&quot;)+(css: &quot;overflow:hidden;&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
-        	(button:&quot;X&quot;)+(css: &quot;border:1px&quot;)+(color:black)+(hover-style: (color:white))(link-goto:&quot;&lt;-&quot;, &quot;Browser&quot;)
-        ]]
-(css: &quot;z-index: 3; padding:0.1px;margin-top:0.1px;margin-bottom:0.1px;&quot;)+(float-box:&quot;=XXX=&quot;,&quot;=YYY===================&quot;)[
-(button:)+(color:(mix: 0.5, white, 0.5, #00f))
-[[Hack -&gt;Level 1]]
-]]
-(css: &quot;z-index:0;margin-top:1px;padding:0.1px;&quot;)+(box:&quot;X&quot;)[
-|==|
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="41" name="Mama Mia&#39;s" tags="" position="375,750" size="100,100">|==|
 =&gt;&lt;=
 &lt;h2&gt;
 MAMA MIA&#39;S PIZZERIA
@@ -1108,9 +1048,9 @@ Ground Meat^^TM^^
 &lt;br&gt;
 &lt;br&gt;
 
+(set: $hackSelection to &quot;Level 1&quot;)
 
-Copyright 2035 Mama Mia&#39;s Pizzeria, a Corporation 2 Company
-]]</tw-passagedata><tw-passagedata pid="43" name="Music" tags="" position="1500,175" size="100,100">(float-box:&quot;X&quot;,&quot;Y&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(css:&quot;margin-top:0px,margin-bottom:0px&quot;)[
+Copyright 2035 Mama Mia&#39;s Pizzeria, a Corporation 2 Company</tw-passagedata><tw-passagedata pid="42" name="Music" tags="" position="1450,325" size="100,100">(float-box:&quot;X&quot;,&quot;Y&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(css:&quot;margin-top:0px,margin-bottom:0px&quot;)[
 	(align:&quot;==&gt;&quot;)+(box:&quot;=====X&quot;)+(css:&quot;margin-top: 0px;offset-position: top 100px;&quot;)[
     	(collapse:)[(float-box: &quot;========X&quot;, &quot;Y===========&quot;)+(css: &quot;overflow:hidden&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
         	(button:&quot;X&quot;)+(css: &quot;border:1px&quot;)+(color:black)+(hover-style: (color:white))(link-goto:&quot;X&quot;, &quot;Computer&quot;)
@@ -1120,8 +1060,11 @@ Copyright 2035 Mama Mia&#39;s Pizzeria, a Corporation 2 Company
 There are some various music files here. They&#39;re mostly alternative rock and edm.
 &lt;!-- Would like to make it possible to unlock various tracks through gameplay to be played in a media player in game--&gt;
 
-]</tw-passagedata><tw-passagedata pid="44" name="New Game" tags="" position="750,200" size="100,100">(set: $typewriterText to &quot;Your name is Kore. You&#39;re a Corporation 2 employee, and you&#39;ve just come home early from a stressful day of designing casino games. In your spare time, you enjoy hacking, and today you&#39;ve got all day to spend diving the net for interesting data.&quot;)
+]</tw-passagedata><tw-passagedata pid="43" name="New Game" tags="" position="125,150" size="100,100">(set: $typewriterText to &quot;Your name is Kore. You&#39;re a Corporation 2 employee, and you&#39;ve just come home early from a stressful day of designing casino games. In your spare time, you enjoy hacking, and today you&#39;ve got all day to spend diving the net for interesting data.&quot;)
 {
+&lt;!-- Reset Stats --&gt;
+(display:&quot;A) Startup&quot;)
+
   &lt;!-- Create a variable to track the position within the $typewriterText string --&gt;
   (set: $typewriterPos to 1)
 
@@ -1145,13 +1088,15 @@ There are some various music files here. They&#39;re mostly alternative rock and
 }
 (live:4s)[
 (color:purple)+(button:)[[Home]]
-]</tw-passagedata><tw-passagedata pid="45" name="Newspaper Battle" tags="" position="500,1150" size="100,100">(collapse:)[
+]</tw-passagedata><tw-passagedata pid="44" name="Newspaper Battle" tags="" position="500,1150" size="100,100">(collapse:)[
 (display:&quot;Newspaper Runner&quot;)
 (set:$enemyName to &quot;C2News Runner&quot;)
 (set:$enemy to $newsRunner)
 (set:$winResult to (go-to:&quot;Newspaper Battle Won&quot;))
+(set: $enemyPC to $newspaperServer)
+(set: $hackSelection to 0)
 ]
-(display:&quot;Battle&quot;)</tw-passagedata><tw-passagedata pid="46" name="Newspaper Battle Won" tags="" position="500,1400" size="100,100">You hack the Un&#39;taeko Daily News, and discover emails between employees describing an active coverup regarding the recent terrorist attack at the stadium in the Capital.
+(display:&quot;Battle&quot;)</tw-passagedata><tw-passagedata pid="45" name="Newspaper Battle Won" tags="" position="500,1400" size="100,100">You hack the Un&#39;taeko Daily News, and discover emails between employees describing an active coverup regarding the recent terrorist attack at the stadium in the Capital.
 
 Would you like to vandalize the newspaper?
 (button:)[(link: &quot;Vandalize the newspaper&quot;)[(set: $newspaperVandalized to true)]]
@@ -1161,16 +1106,18 @@ Would you like to vandalize the newspaper?
 (set:$playerMoney to $playerMoney+10000)
 (set: $unsentEmails&#39;s 2&#39;s &quot;Sent&quot; to true)
 (set: $diamondCore&#39;s &quot;Purchasable&quot; to true)
-(set:$botnet to it + (a:&quot;Un&#39;taeko Daily News Server&quot;))
+(set:$botnet to it + (a:$newspaperServer))
 
 [[Browser]] 
-[[Computer]] </tw-passagedata><tw-passagedata pid="47" name="Newspaper Runner" tags="" position="500,1525" size="100,100">(hook:&quot;newspaperRunner&quot;)[(set: $newsRunnerAttacks to (ds: $ICEPick,$poison))
-(set: $newsRunner to (dm:&quot;Max Health&quot;,200, &quot;Health&quot;, 100, &quot;Max ICE&quot;, 100, &quot;ICE&quot;, 100, &quot;Bandwidth&quot;, 4, &quot;Attack&quot;,10, &quot;Attacks&quot;, $newsRunnerAttacks,&quot;Poisoned&quot;, false, &quot;Glitched&quot;, false))]</tw-passagedata><tw-passagedata pid="48" name="Pictures" tags="" position="1650,300" size="100,100">&lt;!-- Need to commission/draw art for these--&gt;
+[[Computer]] </tw-passagedata><tw-passagedata pid="46" name="Newspaper Runner" tags="" position="500,1525" size="100,100">(hook:&quot;newspaperRunner&quot;)[(set: $newsRunnerAttacks to (ds: $bruteForce, $ICEPick,$poison))
+(set: $newsRunner to (dm:&quot;Name&quot;, &quot;Un&#39;taeko News&quot;, &quot;Max Health&quot;,200, &quot;Health&quot;, 100, &quot;Max ICE&quot;, 100, &quot;ICE&quot;, 100, &quot;Bandwidth&quot;, 4, &quot;Attack&quot;,10, &quot;Attacks&quot;, $newsRunnerAttacks,&quot;Poisoned&quot;, false, &quot;Glitched&quot;, false))
+(set: $newspaperServer to (dm: &quot;Name&quot;, &quot;Un&#39;taeko Daily News Inc&quot;, &quot;Motherboard&quot;, $basicMotherboard, &quot;Core1&quot;, $rubyCore, &quot;Core2&quot;, $emeraldCore, &quot;Core3&quot;, &quot;None&quot;, &quot;Core4&quot;, &quot;None&quot;, &quot;Core5&quot;, &quot;None&quot;, &quot;Core6&quot;, &quot;None&quot;, &quot;RAM Slots&quot;, 2,&quot;RAM Slot 1&quot;, $8GBRAM,&quot;RAM Slot 2&quot;, $8GBRAM, &quot;RAM Slot 3&quot;, &quot;None&quot;, &quot;RAM Slot 4&quot;, &quot;None&quot;, &quot;RAM Slot 5&quot;, &quot;None&quot;, &quot;RAM Slot 6&quot;, &quot;None&quot;, &quot;RAM Slot 7&quot;, &quot;None&quot;, &quot;RAM Slot 8&quot;, &quot;None&quot;, &quot;Cooling System&quot;, $basicCooler, &quot;Network Card&quot;, $basicNetworkCard))
+]</tw-passagedata><tw-passagedata pid="47" name="Pictures" tags="" position="1450,50" size="100,100">&lt;!-- Need to commission/draw art for these--&gt;
 [[Graduation Photos]]
 [[2036 Summer]]
 [[2037 Spring]]
 
-[[Computer]]</tw-passagedata><tw-passagedata pid="49" name="Player" tags="" position="600,175" size="100,100">(collapse:)[
+[[Computer]]</tw-passagedata><tw-passagedata pid="48" name="Player" tags="" position="600,175" size="100,100">(collapse:)[
 	(hook:&quot;Player&quot;)[
     	(set:$playerStat to (dm: &quot;Health&quot;,100, &quot;Max Health&quot;, 100, &quot;Botnet Health&quot;, $botnetHealth, &quot;ICE&quot;, 100, &quot;Max ICE&quot;, 100, &quot;XP&quot;, 0, &quot;Level&quot;, 1,&quot;Money&quot;, 2000,&quot;Poisoned&quot;, false, &quot;Glitched&quot;, false, &quot;Attack Speed&quot;, 0))
 		(set:$playerMaxHealth to $playerStat&#39;s &quot;Max Health&quot;)
@@ -1181,14 +1128,18 @@ Would you like to vandalize the newspaper?
         (set: $playerDataFragments to 4)
 	]
 	(hook:&quot;Kore&#39;s PC&quot;)[
-(set: $computerStats to (dm: &quot;Motherboard&quot;, $basicMotherboard, &quot;Core1&quot;, $emeraldCore, &quot;Core2&quot;, $sapphireCore, &quot;Core3&quot;, &quot;None&quot;, &quot;Core4&quot;, &quot;None&quot;, &quot;Core5&quot;, &quot;None&quot;, &quot;Core6&quot;, &quot;None&quot;, &quot;RAM Slots&quot;, 2,&quot;RAM Slot 1&quot;, $8GBRAM,&quot;RAM Slot 2&quot;, $8GBRAM, &quot;RAM Slot 3&quot;, &quot;None&quot;, &quot;RAM Slot 4&quot;, &quot;None&quot;, &quot;RAM Slot 5&quot;, &quot;None&quot;, &quot;RAM Slot 6&quot;, &quot;None&quot;, &quot;RAM Slot 7&quot;, &quot;None&quot;, &quot;RAM Slot 8&quot;, &quot;None&quot;, &quot;Cooling System&quot;, $basicCooler))
+(set: $computerStats to (dm: &quot;Motherboard&quot;, $basicMotherboard, &quot;Core1&quot;, $emeraldCore, &quot;Core2&quot;, $sapphireCore, &quot;Core3&quot;, &quot;None&quot;, &quot;Core4&quot;, &quot;None&quot;, &quot;Core5&quot;, &quot;None&quot;, &quot;Core6&quot;, &quot;None&quot;, &quot;RAM Slots&quot;, 2,&quot;RAM Slot 1&quot;, $8GBRAM,&quot;RAM Slot 2&quot;, $8GBRAM, &quot;RAM Slot 3&quot;, &quot;None&quot;, &quot;RAM Slot 4&quot;, &quot;None&quot;, &quot;RAM Slot 5&quot;, &quot;None&quot;, &quot;RAM Slot 6&quot;, &quot;None&quot;, &quot;RAM Slot 7&quot;, &quot;None&quot;, &quot;RAM Slot 8&quot;, &quot;None&quot;, &quot;Cooling System&quot;, $basicCooler, &quot;Network Card&quot;, $basicNetworkCard))
 	]
     (hook: &quot;Kore&#39;s Spare Parts&quot;)[
     (set: $koresSpareParts to (a: $rubyCore))
 ]
 ]
 
-</tw-passagedata><tw-passagedata pid="50" name="Programs" tags="" position="100,50" size="100,100">(collapse:)[
+</tw-passagedata><tw-passagedata pid="49" name="Programs" tags="" position="1800,925" size="100,100">(collapse:)[
+&lt;!-- Template --&gt;
+(set: $attackTemplate to (dm: &quot;Name&quot;,str,&quot;ID&quot;, num, &quot;Price&quot;, num, &quot;Damage&quot;,num, &quot;ICE Damage&quot;, num, &quot;Poison&quot;,bool, &quot;Heal&quot;, num, &quot;ICE Heal&quot;, num, &quot;Description&quot;,str, &quot;Purchasable&quot;, bool, &quot;Glitchery&quot;,bool))
+
+
 &lt;!-- BruteForceAttack --&gt;
 (set: $bruteForce to (dm: &quot;Name&quot;,&quot;BruteForceAttack.bat&quot;,&quot;ID&quot;, 01, &quot;Price&quot;, 1000, &quot;Damage&quot;,5, &quot;ICE Damage&quot;, 0, &quot;Poison&quot;,False, &quot;Heal&quot;, 0, &quot;ICE Heal&quot;, 0, &quot;Description&quot;,&quot;An attack that deals a strong hit to your opponent, but only after their ICE is down.&quot;, &quot;Purchasable&quot;, false, &quot;Glitchery&quot;,false))
 
@@ -1196,7 +1147,7 @@ Would you like to vandalize the newspaper?
 (set: $ICEPick to (dm: &quot;Name&quot;,&quot;ICEPick.exe&quot;,&quot;ID&quot;, 01, &quot;Price&quot;, 1000, &quot;Damage&quot;,1, &quot;ICE Damage&quot;, 10, &quot;Poison&quot;,False, &quot;Heal&quot;, 0, &quot;ICE Heal&quot;, 0, &quot;Description&quot;,&quot;A Hacker&#39;s primary tool to break through ICE (Intrusion Countermeasures Electronics)&quot;, &quot;Purchasable&quot;, false, &quot;Glitchery&quot;,false))
  
 &lt;!-- Enhanced ICEPick --&gt;
-(set: $EnhancedICEPick to (dm: &quot;Name&quot;,&quot;EnhancedICEPick.exe&quot;, &quot;ID&quot;, 02, &quot;Price&quot;, 1000, &quot;Damage&quot;, 2, &quot;ICE Damage&quot;, 50, &quot;Poison&quot;,False, &quot;Heal&quot;, 0, &quot;ICE Heal&quot;, 0, &quot;Description&quot;, &quot;An Enhanced version of the ICEPick. Deals extra damage to ICE&quot;, &quot;Purchasable&quot;, false, &quot;Glitchery&quot;,false))
+(set: $EnhancedICEPick to (dm: &quot;Name&quot;,&quot;EnhancedICEPick.exe&quot;, &quot;ID&quot;, 02, &quot;Price&quot;, 1000, &quot;Damage&quot;, 2, &quot;ICE Damage&quot;, 50, &quot;Poison&quot;,False, &quot;Heal&quot;, 0, &quot;ICE Heal&quot;, 0, &quot;Description&quot;, &quot;An Enhanced version of the ICEPick. Deals extra damage to ICE. Allows you to hack servers with stronger ICE.&quot;, &quot;Purchasable&quot;, false, &quot;Glitchery&quot;,false))
 
 &lt;!-- Poison --&gt;
 (set: $poison to (dm:&quot;Name&quot;,&quot;Outbreak.dll&quot;, &quot;ID&quot;, 03, &quot;Price&quot;, 1500, &quot;Damage&quot;, 0, &quot;ICE Damage&quot;, 0, &quot;Poison&quot;,True, &quot;Heal&quot;, 0, &quot;ICE Heal&quot;, 0, &quot;Description&quot;,&quot;It does what&#39;s on the tin!&quot;, &quot;Purchasable&quot;,true, &quot;Glitchery&quot;,false))
@@ -1206,25 +1157,28 @@ Would you like to vandalize the newspaper?
 
 &lt;!-- Glitchery --&gt;
 
-(set: $glitchery to (dm:&quot;Name&quot;, &quot;glitchery.scr&quot;, &quot;ID&quot;, 05, &quot;Price&quot;, 4000, &quot;ICE Damage&quot;, 0, &quot;Damage&quot;, 0, &quot;Poison&quot;,false, &quot;Heal&quot;, 0, &quot;ICE Heal&quot;, 10, &quot;Description&quot;, &quot;Sends your bots at the enemy, dealing damage to their system integrity per bot&quot;,&quot;Purchasable&quot;, true, &quot;Glitchery&quot;,false))
+(set: $glitchery to (dm:&quot;Name&quot;, &quot;glitchery.scr&quot;, &quot;ID&quot;, 05, &quot;Price&quot;, 4000, &quot;ICE Damage&quot;, 0, &quot;Damage&quot;, 0, &quot;Poison&quot;,false, &quot;Heal&quot;, 0, &quot;ICE Heal&quot;, 10, &quot;Description&quot;, &quot;Causes target&#39;s machine to become unstable and occasionally freeze, preventing them from using any programs for one turn.&quot;,&quot;Purchasable&quot;, true, &quot;Glitchery&quot;,true))
 
 &lt;!-- DDOS --&gt;
 
-(set: $DDOS to  (dm:&quot;Name&quot;, &quot;DDOS.bat&quot;, &quot;ID&quot;, 06, &quot;Price&quot;, 1000, &quot;ICE Damage&quot;, 0, &quot;Damage&quot;, 3*$botnetCount, &quot;Poison&quot;,false, &quot;Heal&quot;, 0, &quot;ICE Heal&quot;, 0, &quot;Description&quot;, &quot;Overwhelms target&#39;s network, dealing damage to their system integrity based on the number of bots in your botnet.&quot;,&quot;Purchasable&quot;, true, &quot;Glitchery&quot;,true))
+(set: $DDOS to  (dm:&quot;Name&quot;, &quot;DDOS.bat&quot;, &quot;ID&quot;, 06, &quot;Price&quot;, 1000, &quot;ICE Damage&quot;, 0, &quot;Damage&quot;, 3*$botnetCount, &quot;Poison&quot;,false, &quot;Heal&quot;, 0, &quot;ICE Heal&quot;, 0, &quot;Description&quot;, &quot;Overwhelms target&#39;s network, dealing damage to their system integrity based on the number of bots in your botnet.&quot;,&quot;Purchasable&quot;, false, &quot;Glitchery&quot;,false))
 
 (set:$programsCount to 0)
 
 &lt;!-- defrag.exe --&gt;
 (set: $defrag to (dm:&quot;Name&quot;, &quot;defrag.exe&quot;, &quot;ID&quot;, 07, &quot;Price&quot;, 5000, &quot;ICE Damage&quot;, 0, &quot;Damage&quot;, 0, &quot;Poison&quot;, False, &quot;Heal&quot;, 100, &quot;ICE Heal&quot;, 0, &quot;Description&quot;, &quot;Quick repair for your HP&quot;,&quot;Purchasable&quot;, false, &quot;Glitchery&quot;,false)) 
 
+(set: $allPrograms to (a:))
+(set: $allPrograms to it + (a:$ICEPick, $defrag, $glitchery, $repairICE, $bruteForce, $EnhancedICEPick, $poison))
 
 (for:each _program, $allPrograms)[(set:$programsCount to it + 1)]
-]</tw-passagedata><tw-passagedata pid="51" name="Random Encounter" tags="" position="1250,1525" size="100,100">(hook:&quot;RandomEncounter&quot;)[(collapse:)[
+]</tw-passagedata><tw-passagedata pid="50" name="Random Encounter" tags="" position="1250,1525" size="100,100">(hook:&quot;RandomEncounter&quot;)[(collapse:)[
 (display: &quot;Randomized PC&quot;)
+(set: $enemyPC to $randomizedPC)
 (set:$enemyAttacks to (a:$ICEPick))
 (for: each _program, ...$allPrograms)[
 	(set:$flipResult to (random:0,1))
-	(if:$flipResult is &gt;0 and _program is not $DDOS)[
+	(if:$flipResult is &gt;0 and _program is not $DDOS and _program is not $ICEPick)[
 		(set:$enemyAttacks to it + (a:_program))]
 	(set:$enemyName to $seed + (random:1,$seed))
 ]
@@ -1232,12 +1186,18 @@ Would you like to vandalize the newspaper?
 (set: _dieroll to (random: 1, 20))
 (if: _dieroll is &lt; 5)[
 	(set: $randomEncounter&#39;s &quot;Max Health&quot; to it*5)
-    (
 ]
 (set: $randomEncounter&#39;s &quot;Health&quot; to $randomEncounter&#39;s &quot;Max Health&quot;)
 
+(set: $randomPC to (dm:&quot;Name&quot;,$enemyName, &quot;Motherboard&quot;, (either:$allMotherboards), &quot;Core1&quot;, (either:$allCores), &quot;Core2&quot;, (either:$allCores), &quot;Core3&quot;, (either:$allCores), &quot;Core4&quot;, (either:$allCores), &quot;Core5&quot;, (either:$allCores), &quot;Core6&quot;, (either:$allCores), &quot;RAM Slots&quot;, 0,&quot;RAM Slot 1&quot;, (either:$allRAM),&quot;RAM Slot 2&quot;, (either:$allRAM), &quot;RAM Slot 3&quot;, (either:$allRAM), &quot;RAM Slot 4&quot;, (either:$allRAM), &quot;RAM Slot 5&quot;, (either:$allRAM), &quot;RAM Slot 6&quot;, (either:$allRAM), &quot;RAM Slot 7&quot;, (either:$allRAM), &quot;RAM Slot 8&quot;, (either:$allRAM), &quot;Cooling System&quot;, (either:$allCoolers), &quot;Network Card&quot;, (either:$allNetworkCards)))
+
+(if: $randomPC&#39;s &quot;Motherboard&quot; is $basicMotherboard)[
+	(set: $randomPC&#39;s &quot;Core3&quot; and $randomPC&#39;s &quot;Core 4&quot; to &quot;None&quot;)]
+(if: $randomPC&#39;s &quot;Motherboard&quot; is $basicMotherboard or it is $advancedMotherboard)[
+    (set: $randomPC&#39;s &quot;Core5&quot; and $randomPC&#39;s &quot;Core6&quot; to &quot;None&quot;)
 ]
-]</tw-passagedata><tw-passagedata pid="52" name="Resume" tags="" position="1675,675" size="100,100">(float-box:&quot;X&quot;,&quot;Y&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(css:&quot;margin-top:0px,margin-bottom:0px&quot;)[
+]
+]]</tw-passagedata><tw-passagedata pid="51" name="Resume" tags="" position="1675,675" size="100,100">(float-box:&quot;X&quot;,&quot;Y&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(css:&quot;margin-top:0px,margin-bottom:0px&quot;)[
 	(align:&quot;==&gt;&quot;)+(box:&quot;=====X&quot;)+(css:&quot;margin-top: 0px;offset-position: top 100px;&quot;)[
     	(collapse:)[(float-box: &quot;========X&quot;, &quot;Y===========&quot;)+(css: &quot;overflow:hidden&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[
         	(button:&quot;X&quot;)+(css: &quot;border:1px&quot;)+(color:black)+(hover-style: (color:white))(link-goto:&quot;X&quot;, &quot;Computer&quot;)
@@ -1260,15 +1220,15 @@ Tonii Piroa | Coworker
 Tonii.Piroa@Corp2.corp
 
 ugh why am i even making this there&#39;s no one else to hire me anymore
-]</tw-passagedata><tw-passagedata pid="53" name="Stranger Hacked" tags="" position="1250,1400" size="100,100">(box: &quot;X&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[
+]</tw-passagedata><tw-passagedata pid="52" name="Stranger Hacked" tags="" position="1250,1400" size="100,100">(box: &quot;X&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)[
 You&#39;ve hacked a complete stranger! That was nice of you.
 Their machine is part of your botnet now.
 (set: $playerDataFragments to it + (random:1,4))
 (set:$playerMoney to $playerMoney+5000)
-(set:$botnet to it + (a:$enemyName))
-(button:)[(link:&quot;Browser&quot;)[(go-to:&quot;Browser&quot;)]]]</tw-passagedata><tw-passagedata pid="54" name="Trash" tags="" position="1500,300" size="100,100">It&#39;s empty...
+(set:$botnet to it + (a:$randomizedPC))
+(button:)[(link:&quot;Browser&quot;)[(go-to:&quot;Browser&quot;)]]]</tw-passagedata><tw-passagedata pid="53" name="Trash" tags="" position="1325,50" size="100,100">It&#39;s empty...
 &lt;!-- Maybe put something in here during gameplay--&gt;
-[[Computer]]</tw-passagedata><tw-passagedata pid="55" name="A) Startup" tags="startup" position="475,175" size="100,100">(collapse:)[
+[[Computer]]</tw-passagedata><tw-passagedata pid="54" name="A) Startup" tags="startup" position="475,175" size="100,100">(collapse:)[
 (set: $day to 1)
 &lt;!-- levels--&gt;
 (set: $seed to (random:1000000,4999999))
@@ -1286,6 +1246,7 @@ Their machine is part of your botnet now.
 (set: $level11Complete to false)
 (set: $level12Complete to false)
 (set: $level13Complete to false)
+(set: $hackableSites to (a: &quot;Level 1&quot;))
 
 &lt;!-- starting player money--&gt;
 
@@ -1302,13 +1263,15 @@ Their machine is part of your botnet now.
 (set: $emailNotif to 0)
 
 &lt;!-- botnet --&gt;
-(set:$botnet to (a: &#39;Corporation 2 Casino Server&#39;))
+(display: &quot;C2CasinoServer&quot;)
+(set:$botnet to (a:$C2CasinoServer))
 (set:$playerICE to 100)
-
+(set: $botActive to false)
+(set: $botnetCount to 1)
+(display: &quot;Programs&quot;)
 (set: $shopInventory to (a:))
-
 (display:&quot;Player&quot;)
-]</tw-passagedata><tw-passagedata pid="56" name="Purchase Confirmation" tags="" position="375,450" size="100,100">(collapse:)[(hidden:)|purchaseConfirmation&gt;[You&#39;ve purchased (print: $selected)!
+]</tw-passagedata><tw-passagedata pid="55" name="Purchase Confirmation" tags="" position="375,450" size="100,100">(collapse:)[(hidden:)|purchaseConfirmation&gt;[You&#39;ve purchased (print: $selected)!
 
 (for:each _program, ...$allPrograms)[
 (if: _program&#39;s Name is $selected)[
@@ -1316,16 +1279,16 @@ Their machine is part of your botnet now.
     (set: $playerStat&#39;s Money to it - _program&#39;s Price)
 ]]]]
 
-</tw-passagedata><tw-passagedata pid="57" name="Player Status Effects" tags="" position="0,175" size="100,100">{
+</tw-passagedata><tw-passagedata pid="56" name="Player Status Effects" tags="" position="1700,1050" size="100,100">{
 &lt;!-- Poison Check --&gt;
 (if: $playerStat&#39;s &quot;Poisoned&quot; is true)[
 	(set:$poisonDamage to (random:5,20))
 	(set:$playerHealth to it - $poisonDamage)
-	You take $poisonDamage from $enemyName&#39;s poison.exe!
+	You take $poisonDamage from $enemyName&#39;s Outbreak.dll!
     (if: $playerHealth is &lt; 1)[
     	(goto: &quot;Game Over&quot;)
     ]
-	(box:&quot;===X&quot;)[(button:)[(link:&quot;Ouch&quot;)[(set:$log to &quot;hacking&quot;)
+	(box:&quot;X&quot;)[(button:)[(link:&quot;Ouch&quot;)[(set:$log to &quot;hacking&quot;)
 	(rerun:?Battle)]]
     ]
 ]
@@ -1335,23 +1298,25 @@ Their machine is part of your botnet now.
 	(set: _glitchCheck to (random:1,20))
     (if: _glitchCheck is &lt; 10)[
 	Your computer froze for a second!
-    (button:)[(link: &quot;Next&quot;)[
-    (set: $log to &quot;enemy&quot;)]]
+    
     ]
     (if: _glitchCheck is 20)[
     	(set: $playerStat&#39;s &quot;Glitched&quot; to false)
     ]
+(button: &quot;X&quot;)[(link: &quot;Next&quot;)[
+    (set: $log to &quot;enemy&quot;)
+    (rerun:?Battle)]]
 ]
-}</tw-passagedata><tw-passagedata pid="58" name="Enemy Status Effects" tags="" position="0,300" size="100,100">(collapse:)[(if: $enemy&#39;s &quot;Poisoned&quot; is true)[
+}</tw-passagedata><tw-passagedata pid="57" name="Enemy Status Effects" tags="" position="1700,1175" size="100,100">(collapse:)[(if: $enemy&#39;s &quot;Poisoned&quot; is true)[
 	(set:$poisonDamage to (random:5,20))
 	(if: $allKoresCores contains $emeraldCore)[
 		(set: $poisonDamage to it*1.5)
     ]
 (set:$enemyHealth to it - $poisonDamage)
-$enemyName&#39;s machine is infected with your Outbreak.exe!
-$enemyName takes $poisonDamage from your Outbreak.exe!
+$enemyName&#39;s machine is infected with Outbreak.dll
+$enemyName takes $poisonDamage from Outbreak.dll
 ]
-]</tw-passagedata><tw-passagedata pid="59" name="selectedEmail" tags="" position="1100,400" size="100,100">(hook: &quot;emailWindow&quot;)[(t8n:&quot;zoom&quot;)[(float-box:&quot;==XXXXXXXX=&quot;,&quot;=YYYYYYYYYYY=&quot;)+(css: &quot;z-index: 2; overflow: hidden&quot;)+(b4r: &quot;solid&quot;, &quot;double&quot;, &quot;double&quot;, &quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(bg: black)[
+]</tw-passagedata><tw-passagedata pid="58" name="selectedEmail" tags="" position="1100,400" size="100,100">(hook: &quot;emailWindow&quot;)[(t8n:&quot;zoom&quot;)[(float-box:&quot;==XXXXXXXX=&quot;,&quot;=YYYYYYYYYYY=&quot;)+(css: &quot;z-index: 2; overflow: hidden&quot;)+(b4r: &quot;solid&quot;, &quot;double&quot;, &quot;double&quot;, &quot;solid&quot;)+(b4r-colour:(mix: 0.5, white, 0.5, #00f))+(b4r-size: 20,20,30,30)+(bg: black)[
 (float-box: &quot;================X==&quot;, &quot;==YY================&quot;)+(css: &quot;overflow:hidden; margin-top: 0.1px; padding: 0.1px;&quot;)+(b4r:&quot;solid&quot;,&quot;double&quot;,&quot;double&quot;,&quot;solid&quot;)+(b4r-color:(mix: 0.5, white, 0.5, #00f))+(bg:(mix: 0.5, white, 0.5, #00f))[(button:&quot;X&quot;)+(color:black)+(hover-style: (color:white))[(link:&quot;X&quot;)[(hide:?emailWindow)(rerun:?emailHook)]]]
             (for:each _email, ...$koreEmails)[
 (if: $selected is _email&#39;s Subject)[
@@ -1365,9 +1330,13 @@ Subject: (print:$selected&#39;s Subject)
 
 (set: $selected&#39;s &quot;Read&quot; to true)
 (set: $koreEmails to it + (a:$selected))
-]]]]]</tw-passagedata><tw-passagedata pid="60" name="Computer Shop" tags="" position="1800,75" size="100,100">(collapse:)[
+]]]]]</tw-passagedata><tw-passagedata pid="59" name="Computer Shop" tags="" position="1800,75" size="100,100">(collapse:)[
     (hook: &quot;computerShop&quot;)[
-(float-box:&quot;=======X=&quot;, &quot;=Y=========&quot;)+(css: &quot;overflow:hidden;&quot;)[(button:)[[Home-&gt;Home]]]    (hidden: )|pcShopConfirmation&gt;[(float-box: &quot;=X=&quot;,&quot;==Y==&quot;)[
+(float-box:&quot;=======X=&quot;, &quot;=YY=========&quot;)+(css: &quot;overflow:hidden;&quot;)[(button:)[[Home-&gt;Home]]]
+
+(float-box:&quot;=======X=&quot;, &quot;====YY=========&quot;)+(css: &quot; overflow:hidden;&quot;)[(button:)[(link-show:&quot;?&quot;, ?guide)]]
+
+(hidden: )|pcShopConfirmation&gt;[(float-box: &quot;=X=&quot;,&quot;==Y==&quot;)[
     (set: _count to 0)
 	(for: each _item, ...$allParts)[
     	(set: _count to it +1)
@@ -1378,17 +1347,39 @@ Subject: (print:$selected&#39;s Subject)
             ]
     ]
 ]]
-&lt;style&gt;
-	.shopHeaders {
-        margin-top:100px;
-    }
-    .shopItem {
-    border-style: solid;
-    border-color: purple;
-    }
-&lt;/style&gt;
-&lt;div class=&quot;shopItem&quot;&gt;
-	&lt;div class=&quot;shopHeaders&quot;&gt;
+
+(hidden:)|guide&gt;[
+	(float-box:&quot;==XXXXXXXXXXXXXXX==&quot;,&quot;===YYYYYYYYYYY==&quot;)+(css: &quot;z-index: 2;&quot;)+(bg:black)[
+    (float-box:&quot;============X===&quot;, &quot;===YY==========&quot;)+(css: &quot;overflow:hidden;&quot;)+(bg:transparent)[(button:)[(link:&quot;X&quot;)[(hide:?guide)(rerun:?computerShop)]]]
+    
+    Welcome to Brik&#39;s PC Emporium!
+    We have everything you need to upgrade your PC or build a new one!
+    
+    &lt;h2&gt;Cores&lt;/h2&gt;
+    
+    Cores are essential for your machine to do anything. They&#39;re essentially the brain of your machine. You process any programs you run through the cores, and they output your data. If the type of program you&#39;re running resonates with the particular core you&#39;ve chosen to use in your machine, it will operate more efficiently and perform beyond your expectations.
+    
+    &lt;h2&gt;Core Cooling&lt;/h2&gt;
+    Upgrading your systems cooling will allow for higher performance in your system.
+    Operating your machine at maximum performance for long periods causes it to heat up, and as it heats up it loses efficiency. Keep it cool with an upgraded cooler, and you might even gain some performance.
+    
+    &lt;h2&gt;RAM&lt;/h2&gt;
+    
+    RAM is your machine&#39;s short term memory. The more you have, the more your machine remembers and the faster your machine can run operations that require large amounts of memory, as it&#39;s not having to relearn everything as it&#39;s dumping out it&#39;s oldest memories to make room for new ones.
+    
+    &lt;h2&gt;Motherboard&lt;/h2&gt;
+    
+    The motherboard is the body of the computer. Everything else plugs into the motherboard. Upgrading your motherboard provides additional slots to plug things into.
+    
+    &lt;h2&gt;Network Card&lt;/h2&gt;
+    
+    The network card is the telepathic center of the brain of the machine. Okay I&#39;m kinda running out of ways to compare a computer to a body, but basically the network card is how your machine connects to the internet.
+    An upgraded network card increases your download and upload speeds, and provides additional ports to connect with peers in a p2p network.
+    
+	]
+
+]
+
 		&lt;h3&gt;Processor Cores&lt;/h3&gt;
 	&lt;/div&gt;
 (for: each _core, ...$allCores)[
@@ -1412,10 +1403,7 @@ Subject: (print:$selected&#39;s Subject)
 (else:)[Insufficient Funds]
 ]]]
 ]]
-&lt;/div&gt;
-&lt;div class=&quot;shopHeaders&quot;&gt;
 &lt;h3&gt;Core Cooling&lt;/h3&gt;
-&lt;/div&gt;
 (for: each _core, ...$allCoolers)[
 
 (if:_core&#39;s &quot;Purchasable&quot; is true)[
@@ -1437,7 +1425,7 @@ Description: (print:_core&#39;s &quot;Description&quot;)
 (else:)[Insufficient Funds]
 ]]]]
 ]]
-
+&lt;/div&gt;
 |==|
 
 &lt;h2&gt;RAM&lt;/h2&gt;
@@ -1486,7 +1474,29 @@ Description: (print:_core&#39;s &quot;Description&quot;)
 (else:)[Insufficient Funds]
 ]]]
 ]]]
-</tw-passagedata><tw-passagedata pid="61" name="Computer Parts" tags="" position="1650,75" size="100,100">(collapse:)[
+|==|
+&lt;h2&gt;Network Cards&lt;/h2&gt;
+(for: each _core, ...$allNetworkCards)[
+
+(if:_core&#39;s &quot;Purchasable&quot; is true)[
+(print:_core&#39;s &quot;Name&quot;)
+==||=
+(size:.75)+(color:red)[Buy it Now for: ](print: _core&#39;s &quot;Price&quot;)^^CR^^
+Description: (print:_core&#39;s &quot;Description&quot;)
+
+
+(collapse:)[
+(button:)[(link-replace:&quot;Buy it Now&quot;)[
+
+	(if:$playerMoney &gt; _core&#39;s &quot;Price&quot;)[
+    
+	(print: &quot;(link: &#39;Purchase &quot; + (text: _core&#39;s Name) + &quot;&quot; + &#39;?&#39; + &quot;&#39;)[(set: $selected to &quot; +&quot;&#39;&quot; + (text: _core&#39;s Name) + &quot;&#39;&quot; + &quot;)
+(display: &quot; + &quot;&#39;Purchase Confirmation&#39;&quot; + &quot;)(show: ?pcShopConfirmation)]&quot;)
+]
+
+(else:)[Insufficient Funds]
+]]]
+]]</tw-passagedata><tw-passagedata pid="60" name="Computer Parts" tags="" position="1650,75" size="100,100">(collapse:)[
 (set: $rubyCore to (dm: &quot;Name&quot;, &quot;Ruby Core&quot;, &quot;Element&quot;,&quot;Fire&quot;, &quot;Purchasable&quot;, true, &quot;Price&quot;, 10000, &quot;Description&quot;, &quot;A red gem inscribed with draconic runes. Contains the element of fire.&quot;, &quot;Slot&quot;, &quot;Core&quot;))
 (set: $sapphireCore to (dm: &quot;Name&quot;, &quot;Sapphire Core&quot;, &quot;Element&quot;,&quot;Water&quot;, &quot;Purchasable&quot;, true, &quot;Price&quot;, 10000, &quot;Description&quot;, &quot;A blue gem inscribed with draconic runes. Contains the element of water.&quot;, &quot;Slot&quot;, &quot;Core&quot;))
 (set: $emeraldCore to (dm: &quot;Name&quot;, &quot;Emerald Core&quot;, &quot;Element&quot;,&quot;Air&quot;, &quot;Purchasable&quot;, true, &quot;Price&quot;, 10000, &quot;Description&quot;, &quot;A green gem inscribed with draconic runes. Contains the element of air.&quot;, &quot;Slot&quot;, &quot;Core&quot;))
@@ -1501,18 +1511,25 @@ Description: (print:_core&#39;s &quot;Description&quot;)
 (set: $advancedCooler to (dm: &quot;Name&quot;,&quot;Advanced Cooling System&quot;, &quot;Price&quot;, 50000, &quot;Cooling&quot;, 50, &quot;Description&quot;, &quot;An advanced cooling system for your machine&#39;s cores.&quot;, &quot;Purchasable&quot;, true, &quot;Slot&quot;, &quot;Cooler&quot;))
 (set: $specialCooler to (dm: &quot;Name&quot;, &quot;Custom Cooling System&quot;, &quot;Price&quot;, 75000, &quot;Cooling&quot;, 75, &quot;Description&quot;, &quot;A custom cooling solution for your personal machine&#39;s cores.&quot;, &quot;Purchasable&quot;, false, &quot;Slot&quot;, &quot;Cooler&quot;))
 
-(set: $basicMotherboard to (dm: &quot;Name&quot;, &quot;Basic Motherboard&quot;, &quot;Core Slots&quot;, 2, &quot;RAM Slots&quot;, 2, &quot;Price&quot;, 8000, &quot;Description&quot;, &quot;A basic motherboard for a starter build. Can slot 2 cores and 2 RAM sticks.&quot;, &quot;Purchasable&quot;, true, &quot;Slot&quot;, &quot;Motherboard&quot;)) 
-(set: $advancedMotherboard to (dm: &quot;Name&quot;, &quot;Advanced Motherboard&quot;, &quot;Core Slots&quot;, 4, &quot;RAM Slots&quot;, 4, &quot;Price&quot;, 8000, &quot;Description&quot;, &quot;An advanced motherboard for a more powerful build. Can slot 4 cores and 4 RAM sticks.&quot;, &quot;Purchasable&quot;, true, &quot;Slot&quot;, &quot;Motherboard&quot;))
+(set: $basicMotherboard to (dm: &quot;Name&quot;, &quot;Basic Motherboard&quot;, &quot;Core Slots&quot;, 2, &quot;RAM Slots&quot;, 2, &quot;Price&quot;, 1000, &quot;Description&quot;, &quot;A basic motherboard for a starter build. Can slot 2 cores and 2 RAM sticks.&quot;, &quot;Purchasable&quot;, true, &quot;Slot&quot;, &quot;Motherboard&quot;)) 
+(set: $advancedMotherboard to (dm: &quot;Name&quot;, &quot;Advanced Motherboard&quot;, &quot;Core Slots&quot;, 4, &quot;RAM Slots&quot;, 4, &quot;Price&quot;, 3000, &quot;Description&quot;, &quot;An advanced motherboard for a more powerful build. Can slot 4 cores and 4 RAM sticks.&quot;, &quot;Purchasable&quot;, true, &quot;Slot&quot;, &quot;Motherboard&quot;))
 (set: $specialMotherboard to (dm: &quot;Name&quot;, &quot;Special Motherboard&quot;, &quot;Core Slots&quot;, 6, &quot;RAM Slots&quot;, 8, &quot;Price&quot;, 8000, &quot;Description&quot;, &quot;A special motherboard for a top of the line build. Can slot 6 cores and 8 RAM sticks.&quot;, &quot;Purchasable&quot;, false, &quot;Slot&quot;, &quot;Motherboard&quot;))
 (set: $allMotherboards to (a:$basicMotherboard, $advancedMotherboard, $specialMotherboard))
-]</tw-passagedata><tw-passagedata pid="62" name="Bench" tags="" position="900,75" size="100,100">(float-box:&quot;X&quot;, &quot;Y&quot;)+(b4r: &quot;outset&quot;)+(b4r-color:purple)+(b4r-size: 25)[
-	(float-box:&quot;=======X=&quot;, &quot;Y============&quot;)+(css: &quot;margin-top:25px; margin-right:25px; overflow:hidden;&quot;)[
-    	(button:)+(color:red)[
+
+
+(set: $basicNetworkCard to (dm: &quot;Name&quot;, &quot;Basic Network Card&quot;, &quot;Connection Slots&quot;, 2,  &quot;Price&quot;, 2000, &quot;Description&quot;, &quot;A basic network card for connecting to the internet. Enables private connection with 2 devices at once.&quot;, &quot;Purchasable&quot;, true, &quot;Slot&quot;, &quot;Network Card&quot;)) 
+(set: $advancedNetworkCard to (dm: &quot;Name&quot;, &quot;Advanced Network Card&quot;, &quot;Connection Slots&quot;, 10,  &quot;Price&quot;, 8000, &quot;Description&quot;, &quot;An advanced network card for connecting to the internet. Enables private connection with 4 devices at once.&quot;, &quot;Purchasable&quot;, true, &quot;Slot&quot;, &quot;Network Card&quot;))
+(set: $specialNetworkCard to (dm: &quot;Name&quot;, &quot;Special Network Card&quot;, &quot;Connection Slots&quot;, 100, &quot;Price&quot;, 12000, &quot;Description&quot;, &quot;A special network card for connecting to the internet. Enables private connection with 6 devices at once..&quot;, &quot;Purchasable&quot;, false, &quot;Slot&quot;, &quot;Network Card&quot;))
+(set: $allNetworkCards to (a:$basicNetworkCard, $advancedNetworkCard, $specialNetworkCard))
+]
+</tw-passagedata><tw-passagedata pid="61" name="Bench" tags="" position="1800,225" size="100,100">(float-box:&quot;X&quot;, &quot;Y&quot;)+(b4r: &quot;outset&quot;)+(b4r-color:purple)+(b4r-size: 25)[
+
+	(hook: &quot;ComputerSelect&quot;)[
+    {	(float-box:&quot;=======X=&quot;, &quot;YY============&quot;)+(css: &quot;z-index:2; margin-top:25px; margin-right:25px; overflow:hidden;&quot;)[
+    	(button:)+(color:purple)[
         	(link-goto: &quot;Home&quot;,&quot;Home&quot;)
         ]
     ]
-	(hook: &quot;ComputerSelect&quot;)[
-    {
 		(hook: &quot;ComputerSelectDialogue&quot;)[
 			Here you can work on your PC, or build a new one.
 		]
@@ -1521,7 +1538,7 @@ Description: (print:_core&#39;s &quot;Description&quot;)
         		(hook: &quot;bench&quot;)[
 					(hide:?ComputerSelectDialogue)
 					&lt;h2&gt;Installed&lt;/h2&gt;
-					|===
+					|====
 					&lt;h3&gt;Processing Cores&lt;/h3&gt;
 					Slot 1:
 					(print: $computerStats&#39;s &quot;Core1&quot;&#39;s &quot;Name&quot;)&lt;br&gt;
@@ -1558,7 +1575,7 @@ Description: (print:_core&#39;s &quot;Description&quot;)
         					Slot 6:
         					(print: &quot;Empty&quot;)&lt;br&gt;
         				]
-   						=|==
+   						=|===
    						&lt;h3&gt;RAM&lt;/h3&gt;
                         Slot 1:
    						(print: $computerStats&#39;s &quot;RAM Slot 1&quot;&#39;s &quot;Name&quot;)&lt;br&gt;
@@ -1601,19 +1618,24 @@ Description: (print:_core&#39;s &quot;Description&quot;)
         				(if: $computerStats&#39;s &quot;RAM Slot 8&quot; is &quot;Empty&quot;)[
 							(print: &quot;Slot 8: Empty&quot;)&lt;br&gt;
                             ]
-        				==|=
+        				==|==
     					&lt;h3&gt;Motherboard&lt;/h3&gt;
     					(print:$computerStats&#39;s &quot;Motherboard&quot;&#39;s &quot;Name&quot;)
-    					===|
+    					===|=
     					&lt;h3&gt;Cooling System&lt;/h3&gt;
                         (if: $computerStats&#39;s &quot;Cooling System&quot; is not &quot;Empty&quot;)[
     					(print: $computerStats&#39;s &quot;Cooling System&quot;&#39;s &quot;Name&quot;)]
+                        (else:)[(print: &quot;Empty&quot;)]
+						====|
+    					&lt;h3&gt;Network Card&lt;/h3&gt;
+                        (if: $computerStats&#39;s &quot;Network Card&quot; is not &quot;Empty&quot;)[
+    					(print: $computerStats&#39;s &quot;Network Card&quot;&#39;s &quot;Name&quot;)]
                         (else:)[(print: &quot;Empty&quot;)]
    
    						|==|
    						&lt;h2&gt;Spare Parts&lt;/h2&gt;
 						(set: _arrayNumber to 0)&lt;br&gt;
-						|===
+						|====
     					Cores:
 						(for: each _item, ...$koresSpareParts)[
     						(set: _arrayNumber to it +1)
@@ -1802,7 +1824,7 @@ Description: (print:_core&#39;s &quot;Description&quot;)
                     
                         &lt;br&gt;
 						(set: _arrayNumber to 0)
-						=|==
+						=|===
 						RAM:
 						(for: each _item, ...$koresSpareParts)[
     						(set: _arrayNumber to it +1)
@@ -1939,7 +1961,7 @@ Description: (print:_core&#39;s &quot;Description&quot;)
                 				]
         					]
                         ]
-        				==|=
+        				==|==
         
 						(set: _arrayNumber to 0)
         				Motherboards:
@@ -1990,7 +2012,7 @@ Description: (print:_core&#39;s &quot;Description&quot;)
         					]
         				]
         			]
-        			===|
+        			===|=
         			(set: _arrayNumber to 0)
         			Cooling Systems:
         			(for: each _item, ...$koresSpareParts)[
@@ -2021,13 +2043,46 @@ Description: (print:_core&#39;s &quot;Description&quot;)
         				]
         			]
         			(set: _arrayNumber to 0)
+                    
+                    ====|
+                    Network Cards:
+                    
+        			(for: each _item, ...$koresSpareParts)[
+    					(set: _arrayNumber to it + 1)
+    					(if: _item&#39;s &quot;Slot&quot; is &quot;Network Card&quot;)[
+        					(set: $NetworkCard1ID to _arrayNumber)
+    						(button:)[
+                            	(link: _item&#39;s &quot;Name&quot;)[
+        							Swap into:
+                					(if: $computerStats&#39;s &quot;Network Card&quot; is not &quot;Empty&quot;)[
+                    					(button:)[
+                                        	(link:  $computerStats&#39;s &quot;Network Card&quot;&#39;s &quot;Name&quot; )[
+                                                (set: $koresSpareParts to it + (a:$computerStats&#39;s &quot;Network Card&quot;))
+                                                (set: $computerStats&#39;s &quot;Network Card&quot; to $koresSpareParts&#39;s $NetworkCard1ID)
+                                                (set: _partArray to (find: _part where _part&#39;s Name is _item&#39;s Name, ...$koresSpareParts))
+                                                (set: $koresSpareParts to it - _partArray)
+                                                (if: _partArray&#39;s length is &gt;1)[
+                                                    (set: _partArray to (subarray: _partArray, 1, _partArray&#39;s length -1))
+                                                    (set: $koresSpareParts to it + _partArray)
+                                                  ]
+                                                  		(print: (text:$computerStats&#39;s &quot;Network Card&quot;&#39;s &quot;Name&quot;) + &quot; slotted in successfully.&quot;)
+                                                  	(rerun:?bench)
+                        					]
+                                        ]
+        							]
+                        		]
+        					]
+        				]
+        			]
+        			(set: _arrayNumber to 0)
+                    
         		]
 			]
         ]
 
 		}
 	]
-]</tw-passagedata><tw-passagedata pid="63" name="Randomized PC" tags="" position="1250,1650" size="100,100">(set: $randomizedPC to (dm: &quot;Motherboard&quot;, $basicMotherboard, &quot;Core1&quot;, $emeraldCore, &quot;Core2&quot;, $sapphireCore, &quot;Core3&quot;, &quot;None&quot;, &quot;Core4&quot;, &quot;None&quot;, &quot;Core5&quot;, &quot;None&quot;, &quot;Core6&quot;, &quot;None&quot;, &quot;RAM Slots&quot;, 2,&quot;RAM Slot 1&quot;, $8GBRAM,&quot;RAM Slot 2&quot;, $8GBRAM, &quot;RAM Slot 3&quot;, &quot;None&quot;, &quot;RAM Slot 4&quot;, &quot;None&quot;, &quot;RAM Slot 5&quot;, &quot;None&quot;, &quot;RAM Slot 6&quot;, &quot;None&quot;, &quot;RAM Slot 7&quot;, &quot;None&quot;, &quot;RAM Slot 8&quot;, &quot;None&quot;, &quot;Cooling System&quot;, $basicCooler))
+] </tw-passagedata><tw-passagedata pid="62" name="Randomized PC" tags="" position="1250,1650" size="100,100">(set: $randomizedPC to (dm: &quot;Name&quot;, &quot;None&quot;, &quot;Motherboard&quot;, $basicMotherboard, &quot;Core1&quot;, $emeraldCore, &quot;Core2&quot;, $sapphireCore, &quot;Core3&quot;, &quot;None&quot;, &quot;Core4&quot;, &quot;None&quot;, &quot;Core5&quot;, &quot;None&quot;, &quot;Core6&quot;, &quot;None&quot;, &quot;RAM Slots&quot;, 2,&quot;RAM Slot 1&quot;, $8GBRAM,&quot;RAM Slot 2&quot;, $8GBRAM, &quot;RAM Slot 3&quot;, &quot;None&quot;, &quot;RAM Slot 4&quot;, &quot;None&quot;, &quot;RAM Slot 5&quot;, &quot;None&quot;, &quot;RAM Slot 6&quot;, &quot;None&quot;, &quot;RAM Slot 7&quot;, &quot;None&quot;, &quot;RAM Slot 8&quot;, &quot;None&quot;, &quot;Cooling System&quot;, $basicCooler))
 
 (set: $dieroll to (random:1,20))
 (if: $dieroll is 20)[
@@ -2036,7 +2091,7 @@ Description: (print:_core&#39;s &quot;Description&quot;)
 (else:)[
 	(set: $randomizedRAM to (either: (a:$allRAM&#39;s 1st, $allRAM&#39;s 2nd)))
 ]
-
+(set: $randomizedPC&#39;s &quot;Name&quot; to $enemyName)
 (set: $randomizedPC&#39;s &quot;Motherboard&quot; to (either: ...$allMotherboards))
 (set: $randomizedPC&#39;s &quot;Core1&quot; to (either: ...$allCores))
 (set: $randomizedPC&#39;s &quot;Core2&quot; to (either: ...$allCores))
@@ -2059,7 +2114,7 @@ Description: (print:_core&#39;s &quot;Description&quot;)
 ]
 
 (set: $allRandosCores to (a: $randomizedPC&#39;s &quot;Core1&quot;,$randomizedPC&#39;s &quot;Core2&quot;,$randomizedPC&#39;s &quot;Core3&quot;,$randomizedPC&#39;s &quot;Core4&quot;,$randomizedPC&#39;s &quot;Core5&quot;,$randomizedPC&#39;s &quot;Core6&quot;,))
-(if: $allRandosCores contains &quot;None&quot;)[(set: $allRandosCores to it - (a:&quot;None&quot;))]</tw-passagedata><tw-passagedata pid="64" name="Hack TEC Studios" tags="" position="625,875" size="100,100">&lt;!-- Set the text to show --&gt;
+(if: $allRandosCores contains &quot;None&quot;)[(set: $allRandosCores to it - (a:&quot;None&quot;))]</tw-passagedata><tw-passagedata pid="63" name="Hack TEC Studios" tags="" position="625,875" size="100,100">&lt;!-- Set the text to show --&gt;
 (set: $typewriterText to &quot;initializing...
 
 ICEBREAKER 2.2.25.111f
@@ -2093,7 +2148,7 @@ What would you like to do?
 }
 
 (live:4s)[
-[[TEC Studios Battle]]]</tw-passagedata><tw-passagedata pid="65" name="Hack SecCo" tags="" position="750,875" size="100,100">&lt;!-- Set the text to show --&gt;
+[[TEC Studios Battle]]]</tw-passagedata><tw-passagedata pid="64" name="Hack SecCo" tags="" position="750,875" size="100,100">&lt;!-- Set the text to show --&gt;
 (set: $typewriterText to &quot;initializing...
 
 ICEBREAKER 2.2.25.111f
@@ -2127,7 +2182,7 @@ What would you like to do?
 }
 
 (live:4s)[
-[[SecCo Battle]]]</tw-passagedata><tw-passagedata pid="66" name="Hack C2" tags="" position="875,875" size="100,100">&lt;!-- Set the text to show --&gt;
+[[SecCo Battle]]]</tw-passagedata><tw-passagedata pid="65" name="Hack C2" tags="" position="875,875" size="100,100">&lt;!-- Set the text to show --&gt;
 (set: $typewriterText to &quot;initializing...
 
 ICEBREAKER 2.2.25.111f
@@ -2161,7 +2216,7 @@ What would you like to do?
 }
 
 (live:4s)[
-[[C2 Battle]]]</tw-passagedata><tw-passagedata pid="67" name="Hack C3" tags="" position="1000,875" size="100,100">&lt;!-- Set the text to show --&gt;
+[[C2 Battle]]]</tw-passagedata><tw-passagedata pid="66" name="Hack C3" tags="" position="1000,875" size="100,100">&lt;!-- Set the text to show --&gt;
 (set: $typewriterText to &quot;initializing...
 
 ICEBREAKER 2.2.25.111f
@@ -2195,7 +2250,7 @@ What would you like to do?
 }
 
 (live:4s)[
-[[C3 Battle]]]</tw-passagedata><tw-passagedata pid="68" name="Hack C1" tags="" position="1125,875" size="100,100">&lt;!-- Set the text to show --&gt;
+[[C3 Battle]]]</tw-passagedata><tw-passagedata pid="67" name="Hack C1" tags="" position="1125,875" size="100,100">&lt;!-- Set the text to show --&gt;
 (set: $typewriterText to &quot;initializing...
 
 ICEBREAKER 2.2.25.111f
@@ -2229,26 +2284,34 @@ What would you like to do?
 }
 
 (live:4s)[
-[[C1 Battle]]]</tw-passagedata><tw-passagedata pid="69" name="TEC Studios Boss" tags="" position="625,1525" size="100,100">(hook:&quot;TEC Studios&quot;)[(set: $TECAttacks to (ds: $ICEPick, $poison))
-(set: $TECStudios to (dm:&quot;Max Health&quot;,200, &quot;Health&quot;, 200, &quot;Max ICE&quot;, 200, &quot;ICE&quot;, 200, &quot;Bandwidth&quot;, 4, &quot;Attack&quot;,10, &quot;Attacks&quot;, $TECAttacks,&quot;Poisoned&quot;, false, &quot;Glitched&quot;, false))]</tw-passagedata><tw-passagedata pid="70" name="SecCo Boss" tags="" position="750,1525" size="100,100">(hook:&quot;SecCo&quot;)[(set: $SecCoAttacks to (ds: $ICEPick, $glitchery, $poison))
-(set: $SecCo to (dm:&quot;Max Health&quot;,250, &quot;Health&quot;, 250, &quot;Max ICE&quot;, 250, &quot;ICE&quot;, 250, &quot;Bandwidth&quot;, 4, &quot;Attack&quot;,10, &quot;Attacks&quot;, $SecCoAttacks,&quot;Poisoned&quot;, false, &quot;Glitched&quot;, false))]</tw-passagedata><tw-passagedata pid="71" name="TEC Studios Battle" tags="" position="625,1150" size="100,100">(collapse:)[
+[[C1 Battle]]]</tw-passagedata><tw-passagedata pid="68" name="TEC Studios Boss" tags="" position="625,1525" size="100,100">(hook:&quot;TEC Studios&quot;)[(set: $TECAttacks to (ds: $bruteForce,$ICEPick, $poison, $repairICE))
+(set: $TECStudios to (dm:&quot;Name&quot;, &quot;TEC Runner&quot;, &quot;Max Health&quot;,200, &quot;Health&quot;, 200, &quot;Max ICE&quot;, 200, &quot;ICE&quot;, 200, &quot;Bandwidth&quot;, 4, &quot;Attack&quot;,10, &quot;Attacks&quot;, $TECAttacks,&quot;Poisoned&quot;, false, &quot;Glitched&quot;, false))
+
+(set: $TECPC to (dm: &quot;Name&quot;, &quot;The Entertainment Company&quot;, &quot;Motherboard&quot;, $advancedMotherboard, &quot;Core1&quot;, $emeraldCore, &quot;Core2&quot;, $sapphireCore, &quot;Core3&quot;, $rubyCore, &quot;Core4&quot;, $rubyCore, &quot;Core5&quot;, &quot;None&quot;, &quot;Core6&quot;, &quot;None&quot;, &quot;RAM Slots&quot;, 2,&quot;RAM Slot 1&quot;, $8GBRAM,&quot;RAM Slot 2&quot;, $8GBRAM, &quot;RAM Slot 3&quot;, $8GBRAM, &quot;RAM Slot 4&quot;, $8GBRAM, &quot;RAM Slot 5&quot;, &quot;None&quot;, &quot;RAM Slot 6&quot;, &quot;None&quot;, &quot;RAM Slot 7&quot;, &quot;None&quot;, &quot;RAM Slot 8&quot;, &quot;None&quot;, &quot;Cooling System&quot;, $basicCooler, &quot;Network Card&quot;, $basicNetworkCard))
+]</tw-passagedata><tw-passagedata pid="69" name="SecCo Boss" tags="" position="750,1525" size="100,100">(hook:&quot;SecCo&quot;)[(set: $SecCoAttacks to (ds: $EnhancedICEPick, $bruteForce, $poison))
+(set: $SecCo to (dm:&quot;Name&quot;, &quot;SecCo Agent&quot;,&quot;Max Health&quot;,250, &quot;Health&quot;, 250, &quot;Max ICE&quot;, 250, &quot;ICE&quot;, 250, &quot;Bandwidth&quot;, 4, &quot;Attack&quot;,10, &quot;Attacks&quot;, $SecCoAttacks,&quot;Poisoned&quot;, false, &quot;Glitched&quot;, false))
+
+(set: $SecCoPC to (dm: &quot;Name&quot;, &quot;Security Company, Inc&quot;,&quot;Motherboard&quot;, $advancedMotherboard, &quot;Core1&quot;, $emeraldCore, &quot;Core2&quot;, $rubyCore, &quot;Core3&quot;, $rubyCore, &quot;Core4&quot;, $rubyCore, &quot;Core5&quot;, &quot;None&quot;, &quot;Core6&quot;, &quot;None&quot;, &quot;RAM Slots&quot;, 2,&quot;RAM Slot 1&quot;, $8GBRAM,&quot;RAM Slot 2&quot;, $8GBRAM, &quot;RAM Slot 3&quot;, $8GBRAM, &quot;RAM Slot 4&quot;, $8GBRAM, &quot;RAM Slot 5&quot;, &quot;None&quot;, &quot;RAM Slot 6&quot;, &quot;None&quot;, &quot;RAM Slot 7&quot;, &quot;None&quot;, &quot;RAM Slot 8&quot;, &quot;None&quot;, &quot;Cooling System&quot;, $advancedCooler, &quot;Network Card&quot;, $advancedNetworkCard))
+]</tw-passagedata><tw-passagedata pid="70" name="TEC Studios Battle" tags="" position="625,1150" size="100,100">(collapse:)[
 (display:&quot;TEC Studios Boss&quot;)
 (set:$enemyName to &quot;TEC Studios Server&quot;)
 (set:$enemy to $TECStudios)
 (set:$winResult to (go-to:&quot;TEC Studios Won&quot;))
+(set: $enemyPC to $TECPC)
+(set: $hackSelection to 0)
 ]
-(display:&quot;Battle&quot;)</tw-passagedata><tw-passagedata pid="72" name="SecCo Won" tags="" position="750,1400" size="100,100">You&#39;ve disabled SecCo&#39;s server. What could go wrong?
+(display:&quot;Battle&quot;)</tw-passagedata><tw-passagedata pid="71" name="SecCo Won" tags="" position="750,1400" size="100,100">You&#39;ve disabled SecCo&#39;s server. What could go wrong?
 
 (set: $playerDataFragments to it + 4)
 (set: $level4Complete to true)
 (set:$playerMoney to $playerMoney+25000)
 (set: $unsentEmails&#39;s 1st&#39;s &quot;Sent&quot; to true)
 (set: $advancedMotherboard&#39;s &quot;Purchasable&quot; to true)
-(set:$botnet to it + (a:&quot;SecCo Server&quot;))
+(set:$botnet to it + (a:$SecCo))
 
 [[Browser]] 
 [[Computer]] 
-</tw-passagedata><tw-passagedata pid="73" name="C2 Won" tags="" position="875,1400" size="100,100">You discover an out of place txt document hidden in the system files of C2&#39;s server. It appears to be left by a boy named Tren calling for help from within a facility owned by Corporation 1, but the origins of how the note got here are unclear.
+</tw-passagedata><tw-passagedata pid="72" name="C2 Won" tags="" position="875,1400" size="100,100">You discover an out of place txt document hidden in the system files of C2&#39;s server. It appears to be left by a boy named Tren calling for help from within a facility owned by Corporation 1, but the origins of how the note got here are unclear.
 
 It seems the boy has had experiments performed on him. They&#39;re injecting him with a strange glowing substance and making him perform magic with triistone.
 Is he an aelma? Or are they finding ways to make humans perform magic?
@@ -2260,58 +2323,74 @@ Is he an aelma? Or are they finding ways to make humans perform magic?
 (set: $unsentEmails&#39;s 1st&#39;s &quot;Sent&quot; to true)
 (set: $16GBRAM&#39;s &quot;Purchasable&quot; to true)
 (set: $defrag&#39;s &quot;Purchasable&quot; to true)
-(set:$botnet to it + (a:&quot;C2 Server&quot;))
+(set:$botnet to it + (a:$C2Server))
 
 [[Browser]]
 
-[[Computer]] </tw-passagedata><tw-passagedata pid="74" name="C2 Boss" tags="" position="875,1525" size="100,100">(hook:&quot;C2 Boss&quot;)[(set: $C2Attacks to (ds: $ICEPick))
-(set: $C2 to (dm:&quot;Max Health&quot;,300, &quot;Health&quot;, 300, &quot;Max ICE&quot;, 300, &quot;ICE&quot;, 300, &quot;Bandwidth&quot;, 4, &quot;Attack&quot;,10, &quot;Attacks&quot;, $C2Attacks,&quot;Poisoned&quot;, false, &quot;Glitched&quot;, false))]</tw-passagedata><tw-passagedata pid="75" name="C3 Won" tags="" position="1000,1400" size="100,100">You found the birth records of Dare and his parents, but Tren&#39;s are mysteriously missing
+[[Computer]] </tw-passagedata><tw-passagedata pid="73" name="C2 Boss" tags="" position="875,1525" size="100,100">(hook:&quot;C2 Boss&quot;)[(set: $C2Attacks to (ds: $ICEPick))
+(set: $C2 to (dm:&quot;C2 Runner&quot;, &quot;Max Health&quot;,300, &quot;Health&quot;, 300, &quot;Max ICE&quot;, 300, &quot;ICE&quot;, 300, &quot;Bandwidth&quot;, 4, &quot;Attack&quot;,10, &quot;Attacks&quot;, $C2Attacks,&quot;Poisoned&quot;, false, &quot;Glitched&quot;, false))
+
+
+(set: $C2Server to (dm: &quot;Name&quot;, &quot;Corporation 2&quot;,&quot;Motherboard&quot;, $advancedMotherboard, &quot;Core1&quot;, $emeraldCore, &quot;Core2&quot;, $rubyCore, &quot;Core3&quot;, $rubyCore, &quot;Core4&quot;, $rubyCore, &quot;Core5&quot;, &quot;None&quot;, &quot;Core6&quot;, &quot;None&quot;, &quot;RAM Slots&quot;, 2,&quot;RAM Slot 1&quot;, $16GBRAM,&quot;RAM Slot 2&quot;, $16GBRAM, &quot;RAM Slot 3&quot;, $16GBRAM, &quot;RAM Slot 4&quot;, $16GBRAM, &quot;RAM Slot 5&quot;, &quot;None&quot;, &quot;RAM Slot 6&quot;, &quot;None&quot;, &quot;RAM Slot 7&quot;, &quot;None&quot;, &quot;RAM Slot 8&quot;, &quot;None&quot;, &quot;Cooling System&quot;, $advancedCooler, &quot;Network Card&quot;, $advancedNetworkCard))]</tw-passagedata><tw-passagedata pid="74" name="C3 Won" tags="" position="1000,1400" size="100,100">You found the birth records of Dare and his parents, but Tren&#39;s are mysteriously missing
 
 (set: $playerDataFragments to it + 4)
 (set: $level6Complete to true)
 (set:$playerMoney to $playerMoney+50000)
 (set: $unsentEmails&#39;s 1st&#39;s &quot;Sent&quot; to true)
 (set: $specialMotherboard&#39;s &quot;Purchasable&quot; to true)
-(set:$botnet to it + (a:&quot;C3 Server&quot;))
+(set:$botnet to it + (a:$C3Server))
 
 [[Browser]]
 
-[[Computer]] </tw-passagedata><tw-passagedata pid="76" name="TEC Studios Won" tags="" position="625,1400" size="100,100">You&#39;ve defeated TEC Studios, and uncovered some interesting things about the way they spread propoganda through their social media networks
+[[Computer]] </tw-passagedata><tw-passagedata pid="75" name="TEC Studios Won" tags="" position="625,1400" size="100,100">You&#39;ve defeated TEC Studios, and uncovered some interesting things about the way they spread propoganda through their social media networks
 
 (set: $playerDataFragments to it + 4)
 (set: $level3Complete to true)
 (set:$playerMoney to $playerMoney+15000)
 (set: $unsentEmails&#39;s 1&#39;s &quot;Sent&quot; to true)
 (set: $obsidianCore&#39;s &quot;Purchasable&quot; to true)
-(set:$botnet to it + (a:&quot;TEC Studios Server&quot;))
+(set:$botnet to it + (a:$TECPC))
 [[Browser]]
-[[Computer]] </tw-passagedata><tw-passagedata pid="77" name="SecCo Battle" tags="" position="750,1150" size="100,100">(collapse:)[
+[[Computer]] </tw-passagedata><tw-passagedata pid="76" name="SecCo Battle" tags="" position="750,1150" size="100,100">(collapse:)[
 (display:&quot;SecCo Boss&quot;)
 (set:$enemyName to &quot;SecCo Server&quot;)
 (set:$enemy to $SecCo)
 (set:$winResult to (go-to:&quot;SecCo Won&quot;))
+(set: $enemyPC to $SecCoPC)
+(set: $hackSelection to 0)
 ]
-(display:&quot;Battle&quot;)</tw-passagedata><tw-passagedata pid="78" name="C2 Battle" tags="" position="875,1150" size="100,100">(collapse:)[
+(display:&quot;Battle&quot;)</tw-passagedata><tw-passagedata pid="77" name="C2 Battle" tags="" position="875,1150" size="100,100">(collapse:)[
 (display:&quot;C2 Boss&quot;)
 (set:$enemyName to &quot;C2 Server&quot;)
 (set:$enemy to $C2)
 (set:$winResult to (go-to:&quot;C2 Won&quot;))
+(set: $enemyPC to $C2Server)
+(set: $hackSelection to 0)
 ]
-(display:&quot;Battle&quot;)</tw-passagedata><tw-passagedata pid="79" name="C3 Battle" tags="" position="1000,1150" size="100,100">(collapse:)[
+(display:&quot;Battle&quot;)</tw-passagedata><tw-passagedata pid="78" name="C3 Battle" tags="" position="1000,1150" size="100,100">(collapse:)[
 (display:&quot;C3 Boss&quot;)
 (set:$enemyName to &quot;C3 Server&quot;)
 (set:$enemy to $C3)
 (set:$winResult to (go-to:&quot;C3 Won&quot;))
+(set: $enemyPC to $C3Server)
+(set: $hackSelection to 0)
 ]
-(display:&quot;Battle&quot;)</tw-passagedata><tw-passagedata pid="80" name="C1 Battle" tags="" position="1125,1150" size="100,100">(collapse:)[
+(display:&quot;Battle&quot;)</tw-passagedata><tw-passagedata pid="79" name="C1 Battle" tags="" position="1125,1150" size="100,100">(collapse:)[
 (display:&quot;C1 Boss&quot;)
 (set:$enemyName to &quot;C1 Server&quot;)
 (set:$enemy to $C1)
 (set:$winResult to (go-to:&quot;C1 Won&quot;))
+(set: $enemyPC to $C1Server)
+(set: $hackSelection to 0)
 ]
-(display:&quot;Battle&quot;)</tw-passagedata><tw-passagedata pid="81" name="C3 Boss" tags="" position="1000,1525" size="100,100">(hook:&quot;C3 Boss&quot;)[(set: $C3Attacks to (ds: $ICEPick))
-(set: $C3 to (dm:&quot;Max Health&quot;,350, &quot;Health&quot;, 350, &quot;Max ICE&quot;, 350, &quot;ICE&quot;, 350, &quot;Bandwidth&quot;, 4, &quot;Attack&quot;,10, &quot;Attacks&quot;, $C3Attacks,&quot;Poisoned&quot;, false, &quot;Glitched&quot;, false))]</tw-passagedata><tw-passagedata pid="82" name="C1 Boss" tags="" position="1125,1525" size="100,100">(hook:&quot;C1 Boss&quot;)[(set: $C1Attacks to (ds: $ICEPick))
-(set: $C1 to (dm:&quot;Max Health&quot;,400, &quot;Health&quot;, 400, &quot;Max ICE&quot;, 400, &quot;ICE&quot;, 400, &quot;Bandwidth&quot;, 4, &quot;Attack&quot;,10, &quot;Attacks&quot;, $C1Attacks,&quot;Poisoned&quot;, false, &quot;Glitched&quot;, false))]</tw-passagedata><tw-passagedata pid="83" name="C1 Won" tags="" position="1125,1400" size="100,100">You found the documents detailing the experiments the government has been performing on Tren, his entire history and stuff.
+(display:&quot;Battle&quot;)</tw-passagedata><tw-passagedata pid="80" name="C3 Boss" tags="" position="1000,1525" size="100,100">(hook:&quot;C3 Boss&quot;)[(set: $C3Attacks to (ds: $ICEPick))
+(set: $C3 to (dm::&quot;Name&quot;,&quot;C3 Runner&quot;,&quot;Max Health&quot;,350, &quot;Health&quot;, 350, &quot;Max ICE&quot;, 350, &quot;ICE&quot;, 350, &quot;Bandwidth&quot;, 4, &quot;Attack&quot;,10, &quot;Attacks&quot;, $C3Attacks,&quot;Poisoned&quot;, false, &quot;Glitched&quot;, false))
+
+
+(set: $C3Server to (dm: &quot;Name&quot;, &quot;Corporation 3&quot;, &quot;Motherboard&quot;, $advancedMotherboard, &quot;Core1&quot;, $emeraldCore, &quot;Core2&quot;, $rubyCore, &quot;Core3&quot;, $rubyCore, &quot;Core4&quot;, $rubyCore, &quot;Core5&quot;, &quot;None&quot;, &quot;Core6&quot;, &quot;None&quot;, &quot;RAM Slots&quot;, 2,&quot;RAM Slot 1&quot;, $16GBRAM,&quot;RAM Slot 2&quot;, $16GBRAM, &quot;RAM Slot 3&quot;, $16GBRAM, &quot;RAM Slot 4&quot;, $16GBRAM, &quot;RAM Slot 5&quot;, &quot;None&quot;, &quot;RAM Slot 6&quot;, &quot;None&quot;, &quot;RAM Slot 7&quot;, &quot;None&quot;, &quot;RAM Slot 8&quot;, &quot;None&quot;, &quot;Cooling System&quot;, $advancedCooler, &quot;Network Card&quot;, $advancedNetworkCard))]</tw-passagedata><tw-passagedata pid="81" name="C1 Boss" tags="" position="1125,1525" size="100,100">(hook:&quot;C1 Boss&quot;)[(set: $C1Attacks to (ds: $EnhancedICEPick, $poison, $bruteForce, $defrag))
+(set: $C1 to (dm:&quot;Name&quot;,&quot;C1 Runner&quot;,&quot;Max Health&quot;,400, &quot;Health&quot;, 400, &quot;Max ICE&quot;, 400, &quot;ICE&quot;, 400, &quot;Bandwidth&quot;, 4, &quot;Attack&quot;,10, &quot;Attacks&quot;, $C1Attacks,&quot;Poisoned&quot;, false, &quot;Glitched&quot;, false))
+
+(set: $C1Server to (dm: &quot;Name&quot;, &quot;Corporation 1&quot;, &quot;Motherboard&quot;, $specialMotherboard, &quot;Core1&quot;, $emeraldCore, &quot;Core2&quot;, $rubyCore, &quot;Core3&quot;, $rubyCore, &quot;Core4&quot;, $rubyCore, &quot;Core5&quot;, $sapphireCore, &quot;Core6&quot;, $sapphireCore, &quot;RAM Slots&quot;, 8,&quot;RAM Slot 1&quot;, $16GBRAM,&quot;RAM Slot 2&quot;, $16GBRAM, &quot;RAM Slot 3&quot;, $16GBRAM, &quot;RAM Slot 4&quot;, $16GBRAM, &quot;RAM Slot 5&quot;, $16GBRAM, &quot;RAM Slot 6&quot;, $16GBRAM, &quot;RAM Slot 7&quot;, $16GBRAM, &quot;RAM Slot 8&quot;, $16GBRAM, &quot;Cooling System&quot;, $advancedCooler, &quot;Network Card&quot;, $advancedNetworkCard))]</tw-passagedata><tw-passagedata pid="82" name="C1 Won" tags="" position="1125,1400" size="100,100">You found the documents detailing the experiments the government has been performing on Tren, his entire history and stuff.
 
 Don&#39;t worry, this game is still in alpha, and this page and all others will be updated.
 
@@ -2320,11 +2399,129 @@ Don&#39;t worry, this game is still in alpha, and this page and all others will 
 (set:$playerMoney to $playerMoney+50000)
 (set: $unsentEmails&#39;s 1st&#39;s &quot;Sent&quot; to true)
 (set: $specialCooler&#39;s &quot;Purchasable&quot; to true)
-(set:$botnet to it + (a:&quot;C1 Server&quot;))
+(set:$botnet to it + (a:$c1Server))
 
 [[Browser]]
 
-[[Computer]] </tw-passagedata></tw-storydata>
+[[Computer]] </tw-passagedata><tw-passagedata pid="83" name="C2CasinoServer" tags="" position="125,1525" size="100,100">(collapse:)[(set: $C2CasinoServer to (dm: &quot;Name&quot;, &quot;Gaming Systems Ltd&quot;, &quot;Motherboard&quot;, $basicMotherboard, &quot;Core1&quot;, $sapphireCore, &quot;Core2&quot;, $sapphireCore, &quot;Core3&quot;, &quot;None&quot;, &quot;Core4&quot;, &quot;None&quot;, &quot;Core5&quot;, &quot;None&quot;, &quot;Core6&quot;, &quot;None&quot;, &quot;RAM Slots&quot;, 2,&quot;RAM Slot 1&quot;, $8GBRAM,&quot;RAM Slot 2&quot;, $8GBRAM, &quot;RAM Slot 3&quot;, &quot;None&quot;, &quot;RAM Slot 4&quot;, &quot;None&quot;, &quot;RAM Slot 5&quot;, &quot;None&quot;, &quot;RAM Slot 6&quot;, &quot;None&quot;, &quot;RAM Slot 7&quot;, &quot;None&quot;, &quot;RAM Slot 8&quot;, &quot;None&quot;, &quot;Cooling System&quot;, $basicCooler, &quot;Network Card&quot;, $basicNetworkCard))]</tw-passagedata><tw-passagedata pid="84" name="Hack Button" tags="" position="1700,925" size="100,100">(collapse:)[    			(button:)[
+					(link:&quot;Name&quot; of _download)[
+            			(set: $usedRAM to it +8)
+                		(if: $availableRAM &gt;= 8)[
+						(set:$damage to _download&#39;s &quot;Damage&quot;)
+            			(if: $allKoresCores contains $rubyCore)[
+                			(set: $allRubyCores to (find: $_rubies where _rubies is $rubyCore ...$allKoresCores)&#39;s length)
+            				(set: $damage to it*$allRubyCores*4.25+it)]
+                		(set: _criticalCheck to (random: 1,20))
+               			 (if: _criticalCheck is 20)[
+                			(set: $damage to it*2)
+                		]
+               		 	(if: $enemyICE &lt;1)[
+                			(set: $damage to it*$allRubyCores+it*15)
+                    	]
+                        (if: $enemyICE &gt;0)[
+                        	(set: $damage to it*0+_download&#39;s &quot;Damage&quot;/10)
+                            ]
+						(set:$ICEDamage to _download&#39;s &quot;ICE Damage&quot;)
+            			(if: $allKoresCores contains $diamondCore)[
+            				(set: $ICEDamage to it*1.25)
+                    	]
+                (if: (random: 1,20) is 20)[
+                	(set: $ICEDamage to it * 2)
+                ]
+                &lt;!-- Poison --&gt;
+                (if: _download&#39;s &quot;Poison&quot; is true)[
+                    (set: _poisonCheck to (random: 1,4))
+                    (if: _poisonCheck is 4)[
+                        (set: $enemy&#39;s &quot;Poisoned&quot; to true)
+                    ]
+                    (if: _poisonCheck is 3 and $allKoresCores contains $obsidianCore)[
+                    	(set: $enemy&#39;s &quot;Poisoned&quot; to true)
+                    ]
+                ]
+                &lt;!-- Heal --&gt;
+                (if:_download&#39;s &quot;Heal&quot; is &gt; 0)[
+                    (set:$healing to _download&#39;s &quot;Heal&quot;/2)
+                    (if: $allKoresCores contains $sapphireCore)[
+                        (set: $healing to it*2)
+                    ]
+                	(set:$playerHealth to it + $healing)
+                    (if: $playerHealth &gt; $playerMaxHealth)[
+                    	(set: $playerHealth to $playerMaxHealth)
+                     ]
+                	(set:$healCheck to true)
+                ] 
+
+                &lt;!-- ICE Healing --&gt;
+                (if:_download&#39;s &quot;ICE Heal&quot; is &gt;0)[
+                (set:$ICEHealing to _download&#39;s &quot;ICE Heal&quot;)
+                    (if: $allKoresCores contains $sapphireCore)[
+                        (set: $ICEHealing to it*2)
+                    ]
+                (set:$playerICE to it + $ICEHealing)
+                (set:$ICEHealCheck to true)
+                ]
+
+                &lt;!-- ICE Damage--&gt;
+                (if: _download&#39;s &quot;ICE Damage&quot; is &gt; 0)[(set:$ICEDamageChecker to true)]
+                (if:&quot;Poison&quot; of _download is true)[(set:$enemy&#39;s &quot;Poisoned&quot; to true)
+                (set: $outbreakActive to true)
+                You&#39;ve successfully installed Outbreak.dll on $enemyName&#39;s computer]
+                (set:$enemyHealth to it - $damage)
+                (if:$enemyICE &gt;0)[
+                    (set:$enemyICE to it - $ICEDamage)]
+                (if:$healCheck is true)[
+                    (print:&quot;Name&quot; of _download+&quot;heals you for &quot; + $healing + &quot;points.&quot;)]
+                    (if:$ICEHealCheck is true)[
+                       (print:&quot;Name&quot; of _download +&quot; repairs your ICE by &quot; + $ICEHealing + &quot;points.&quot;)]
+                (if:$damage &gt;0)[(print:&quot;Name&quot; of _download) deals $damage damage to $enemyName&#39;s machine.]
+                (if:$ICEDamageChecker is true)[$enemyName&#39;s ICE lost $ICEDamage integrity.]
+                (set: $damageCheck to false)
+				(set: $ICEDamageCheck to false)
+				(set: $healCheck to false)
+				(set: $ICEHealCheck to false)
+                (set:$log to &quot;enemy&quot;)
+            	(rerun:?Battle)
+
+                        (if:$enemyHealth &lt;1)[
+                        (set: $outbreakActive to false)
+                        $winResult]
+                        
+                    ]
+                    (else:)[(set: _ramless to true)]
+               ]
+        ]]</tw-passagedata><tw-passagedata pid="85" name="Detect Vulnerabilities" tags="" position="100,600" size="100,100">Checking for vulnerabilities...
+.
+.
+Running byteToken...
+.
+.
+byteToken couldn&#39;t find a vulnerability.
+Running ShawntiTracer...
+.
+.
+ShawntiTracer found $ulnerabilities vulnerability</tw-passagedata><tw-passagedata pid="86" name="Browser Home" tags="" position="600,575" size="100,100">&lt;h1&gt;
+Turnip Browser
+&lt;/h1&gt;
+Using the Turnip Browser makes your browsing on the net super safe!
+No ads, and no trackers. The Turnip Browser connects you to a network of other users of the Turnip Browser, and passes your encrypted connection through their network to obfuscate your connection.
+Included in your personal cracked version of Turnip Browser is a script to crack open the server of any site you visit using a suite of tools you&#39;ve accumulated. Just watch out for any ICE they may be running!</tw-passagedata><tw-passagedata pid="87" name="Bank Battle" tags="" position="250,875" size="100,100">[[Hack the Bank]]</tw-passagedata><tw-passagedata pid="88" name="Hack the Bank" tags="" position="250,1150" size="100,100">(collapse:)[
+(display:&quot;Bank Boss&quot;)
+(set:$enemy to $bankBoss)
+(set:$enemyName to &quot;Un&#39;taeko Ntl Bank&quot;)
+(set:$winResult to (go-to:&quot;Bank Won&quot;))
+(set: $enemyPC to $bankServer)
+]
+(display:&quot;Battle&quot;)</tw-passagedata><tw-passagedata pid="89" name="Bank Won" tags="" position="250,1400" size="100,100">(set: $player&#39;s Money to 999999999)
+
+You weren&#39;t really supposed to be able to do that, but, uh. Congratulations. You&#39;re rich.
+
+[[Home]]
+
+
+[[Browser]] </tw-passagedata><tw-passagedata pid="90" name="Bank Boss" tags="" position="250,1525" size="100,100">(hook:&quot;bankBoss&quot;)[(set: $bankAttacks to (ds: $ICEPick, $poison, $bruteForce, $defrag, $repairICE))
+(set: $bankBoss to (dm:&quot;Name&quot;, &quot;Un&#39;taeko Ntl Bank&quot;, &quot;Max Health&quot;,1000, &quot;Health&quot;, 1000, &quot;Max ICE&quot;, 1000, &quot;ICE&quot;, 1000, &quot;Bandwidth&quot;, 4, &quot;Attack&quot;,10, &quot;Attacks&quot;, $bankAttacks,&quot;Poisoned&quot;, false, &quot;Glitched&quot;, false))
+
+(set: $bankServer to (dm: &quot;Name&quot;, &quot;Untaeko National Bank&quot;, &quot;Motherboard&quot;, $advancedMotherboard, &quot;Core1&quot;, $emeraldCore, &quot;Core2&quot;, $rubyCore, &quot;Core3&quot;, $rubyCore, &quot;Core4&quot;, $rubyCore, &quot;Core5&quot;, &quot;None&quot;, &quot;Core6&quot;, &quot;None&quot;, &quot;RAM Slots&quot;, 2,&quot;RAM Slot 1&quot;, $16GBRAM,&quot;RAM Slot 2&quot;, $16GBRAM, &quot;RAM Slot 3&quot;, $16GBRAM, &quot;RAM Slot 4&quot;, $16GBRAM, &quot;RAM Slot 5&quot;, &quot;None&quot;, &quot;RAM Slot 6&quot;, &quot;None&quot;, &quot;RAM Slot 7&quot;, &quot;None&quot;, &quot;RAM Slot 8&quot;, &quot;None&quot;, &quot;Cooling System&quot;, $advancedCooler, &quot;Network Card&quot;, $advancedNetworkCard))]</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
  * https://github.com/paulmillr/es6-shim
